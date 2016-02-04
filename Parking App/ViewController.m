@@ -7,21 +7,52 @@
 //
 
 #import "ViewController.h"
-
+#import "Vehicle.h"
+#import "AppDelegate.h"
+//#import "SecondViewController.h"
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //[self.MainButton setTitle:@"Park Now" forState:UIControlStateNormal];
     // Do any additional setup after loading the view, typically from a nib.
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationItem.title = @"Home";
+    self.MainTextLabel.text = [NSString stringWithFormat: @"Parked Vehicles : %ld", (long)[Vehicle totalParkedVehicles]];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)handleMainButtonClick:(id)sender {
+    /*AppDelegate* delegate = [[UIApplication sharedApplication] delegate ];
+    Vehicle* v = [[Vehicle alloc]initWithPlateLicense:@"asd"
+                                               colour:@"red"
+                                         manufacturer:@"renault"
+                                                model:@"model"
+                                                 year:@12];
 
+    [delegate.vehicles addObject:v];
+    NSLog(@"%ld",[Vehicle totalParkedVehicles]);
+     */
+  //  [firstViewController presentModalViewController:secondViewController animated:YES];
+  //  SecondViewController *second = [[SecondViewController alloc] initWithNibName:nil bundle:nil ];
+  //  [self presentViewController:second animated:YES completion:NULL];
+    }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+}
+
+- (IBAction)goToParking:(id)sender {
+    [self performSegueWithIdentifier:@"SegueToNextPage" sender:self];
+}
 @end

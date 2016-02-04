@@ -10,10 +10,17 @@
 
 @interface AppDelegate ()
 
+
 @end
 
 @implementation AppDelegate
 
+- (NSMutableArray *)vehicles{
+    if (!_vehicles) {
+        _vehicles = [[NSMutableArray alloc] init];
+    }
+    return _vehicles;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

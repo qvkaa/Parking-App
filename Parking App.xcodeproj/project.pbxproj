@@ -15,6 +15,10 @@
 		5F1CB20D1C56552C00650671 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F1CB20B1C56552C00650671 /* LaunchScreen.storyboard */; };
 		5F1CB2181C56552C00650671 /* Parking_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1CB2171C56552C00650671 /* Parking_AppTests.m */; };
 		5F1CB2231C56552C00650671 /* Parking_AppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1CB2221C56552C00650671 /* Parking_AppUITests.m */; };
+		5F1CB2321C56559600650671 /* Vehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1CB2311C56559600650671 /* Vehicle.m */; };
+		5F672AC31C5A6E0000FF9D9F /* VehicleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F672AC21C5A6E0000FF9D9F /* VehicleListViewController.m */; };
+		5F716A3F1C58D5E5007C63F1 /* ValidateDataUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F716A3E1C58D5E5007C63F1 /* ValidateDataUtil.m */; };
+		5F802A911C57C7B900CE362C /* ParkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F802A901C57C7B900CE362C /* ParkingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,14 @@
 		5F1CB21E1C56552C00650671 /* Parking AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Parking AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F1CB2221C56552C00650671 /* Parking_AppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Parking_AppUITests.m; sourceTree = "<group>"; };
 		5F1CB2241C56552C00650671 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F1CB2301C56559600650671 /* Vehicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vehicle.h; sourceTree = "<group>"; };
+		5F1CB2311C56559600650671 /* Vehicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vehicle.m; sourceTree = "<group>"; };
+		5F672AC11C5A6E0000FF9D9F /* VehicleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleListViewController.h; sourceTree = "<group>"; };
+		5F672AC21C5A6E0000FF9D9F /* VehicleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VehicleListViewController.m; sourceTree = "<group>"; };
+		5F716A3D1C58D5E5007C63F1 /* ValidateDataUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidateDataUtil.h; sourceTree = "<group>"; };
+		5F716A3E1C58D5E5007C63F1 /* ValidateDataUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidateDataUtil.m; sourceTree = "<group>"; };
+		5F802A8F1C57C7B900CE362C /* ParkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkingViewController.h; sourceTree = "<group>"; };
+		5F802A901C57C7B900CE362C /* ParkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,14 +113,15 @@
 		5F1CB1FC1C56552C00650671 /* Parking App */ = {
 			isa = PBXGroup;
 			children = (
+				5F716A3C1C58D19D007C63F1 /* Utility */,
 				5F1CB2001C56552C00650671 /* AppDelegate.h */,
 				5F1CB2011C56552C00650671 /* AppDelegate.m */,
-				5F1CB2031C56552C00650671 /* ViewController.h */,
-				5F1CB2041C56552C00650671 /* ViewController.m */,
 				5F1CB2061C56552C00650671 /* Main.storyboard */,
 				5F1CB2091C56552C00650671 /* Assets.xcassets */,
 				5F1CB20B1C56552C00650671 /* LaunchScreen.storyboard */,
 				5F1CB20E1C56552C00650671 /* Info.plist */,
+				5F672ABD1C5A6D4A00FF9D9F /* ViewControllers */,
+				83CE59CF1C620B23009FDD1C /* Model */,
 				5F1CB1FD1C56552C00650671 /* Supporting Files */,
 			);
 			path = "Parking App";
@@ -138,6 +151,37 @@
 				5F1CB2241C56552C00650671 /* Info.plist */,
 			);
 			path = "Parking AppUITests";
+			sourceTree = "<group>";
+		};
+		5F672ABD1C5A6D4A00FF9D9F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5F1CB2031C56552C00650671 /* ViewController.h */,
+				5F1CB2041C56552C00650671 /* ViewController.m */,
+				5F802A8F1C57C7B900CE362C /* ParkingViewController.h */,
+				5F802A901C57C7B900CE362C /* ParkingViewController.m */,
+				5F672AC11C5A6E0000FF9D9F /* VehicleListViewController.h */,
+				5F672AC21C5A6E0000FF9D9F /* VehicleListViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5F716A3C1C58D19D007C63F1 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				5F716A3D1C58D5E5007C63F1 /* ValidateDataUtil.h */,
+				5F716A3E1C58D5E5007C63F1 /* ValidateDataUtil.m */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		83CE59CF1C620B23009FDD1C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5F1CB2301C56559600650671 /* Vehicle.h */,
+				5F1CB2311C56559600650671 /* Vehicle.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,7 +314,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F1CB2321C56559600650671 /* Vehicle.m in Sources */,
+				5F716A3F1C58D5E5007C63F1 /* ValidateDataUtil.m in Sources */,
 				5F1CB2051C56552C00650671 /* ViewController.m in Sources */,
+				5F672AC31C5A6E0000FF9D9F /* VehicleListViewController.m in Sources */,
+				5F802A911C57C7B900CE362C /* ParkingViewController.m in Sources */,
 				5F1CB2021C56552C00650671 /* AppDelegate.m in Sources */,
 				5F1CB1FF1C56552C00650671 /* main.m in Sources */,
 			);
@@ -496,6 +544,7 @@
 				5F1CB2291C56552C00650671 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5F1CB22A1C56552C00650671 /* Build configuration list for PBXNativeTarget "Parking AppTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +553,7 @@
 				5F1CB22C1C56552C00650671 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5F1CB22D1C56552C00650671 /* Build configuration list for PBXNativeTarget "Parking AppUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +562,7 @@
 				5F1CB22F1C56552C00650671 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
