@@ -19,6 +19,7 @@
 		5F672AC31C5A6E0000FF9D9F /* VehicleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F672AC21C5A6E0000FF9D9F /* VehicleListViewController.m */; };
 		5F716A3F1C58D5E5007C63F1 /* ValidateDataUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F716A3E1C58D5E5007C63F1 /* ValidateDataUtil.m */; };
 		5F802A911C57C7B900CE362C /* ParkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F802A901C57C7B900CE362C /* ParkingViewController.m */; };
+		835A7FF11C6398A900CE49A1 /* ParkingLot.m in Sources */ = {isa = PBXBuildFile; fileRef = 835A7FF01C6398A900CE49A1 /* ParkingLot.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		5F716A3E1C58D5E5007C63F1 /* ValidateDataUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidateDataUtil.m; sourceTree = "<group>"; };
 		5F802A8F1C57C7B900CE362C /* ParkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkingViewController.h; sourceTree = "<group>"; };
 		5F802A901C57C7B900CE362C /* ParkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkingViewController.m; sourceTree = "<group>"; };
+		835A7FEF1C6398A900CE49A1 /* ParkingLot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkingLot.h; sourceTree = "<group>"; };
+		835A7FF01C6398A900CE49A1 /* ParkingLot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkingLot.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +183,8 @@
 			children = (
 				5F1CB2301C56559600650671 /* Vehicle.h */,
 				5F1CB2311C56559600650671 /* Vehicle.m */,
+				835A7FEF1C6398A900CE49A1 /* ParkingLot.h */,
+				835A7FF01C6398A900CE49A1 /* ParkingLot.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 			files = (
 				5F1CB2321C56559600650671 /* Vehicle.m in Sources */,
 				5F716A3F1C58D5E5007C63F1 /* ValidateDataUtil.m in Sources */,
+				835A7FF11C6398A900CE49A1 /* ParkingLot.m in Sources */,
 				5F1CB2051C56552C00650671 /* ViewController.m in Sources */,
 				5F672AC31C5A6E0000FF9D9F /* VehicleListViewController.m in Sources */,
 				5F802A911C57C7B900CE362C /* ParkingViewController.m in Sources */,

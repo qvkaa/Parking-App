@@ -10,6 +10,8 @@
 #import "ValidateDataUtil.h"
 #import "AppDelegate.h"
 #import "Vehicle.h"
+#import "ParkingLot.h"
+
 @interface ParkingViewController()
 #pragma mark - IBActions
 
@@ -52,17 +54,18 @@
     
     if (isLicenseValid && isYearValid) { // && [self.modelTextField.text length] > 0
     //   && [self.manufacturerTextField.text length] > 0 && [self.colorTextField.text length] > 0) {
-        AppDelegate* delegate = [[UIApplication sharedApplication] delegate ];
+      //  AppDelegate* delegate = [[UIApplication sharedApplication] delegate ];
+        ParkingLot *parking = [ParkingLot sharedManager];
         Vehicle* v = [[Vehicle alloc]initWithPlateLicense:self.licenseTextField.text
                                                    color:self.colorTextField.text
                                              manufacturer:self.manufacturerTextField.text
                                                     model:self.modelTextField.text
                                                      year:@([self.yearTextField.text integerValue])
                       ];
-        [delegate.vehicles addObject:v];
-        NSLog(@"count : %ld",[delegate.vehicles count]);
-        //NSLog(@"%ld",[Vehicle totalParkedVehicles]);
-        NSLog(@"%@",[v vehicleInfo]);
+        [parking addVehicle:v];
+//        NSLog(@"count : %ld",[delegate.vehicles count]);
+//        NSLog(@"%ld",[Vehicle totalParkedVehicles]);
+//        NSLog(@"%@",[v vehicleInfo]);
     }
 }
 @end

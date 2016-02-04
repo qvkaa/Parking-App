@@ -10,16 +10,4 @@
 
 @interface ParkingViewController : UIViewController
 
-
-
-
-/*
-@property (weak, nonatomic) IBOutlet UILabel *yearLabel;
-@property (weak, nonatomic) IBOutlet UILabel *modelLabel;
-@property (weak, nonatomic) IBOutlet UILabel *manufacturerLabel;
-@property (weak, nonatomic) IBOutlet UILabel *colorLabel;
-@property (weak, nonatomic) IBOutlet UILabel *licenseLabel;
-@property (weak, nonatomic) IBOutlet UILabel *parkingDescriptionLabel;
- */
-
 @end

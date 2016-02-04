@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) NSMutableArray *vehicles; // of Vehicle
+//@property (strong, nonatomic) NSMutableArray *vehicles; // of Vehicle
 
 @end
 

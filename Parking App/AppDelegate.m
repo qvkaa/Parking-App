@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ParkingLot.h"
 
 @interface AppDelegate ()
 
@@ -15,14 +16,32 @@
 
 @implementation AppDelegate
 
-- (NSMutableArray *)vehicles{
-    if (!_vehicles) {
-        _vehicles = [[NSMutableArray alloc] init];
-    }
-    return _vehicles;
-}
+//- (NSMutableArray *)vehicles{
+//    if (!_vehicles) {
+//        _vehicles = [[NSMutableArray alloc] init];
+//    }
+//    return _vehicles;
+//}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    ParkingLot *parking = [ParkingLot sharedManager];
+    
+//    NSMutableArray *tempVehicles = [[NSMutableArray alloc] init];
+    for (NSInteger i = 1999; i < 2015; ++i) {
+        Vehicle *temp = [[Vehicle alloc] init];
+        temp.color = @"red";
+        temp.model = @"pegeout";
+        temp.manufacturer = @"asdf";
+        temp.yearOfManufacture = [NSNumber numberWithLong:i];
+        temp.plateLicenseNumber = @"12asdf49";
+        
+        
+        [parking addVehicle:temp];
+        
+//        [tempVehicles addObject:temp];
+    }
+    
     // Override point for customization after application launch.
     return YES;
 }
