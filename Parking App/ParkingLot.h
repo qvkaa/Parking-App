@@ -18,4 +18,11 @@
 - (void)addVehicle:(Vehicle *)vehicle;
 
 - (NSUInteger)totalVehicles;
+
+- (void)saveData;
+
+- (void)loadData;
+
+- (void)resetData;
+
 @end

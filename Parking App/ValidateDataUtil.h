@@ -10,5 +10,5 @@
 
 @interface ValidateDataUtil : NSObject
 + (BOOL)isValidYear:(NSString*) year;
-+ (BOOL)isValidLength:(NSString*)word requiredLength:(NSInteger*)requiredLength;
++ (BOOL)isValidLength:(NSString*)word requiredLength:(NSInteger)requiredLength;
 @end

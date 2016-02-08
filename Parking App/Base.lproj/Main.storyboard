@@ -76,7 +76,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="100" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Kds-tp-5T8">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="zWu-T5-kAI" style="IBUITableViewCellStyleDefault" id="4xN-hb-RtS">
                                         <rect key="frame" x="0.0" y="114" width="320" height="100"/>
@@ -89,7 +89,7 @@
                                                     <rect key="frame" x="15" y="0.0" width="290" height="99"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -132,7 +132,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dza-te-XXn">
-                                <rect key="frame" x="118" y="405" width="85" height="30"/>
+                                <rect key="frame" x="118" y="370" width="85" height="30"/>
                                 <state key="normal" title="Park Vehicle">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -194,7 +194,7 @@
                             <constraint firstItem="Arl-6n-ksJ" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="ra1-w6-0OY"/>
                             <constraint firstItem="Kpe-ly-C11" firstAttribute="top" secondItem="hr2-qr-YTb" secondAttribute="bottom" constant="10" id="ynD-Sx-092"/>
                             <constraint firstItem="Arl-6n-ksJ" firstAttribute="width" secondItem="Ens-q9-7LV" secondAttribute="width" id="zdZ-ca-aGK"/>
-                            <constraint firstItem="dza-te-XXn" firstAttribute="top" secondItem="35N-c2-L48" secondAttribute="bottom" constant="45" id="zwd-I0-0kG"/>
+                            <constraint firstItem="dza-te-XXn" firstAttribute="top" secondItem="35N-c2-L48" secondAttribute="bottom" constant="10" id="zwd-I0-0kG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NuD-I5-joo"/>

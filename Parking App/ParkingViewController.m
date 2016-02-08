@@ -39,12 +39,32 @@
     [super viewWillAppear:animated];
     self.navigationItem.title = @"Parking";
 }
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
+
 - (IBAction)clickParkingButton:(id)sender {
     BOOL isYearValid = YES;
     BOOL isLicenseValid = YES;
-    isYearValid = [ValidateDataUtil isValidYear:_yearTextField.text];
+    isYearValid = [ValidateDataUtil isValidYear:self.yearTextField.text];
     NSInteger len = 8;
-    isLicenseValid = [ValidateDataUtil isValidLength:_licenseTextField.text requiredLength:&len];
+    isLicenseValid = [ValidateDataUtil isValidLength:self.licenseTextField.text requiredLength:len];
+    if (!isLicenseValid) {
+        len = 7;
+        isLicenseValid = [ValidateDataUtil isValidLength:self.licenseTextField.text requiredLength:len];
+    }
     if(isYearValid && isLicenseValid && [self.modelTextField.text length] > 0
        && [self.manufacturerTextField.text length] > 0 && [self.colorTextField.text length] > 0) {
         NSLog(@"success");
@@ -52,20 +72,22 @@
         NSLog(@"failure");
     }
     
-    if (isLicenseValid && isYearValid) { // && [self.modelTextField.text length] > 0
-    //   && [self.manufacturerTextField.text length] > 0 && [self.colorTextField.text length] > 0) {
-      //  AppDelegate* delegate = [[UIApplication sharedApplication] delegate ];
-        ParkingLot *parking = [ParkingLot sharedManager];
-        Vehicle* v = [[Vehicle alloc]initWithPlateLicense:self.licenseTextField.text
-                                                   color:self.colorTextField.text
-                                             manufacturer:self.manufacturerTextField.text
-                                                    model:self.modelTextField.text
-                                                     year:@([self.yearTextField.text integerValue])
+    if (isLicenseValid &&
+        isYearValid &&
+        [self.modelTextField.text length] > 0 &&
+        [self.manufacturerTextField.text length] > 0 &&
+        [self.colorTextField.text length] > 0) {
+          //  AppDelegate* delegate = [[UIApplication sharedApplication] delegate ];
+            ParkingLot *parking = [ParkingLot sharedManager];
+            Vehicle* v = [[Vehicle alloc]initWithPlateLicense:self.licenseTextField.text
+                                                        color:self.colorTextField.text
+                                                 manufacturer:self.manufacturerTextField.text
+                                                        model:self.modelTextField.text
+                                                         year:@([self.yearTextField.text integerValue])
                       ];
         [parking addVehicle:v];
-//        NSLog(@"count : %ld",[delegate.vehicles count]);
-//        NSLog(@"%ld",[Vehicle totalParkedVehicles]);
-//        NSLog(@"%@",[v vehicleInfo]);
+        [parking saveData];
+
     }
 }
 @end

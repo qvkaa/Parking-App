@@ -36,9 +36,9 @@
     return isNumber;
     
 }
-+ (BOOL)isValidLength:(NSString*)word requiredLength:(NSInteger*) requiredLength{
++ (BOOL)isValidLength:(NSString*)word requiredLength:(NSInteger)requiredLength{
     NSInteger currentLen =[word length];
-    NSInteger reqLen = *requiredLength;
+    NSInteger reqLen = requiredLength;
     if( currentLen != reqLen) {
         return NO;
     }else{

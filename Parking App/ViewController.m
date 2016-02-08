@@ -9,7 +9,9 @@
 #import "ViewController.h"
 #import "Vehicle.h"
 #import "AppDelegate.h"
+#import "ParkingLot.h"
 //#import "SecondViewController.h"
+
 @interface ViewController ()
 
 @end
@@ -24,9 +26,10 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 - (void)viewWillAppear:(BOOL)animated{
+    ParkingLot *parking = [ParkingLot sharedManager];
     [super viewWillAppear:animated];
     self.navigationItem.title = @"Home";
-    self.MainTextLabel.text = [NSString stringWithFormat: @"Parked Vehicles : %ld", (long)[Vehicle totalParkedVehicles]];
+    self.MainTextLabel.text = [NSString stringWithFormat: @"Parked Vehicles : %ld", [parking totalVehicles]];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

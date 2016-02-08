@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Vehicle : NSObject
+@interface Vehicle : NSObject <NSCoding>
 
-@property NSString *plateLicenseNumber;
-@property NSString *color;
-@property NSString *manufacturer;
-@property NSString *model;
-@property NSNumber *yearOfManufacture;
+@property (strong,nonatomic)NSString *plateLicenseNumber;
+@property (strong,nonatomic)NSString *color;
+@property (strong,nonatomic,readonly)NSString *manufacturer;
+@property (strong,nonatomic,readonly)NSString *model;
+@property (strong,nonatomic,readonly)NSNumber *yearOfManufacture;
 
 - (instancetype)initWithPlateLicense:(NSString *)plate
                                  color:(NSString *)color
@@ -24,5 +24,7 @@
 + (NSInteger)totalParkedVehicles;
 
 - (NSString *)vehicleInfo;
+
+
 
 @end

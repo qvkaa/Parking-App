@@ -16,37 +16,30 @@
 
 @implementation AppDelegate
 
-//- (NSMutableArray *)vehicles{
-//    if (!_vehicles) {
-//        _vehicles = [[NSMutableArray alloc] init];
-//    }
-//    return _vehicles;
-//}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[ParkingLot sharedManager] loadData];
     
-    ParkingLot *parking = [ParkingLot sharedManager];
     
-//    NSMutableArray *tempVehicles = [[NSMutableArray alloc] init];
-    for (NSInteger i = 1999; i < 2015; ++i) {
-        Vehicle *temp = [[Vehicle alloc] init];
-        temp.color = @"red";
-        temp.model = @"pegeout";
-        temp.manufacturer = @"asdf";
-        temp.yearOfManufacture = [NSNumber numberWithLong:i];
-        temp.plateLicenseNumber = @"12asdf49";
-        
-        
-        [parking addVehicle:temp];
-        
-//        [tempVehicles addObject:temp];
-    }
+//    ParkingLot *parking = [ParkingLot sharedManager];
+//    for (NSInteger i = 1999; i < 2015; ++i) {
+//        Vehicle *temp = [[Vehicle alloc] initWithPlateLicense:@"12asdf49"
+//                                                        color:@"red"
+//                                                 manufacturer:@"pegeout"
+//                                                        model:@"123"
+//                                                         year:[NSNumber numberWithLong:i]];
+//               
+//        
+//        [parking addVehicle:temp];
+//
+//    }
     
     // Override point for customization after application launch.
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+  //  ParkingLot *parking = [ParkingLot sharedManager];
+ //   [parking saveData];
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
