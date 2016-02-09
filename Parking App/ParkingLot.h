@@ -17,6 +17,8 @@
 
 - (void)addVehicle:(Vehicle *)vehicle;
 
+- (void)removeVehicleAtIndex:(NSUInteger)index;
+
 - (NSUInteger)totalVehicles;
 
 - (void)saveData;

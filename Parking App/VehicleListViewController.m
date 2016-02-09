@@ -9,7 +9,7 @@
 #import "VehicleListViewController.h"
 #import "Vehicle.h"
 #import "ParkingLot.h"
-
+#import "CustomTableViewCell.h"
 
 static const NSInteger NUMBER_OF_LINES = 5;
 
@@ -27,6 +27,10 @@ static const NSInteger NUMBER_OF_LINES = 5;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.tableView setEditing:YES];
+    [self.tableView setRowHeight:UITableViewAutomaticDimension];
+    [self.  tableView setEstimatedRowHeight:400.0];
+    [self.tableView setAllowsMultipleSelectionDuringEditing:NO];
 //    AppDelegate* delegate = [[UIApplication sharedApplication] delegate ];
 //    NSUInteger totalVehicles = [delegate.vehicles count];
 //    NSUInteger labelHeight = totalVehicles * NUMBER_OF_LINES * DEFAULT_HEIGHT;
@@ -68,14 +72,43 @@ static const NSInteger NUMBER_OF_LINES = 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+   
     ParkingLot *parking = [ParkingLot sharedManager];
-    //parkin
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.textLabel.numberOfLines = NUMBER_OF_LINES;
-    cell.textLabel.text = [[parking vehicleAtIndex:indexPath.row] vehicleInfo];
-    cell.editing = YES;
+    CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+   
+    [cell.customCellLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    cell.customCellLabel.numberOfLines = NUMBER_OF_LINES;
+    cell.customCellLabel.text = [[parking vehicleAtIndex:indexPath.row] vehicleInfo];
+ //   [cell.customCellLabel setPreferredMaxLayoutWidth:400.0];
     return cell;
 }
+
+
+
+// During startup (-viewDidLoad or in storyboard) do:
+
+
+
+// Override to support conditional editing of the table view.
+// This only needs to be implemented if you are going to be returning NO
+// for some items. By default, all items are editable.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        ParkingLot *parking = [ParkingLot sharedManager];
+        [parking removeVehicleAtIndex:indexPath.row];
+        NSLog(@"Deleting row %ld",indexPath.row);
+        [tableView reloadData];
+        [parking saveData]; 
+        
+    }
+}
+
+
 
 @end

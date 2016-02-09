@@ -78,6 +78,11 @@ static NSString *VEHICLES = @"VEHICLES";
 - (void)addVehicle:(Vehicle *)vehicle {
     [self.vehicles addObject:vehicle];
 }
+
+- (void)removeVehicleAtIndex:(NSUInteger)index {
+    [self.vehicles removeObjectAtIndex:index];
+}
+
 - (Vehicle *)vehicleAtIndex:(NSUInteger)index {
     NSUInteger size = [self.vehicles count];
     if (index < size) {
