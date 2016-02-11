@@ -11,7 +11,7 @@
 
 @interface ParkingLot : NSObject
 
-+ (id)sharedManager;
++ (id)defaultParking;
 
 - (Vehicle *)vehicleAtIndex:(NSUInteger)index;
 

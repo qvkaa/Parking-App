@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ParkingViewController : UIViewController
+#import "DataErrorView.h"
+@interface ParkingViewController : UIViewController <DataErrorViewDelegate>
 
 @end

@@ -11,9 +11,9 @@
 @implementation DataValidateView
 
 - (void)awakeFromNib {
-    [[NSBundle mainBundle] loadNibNamed:@"HandyView" owner:self options:nil];
-    self.temp.frame = self.bounds;
-    [self addSubview:self.temp];
+   DataValidateView* myViewObject= [[[NSBundle mainBundle] loadNibNamed:@"ErrorView" owner:self options:nil] firstObject];
+    //self.errorMessageView.frame = self.bounds;
+    //[self addSubview:self.errorMessageView];
     
     [super awakeFromNib];
 }
@@ -24,5 +24,10 @@
     // Drawing code
 }
 */
+#pragma mark - IBAction
+
+- (IBAction)errorButtonConfirmation:(id)sender {
+    
+}
 
 @end

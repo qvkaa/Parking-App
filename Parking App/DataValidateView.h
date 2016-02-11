@@ -10,6 +10,10 @@
 
 @interface DataValidateView : UIView
 
-@property (nonatomic, strong) IBOutlet UIView *temp;
+@property (strong, nonatomic) IBOutlet DataValidateView *myView;
+
+- (IBAction)errorButtonConfirmation:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 
 @end

@@ -19,12 +19,10 @@
 		5F672AC31C5A6E0000FF9D9F /* VehicleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F672AC21C5A6E0000FF9D9F /* VehicleListViewController.m */; };
 		5F716A3F1C58D5E5007C63F1 /* ValidateDataUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F716A3E1C58D5E5007C63F1 /* ValidateDataUtil.m */; };
 		5F802A911C57C7B900CE362C /* ParkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F802A901C57C7B900CE362C /* ParkingViewController.m */; };
+		8357503D1C6C969400ADF5CB /* DataErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8357503C1C6C969400ADF5CB /* DataErrorView.xib */; };
+		835750401C6C96A600ADF5CB /* DataErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8357503F1C6C96A600ADF5CB /* DataErrorView.m */; };
 		835A7FF11C6398A900CE49A1 /* ParkingLot.m in Sources */ = {isa = PBXBuildFile; fileRef = 835A7FF01C6398A900CE49A1 /* ParkingLot.m */; };
 		836DF0E61C69F91400A9E862 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */; };
-		836DF0E81C6A2B4700A9E862 /* NotValidDataPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836DF0E71C6A2B4700A9E862 /* NotValidDataPopUp.xib */; };
-		836DF0ED1C6A3A8200A9E862 /* DataValidationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836DF0EB1C6A3A8200A9E862 /* DataValidationViewController.m */; };
-		836DF0EE1C6A3A8200A9E862 /* DataValidationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 836DF0EC1C6A3A8200A9E862 /* DataValidationViewController.xib */; };
-		836DF0F21C6A4CF300A9E862 /* DataValidateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 836DF0F11C6A4CF300A9E862 /* DataValidateView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,16 +67,13 @@
 		5F716A3E1C58D5E5007C63F1 /* ValidateDataUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidateDataUtil.m; sourceTree = "<group>"; };
 		5F802A8F1C57C7B900CE362C /* ParkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkingViewController.h; sourceTree = "<group>"; };
 		5F802A901C57C7B900CE362C /* ParkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkingViewController.m; sourceTree = "<group>"; };
+		8357503C1C6C969400ADF5CB /* DataErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataErrorView.xib; sourceTree = "<group>"; };
+		8357503E1C6C96A600ADF5CB /* DataErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataErrorView.h; sourceTree = "<group>"; };
+		8357503F1C6C96A600ADF5CB /* DataErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataErrorView.m; sourceTree = "<group>"; };
 		835A7FEF1C6398A900CE49A1 /* ParkingLot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkingLot.h; sourceTree = "<group>"; };
 		835A7FF01C6398A900CE49A1 /* ParkingLot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkingLot.m; sourceTree = "<group>"; };
 		836DF0E41C69F91400A9E862 /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
-		836DF0E71C6A2B4700A9E862 /* NotValidDataPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotValidDataPopUp.xib; sourceTree = "<group>"; };
-		836DF0EA1C6A3A8200A9E862 /* DataValidationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataValidationViewController.h; sourceTree = "<group>"; };
-		836DF0EB1C6A3A8200A9E862 /* DataValidationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataValidationViewController.m; sourceTree = "<group>"; };
-		836DF0EC1C6A3A8200A9E862 /* DataValidationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataValidationViewController.xib; sourceTree = "<group>"; };
-		836DF0F01C6A4CF300A9E862 /* DataValidateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataValidateView.h; sourceTree = "<group>"; };
-		836DF0F11C6A4CF300A9E862 /* DataValidateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataValidateView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,9 +176,6 @@
 				5F672AC21C5A6E0000FF9D9F /* VehicleListViewController.m */,
 				836DF0E41C69F91400A9E862 /* CustomTableViewCell.h */,
 				836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */,
-				836DF0EA1C6A3A8200A9E862 /* DataValidationViewController.h */,
-				836DF0EB1C6A3A8200A9E862 /* DataValidationViewController.m */,
-				836DF0EC1C6A3A8200A9E862 /* DataValidationViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -197,19 +189,12 @@
 			name = Utility;
 			sourceTree = "<group>";
 		};
-		836DF0E91C6A36DB00A9E862 /* CustomViews */ = {
-			isa = PBXGroup;
-			children = (
-				836DF0E71C6A2B4700A9E862 /* NotValidDataPopUp.xib */,
-			);
-			name = CustomViews;
-			sourceTree = "<group>";
-		};
 		836DF0EF1C6A4CCC00A9E862 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				836DF0F01C6A4CF300A9E862 /* DataValidateView.h */,
-				836DF0F11C6A4CF300A9E862 /* DataValidateView.m */,
+				8357503E1C6C96A600ADF5CB /* DataErrorView.h */,
+				8357503F1C6C96A600ADF5CB /* DataErrorView.m */,
+				8357503C1C6C969400ADF5CB /* DataErrorView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -221,7 +206,6 @@
 				5F1CB2311C56559600650671 /* Vehicle.m */,
 				835A7FEF1C6398A900CE49A1 /* ParkingLot.h */,
 				835A7FF01C6398A900CE49A1 /* ParkingLot.m */,
-				836DF0E91C6A36DB00A9E862 /* CustomViews */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -330,9 +314,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F1CB20D1C56552C00650671 /* LaunchScreen.storyboard in Resources */,
-				836DF0E81C6A2B4700A9E862 /* NotValidDataPopUp.xib in Resources */,
+				8357503D1C6C969400ADF5CB /* DataErrorView.xib in Resources */,
 				5F1CB20A1C56552C00650671 /* Assets.xcassets in Resources */,
-				836DF0EE1C6A3A8200A9E862 /* DataValidationViewController.xib in Resources */,
 				5F1CB2081C56552C00650671 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,15 +343,14 @@
 			files = (
 				5F1CB2321C56559600650671 /* Vehicle.m in Sources */,
 				5F716A3F1C58D5E5007C63F1 /* ValidateDataUtil.m in Sources */,
-				836DF0F21C6A4CF300A9E862 /* DataValidateView.m in Sources */,
 				835A7FF11C6398A900CE49A1 /* ParkingLot.m in Sources */,
 				5F1CB2051C56552C00650671 /* ViewController.m in Sources */,
 				5F672AC31C5A6E0000FF9D9F /* VehicleListViewController.m in Sources */,
 				836DF0E61C69F91400A9E862 /* CustomTableViewCell.m in Sources */,
 				5F802A911C57C7B900CE362C /* ParkingViewController.m in Sources */,
+				835750401C6C96A600ADF5CB /* DataErrorView.m in Sources */,
 				5F1CB2021C56552C00650671 /* AppDelegate.m in Sources */,
 				5F1CB1FF1C56552C00650671 /* main.m in Sources */,
-				836DF0ED1C6A3A8200A9E862 /* DataValidationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,17 +9,29 @@
 #import "ValidateDataUtil.h"
 
 @implementation ValidateDataUtil
-+ (BOOL)isValidYear:(NSString*) year{
-    //TODO get current year dynamically
+
++ (ValidData)isValidColor:(NSString *)color {
+    return ValidColor;
+}
+
+
++ (ValidData)isValidManufacturer:(NSString *)manufacturer {
+    return ValidManufacturer;
+}
+
++ (ValidData)isValidModel:(NSString *)model {
+    return ValidModel;
+}
++ (ValidData)isValidYear:(NSString*) year{
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
     NSInteger currentYear = [components year];
-    BOOL isNumber = YES;
+    NSUInteger isNumber = ValidYear;
     NSCharacterSet *numbers = [NSCharacterSet decimalDigitCharacterSet];
     
     NSCharacterSet *yearChars = [NSCharacterSet characterSetWithCharactersInString:year];
     
     if( ![numbers isSupersetOfSet:yearChars]){
-        isNumber = NO;
+        isNumber = 0;
     }
    /* for(int i = 0 ; i < year.length; ++i){
         char temp = [year characterAtIndex:i];
@@ -31,18 +43,19 @@
     //Check if year is in valid range  0 - current year
     NSInteger number = [year integerValue];
     if( !(number > 1950 && number <= currentYear) ){
-        isNumber = NO;
+        isNumber = 0;
     }
     return isNumber;
     
 }
-+ (BOOL)isValidLength:(NSString*)word requiredLength:(NSInteger)requiredLength{
-    NSInteger currentLen =[word length];
-    NSInteger reqLen = requiredLength;
-    if( currentLen != reqLen) {
-        return NO;
++ (ValidData)isValidLicense:(NSString*)license requiredLength:(NSUInteger)requiredLength{
+    NSUInteger currentLen =[license length];
+    
+    if( currentLen != requiredLength) {
+        return 0;
     }else{
-        return YES;
+        return ValidLicense;
     }
 }
+
 @end

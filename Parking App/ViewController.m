@@ -26,7 +26,7 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 - (void)viewWillAppear:(BOOL)animated{
-    ParkingLot *parking = [ParkingLot sharedManager];
+    ParkingLot *parking = [ParkingLot defaultParking];
     [super viewWillAppear:animated];
     self.navigationItem.title = @"Home";
     self.MainTextLabel.text = [NSString stringWithFormat: @"Parked Vehicles : %ld", [parking totalVehicles]];

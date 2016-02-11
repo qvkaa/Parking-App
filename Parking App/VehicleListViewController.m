@@ -29,7 +29,7 @@ static const NSInteger NUMBER_OF_LINES = 5;
     [super viewDidLoad];
     [self.tableView setEditing:YES];
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
-    [self.  tableView setEstimatedRowHeight:400.0];
+    [self.tableView setEstimatedRowHeight:400.0];
     [self.tableView setAllowsMultipleSelectionDuringEditing:NO];
 //    AppDelegate* delegate = [[UIApplication sharedApplication] delegate ];
 //    NSUInteger totalVehicles = [delegate.vehicles count];
@@ -66,14 +66,14 @@ static const NSInteger NUMBER_OF_LINES = 5;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    ParkingLot *parking = [ParkingLot sharedManager];
+    ParkingLot *parking = [ParkingLot defaultParking];
     NSUInteger numberOfVehicles = [parking totalVehicles];
     return numberOfVehicles;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    ParkingLot *parking = [ParkingLot sharedManager];
+    ParkingLot *parking = [ParkingLot defaultParking];
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
    
     [cell.customCellLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -100,7 +100,7 @@ static const NSInteger NUMBER_OF_LINES = 5;
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        ParkingLot *parking = [ParkingLot sharedManager];
+        ParkingLot *parking = [ParkingLot defaultParking];
         [parking removeVehicleAtIndex:indexPath.row];
         NSLog(@"Deleting row %ld",indexPath.row);
         [tableView reloadData];

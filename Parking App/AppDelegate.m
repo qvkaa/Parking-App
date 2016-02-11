@@ -17,7 +17,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[ParkingLot sharedManager] loadData];
+    [[ParkingLot defaultParking] loadData];
     
     
 //    ParkingLot *parking = [ParkingLot sharedManager];

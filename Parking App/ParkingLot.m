@@ -8,19 +8,21 @@
 
 #import "ParkingLot.h"
 
-static NSString *VEHICLES = @"VEHICLES";
+NSString * const VEHICLES = @"VEHICLES";
 
 @interface ParkingLot()
 
 @property (strong, nonatomic) NSMutableArray *vehicles;
-//@property (strong, nonatomic) NSUserDefaults *defaults;
+
 @end
 
 @implementation ParkingLot
 
 //@synthesize defaults = _defaults;
 
-+ (id)sharedManager {
+#pragma mark - Lifecycle
+
++ (id)defaultParking {
     static ParkingLot *sharedParkingLot = nil;
     @synchronized (self) {
         if (sharedParkingLot == nil)
@@ -46,6 +48,8 @@ static NSString *VEHICLES = @"VEHICLES";
 //    return self;
 //}
 
+#pragma mark - Add/Remove Vehicles
+
 - (void)loadData {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [defaults objectForKey:VEHICLES];
@@ -67,6 +71,7 @@ static NSString *VEHICLES = @"VEHICLES";
     }
 }
 
+#pragma mark - Accessor methods
 - (NSMutableArray *)vehicles {
     if (!_vehicles) {
         _vehicles = [[NSMutableArray alloc] init];

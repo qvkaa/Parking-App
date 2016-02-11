@@ -19,8 +19,9 @@
                         <subviews>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FTj-Lp-u5O">
                                 <rect key="frame" x="127" y="269" width="66" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Park Now">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -29,12 +30,14 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parked Cars :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NK-yR-UgI">
                                 <rect key="frame" x="109" y="168" width="102" height="21"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSH-s0-TSM">
-                                <rect key="frame" x="85" y="348" width="151" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSH-s0-TSM">
+                                <rect key="frame" x="71" y="348" width="178" height="34"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Show Parked Vehicles"/>
                                 <connections>
                                     <segue destination="e3y-gk-Jhm" kind="push" id="0yx-7T-zHp"/>
@@ -60,7 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="595.20000000000005" y="327.54666666666668"/>
+            <point key="canvasLocation" x="609" y="321"/>
         </scene>
         <!--Vehicle List View Controller-->
         <scene sceneID="mpF-J8-b3Z">
@@ -88,7 +91,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNw-z6-JJk">
                                                     <rect key="frame" x="60" y="10" width="250" height="79"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -127,31 +130,6 @@
             </objects>
             <point key="canvasLocation" x="595" y="1113"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="ocb-ub-pfi">
-            <objects>
-                <viewController id="Rsx-eP-t3H" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="agv-au-mfJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="QH5-Vg-iW3"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="L3Q-2G-qLe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ru-gW-EJ8">
-                                <rect key="frame" x="60" y="117" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="y4J-9l-Ooh"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="brq-zU-v0s" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1509" y="338"/>
-        </scene>
         <!--Parking-->
         <scene sceneID="HmG-hQ-Nxw">
             <objects>
@@ -166,8 +144,9 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dza-te-XXn">
                                 <rect key="frame" x="118" y="370" width="85" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Park Vehicle">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="clickParkingButton:" destination="JOl-C7-rXo" eventType="touchUpInside" id="YtV-tA-4RS"/>
@@ -195,8 +174,9 @@
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the following data for your vehicle :" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jx-OJ-6M2">
                                 <rect key="frame" x="4" y="104" width="312" height="21"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="License Plate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ens-q9-7LV">
@@ -207,13 +187,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hF0-03-pF5">
-                                <rect key="frame" x="147" y="473" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="Rsx-eP-t3H" kind="push" id="CLX-qX-t1q"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.40997420959999997" green="0.75719074019999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -246,6 +219,12 @@
                         <outlet property="parkVehicleButton" destination="dza-te-XXn" id="nL6-Mn-ESj"/>
                         <outlet property="parkingGeneralLabel" destination="3jx-OJ-6M2" id="b9A-Rp-11J"/>
                         <outlet property="yearTextField" destination="35N-c2-L48" id="Pd6-Dx-CDy"/>
+                        <outletCollection property="interactableViews" destination="dza-te-XXn" id="62o-Qa-ERZ"/>
+                        <outletCollection property="interactableViews" destination="Arl-6n-ksJ" id="qJi-rD-J6I"/>
+                        <outletCollection property="interactableViews" destination="hr2-qr-YTb" id="mmH-BJ-Vhr"/>
+                        <outletCollection property="interactableViews" destination="Kpe-ly-C11" id="aeU-UL-WE8"/>
+                        <outletCollection property="interactableViews" destination="35N-c2-L48" id="pKr-Xz-LzM"/>
+                        <outletCollection property="interactableViews" destination="Ens-q9-7LV" id="U5R-nS-Y6b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YHY-zx-N73" userLabel="First Responder" sceneMemberID="firstResponder"/>
