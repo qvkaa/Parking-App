@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Main-->
@@ -121,8 +122,33 @@
                             <constraint firstItem="Kds-tp-5T8" firstAttribute="top" secondItem="hXN-2G-cGz" secondAttribute="bottom" id="yqs-oi-68p"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cMa-Y7-ZCG"/>
+                    <navigationItem key="navigationItem" id="cMa-Y7-ZCG">
+                        <rightBarButtonItems>
+                            <barButtonItem id="Guc-Nc-2Wa">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Thr-mx-iKC">
+                                    <rect key="frame" x="233" y="7" width="71" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Edit"/>
+                                    <connections>
+                                        <action selector="enterEditModeAction:" destination="e3y-gk-Jhm" eventType="touchUpInside" id="NY7-P7-6Qp"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                            <barButtonItem id="0Zi-mo-J4e">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Zat-AC-rCS">
+                                    <rect key="frame" x="115" y="7" width="110" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Delete Selected"/>
+                                    <connections>
+                                        <action selector="deleteSelectedAction:" destination="e3y-gk-Jhm" eventType="touchUpInside" id="ehv-JX-T6l"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
+                        <outlet property="deleteSelectedButton" destination="Zat-AC-rCS" id="Ge3-0g-tWI"/>
+                        <outlet property="enterEditModeButton" destination="Thr-mx-iKC" id="WSd-Id-Zyn"/>
                         <outlet property="tableView" destination="Kds-tp-5T8" id="uAm-Zb-2DH"/>
                     </connections>
                 </viewController>

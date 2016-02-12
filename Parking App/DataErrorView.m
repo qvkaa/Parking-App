@@ -59,9 +59,9 @@
 //}
 
 - (IBAction)closeErrorButton:(id)sender {
-    if (self.delegate) {
+    if ([self.delegate respondsToSelector:@selector(closeErrorView:)]) {
         [self.delegate closeErrorView:YES];
-         self.hidden = YES;
+         //self.hidden = YES;
     }
 }
 

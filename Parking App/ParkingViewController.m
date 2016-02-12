@@ -173,9 +173,15 @@
     }
 }
 - (void)disableViews {
-    [self.interactableViews makeObjectsPerformSelector:@selector(setUserInteractionEnabled:) withObject:@NO];
+    for (UIView *view in self.interactableViews) {
+        [view setUserInteractionEnabled:NO];
+    }
+   // [self.interactableViews makeObjectsPerformSelector:@selector(setUserInteractionEnabled:) withObject:@NO];
 }
 - (void)enableViews {
-    [self.interactableViews makeObjectsPerformSelector:@selector(setUserInteractionEnabled:) withObject:@YES];
+    for (UIView *view in self.interactableViews) {
+        [view setUserInteractionEnabled:YES];
+    }
+    //[self.interactableViews makeObjectsPerformSelector:@selector(setUserInteractionEnabled:) withObject:@YES];
 }
 @end

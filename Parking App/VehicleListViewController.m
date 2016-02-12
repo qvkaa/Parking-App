@@ -12,8 +12,17 @@
 #import "CustomTableViewCell.h"
 
 static const NSInteger NUMBER_OF_LINES = 5;
-
+static  NSString *EDIT_TOGGLED_OFF_TITLE = @"Edit";
+static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 @interface VehicleListViewController() <UITableViewDataSource, UITableViewDelegate>
+
+#pragma mark - UIButton
+@property (weak, nonatomic) IBOutlet UIButton *deleteSelectedButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *enterEditModeButton;
+
+#pragma mark - BOOL
+@property (assign) BOOL isEditButtonToggledOn;
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 //@property (nonatomic, strong) UIImageView *imageView;
@@ -25,12 +34,15 @@ static const NSInteger NUMBER_OF_LINES = 5;
 
 @implementation VehicleListViewController
 
+#pragma mark - Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView setEditing:YES];
+    //[self.tableView setEditing:YES];
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
     [self.tableView setEstimatedRowHeight:400.0];
-    [self.tableView setAllowsMultipleSelectionDuringEditing:NO];
+    [self.tableView setAllowsMultipleSelectionDuringEditing:YES];
+    [self.enterEditModeButton setTitle:EDIT_TOGGLED_OFF_TITLE forState:UIControlStateNormal];
+    self.deleteSelectedButton.hidden = YES;
 //    AppDelegate* delegate = [[UIApplication sharedApplication] delegate ];
 //    NSUInteger totalVehicles = [delegate.vehicles count];
 //    NSUInteger labelHeight = totalVehicles * NUMBER_OF_LINES * DEFAULT_HEIGHT;
@@ -63,7 +75,47 @@ static const NSInteger NUMBER_OF_LINES = 5;
 //    }
 
 }
+#pragma mark - IBAction
+- (IBAction)enterEditModeAction:(id)sender {
+    if ( self.isEditButtonToggledOn) {
+        self.isEditButtonToggledOn = NO;
+        [sender setTitle:EDIT_TOGGLED_OFF_TITLE forState:UIControlStateNormal];
+        [self.tableView setEditing:NO];
+        self.deleteSelectedButton.hidden = YES;
+        
+    } else {
+        self.isEditButtonToggledOn = YES;
+        [sender setTitle:EDIT_TOGGLED_ON_TITLE forState:UIControlStateNormal];
+        [self.tableView setEditing:YES];
+        self.deleteSelectedButton.hidden = NO;
+    }
+  }
+- (IBAction)deleteSelectedAction:(id)sender {
+    //for (self.tableView.indexPathsForSelectedRows
+    ParkingLot *parking = [ParkingLot defaultParking];
+    //self.tableView.indexPathsForSelectedRows sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+   //     obj1
+  //  }
+    NSMutableArray *rowIndices = [[NSMutableArray alloc] initWithCapacity:self.tableView.indexPathsForSelectedRows.count];
+    for(NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows){
+        NSNumber *temp = [[NSNumber alloc] initWithLong:indexPath.row];
+        [rowIndices addObject:temp];
+       
+        NSLog(@"Deleting row %ld",indexPath.row);
+    
+    }
+    NSSortDescriptor *highestToLowest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:NO];
+    [rowIndices sortUsingDescriptors:[NSArray arrayWithObject:highestToLowest]];
+    
+    for (NSNumber *index in rowIndices) {
+        [parking removeVehicleAtIndex:[index longValue]];
+    }
+    
+    [self.tableView reloadData];
+    [parking saveData];
+}
 
+#pragma mark - Delegate methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     ParkingLot *parking = [ParkingLot defaultParking];
@@ -92,12 +144,14 @@ static const NSInteger NUMBER_OF_LINES = 5;
 // Override to support conditional editing of the table view.
 // This only needs to be implemented if you are going to be returning NO
 // for some items. By default, all items are editable.
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return YES if you want the specified item to be editable.
     return YES;
 }
 
 // Override to support editing the table view.
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         ParkingLot *parking = [ParkingLot defaultParking];
