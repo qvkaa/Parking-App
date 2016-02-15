@@ -21,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.MainTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     
     //[self.MainButton setTitle:@"Park Now" forState:UIControlStateNormal];
     // Do any additional setup after loading the view, typically from a nib.

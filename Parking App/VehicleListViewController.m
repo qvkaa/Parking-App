@@ -91,26 +91,26 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     }
   }
 - (IBAction)deleteSelectedAction:(id)sender {
-    //for (self.tableView.indexPathsForSelectedRows
     ParkingLot *parking = [ParkingLot defaultParking];
-    //self.tableView.indexPathsForSelectedRows sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-   //     obj1
-  //  }
-    NSMutableArray *rowIndices = [[NSMutableArray alloc] initWithCapacity:self.tableView.indexPathsForSelectedRows.count];
-    for(NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows){
-        NSNumber *temp = [[NSNumber alloc] initWithLong:indexPath.row];
-        [rowIndices addObject:temp];
-       
-        NSLog(@"Deleting row %ld",indexPath.row);
-    
+    NSArray *rowIndices = [self.tableView.indexPathsForSelectedRows mutableCopy];
+    rowIndices = [rowIndices sortedArrayUsingComparator: ^(id obj1, id obj2) {
+        NSIndexPath *object1 = obj1;
+        NSIndexPath *object2 = obj2;
+        if (object1.row > object2.row) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        
+        if (object1.row < object2.row) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        
+        return (NSComparisonResult)NSOrderedSame;
+        return (NSComparisonResult)NSOrderedSame;
+        
+    }];
+    for (NSIndexPath *indexPath in rowIndices) {
+        [parking removeVehicleAtIndex:indexPath.row];
     }
-    NSSortDescriptor *highestToLowest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:NO];
-    [rowIndices sortUsingDescriptors:[NSArray arrayWithObject:highestToLowest]];
-    
-    for (NSNumber *index in rowIndices) {
-        [parking removeVehicleAtIndex:[index longValue]];
-    }
-    
     [self.tableView reloadData];
     [parking saveData];
 }
