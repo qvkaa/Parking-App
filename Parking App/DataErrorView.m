@@ -16,6 +16,7 @@
 @end
 
 @implementation DataErrorView
+
 @synthesize delegate = _delegate;
 
 #pragma mark - Lifecycle

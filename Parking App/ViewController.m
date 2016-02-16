@@ -33,7 +33,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     ParkingLot *parking = [ParkingLot defaultParking];
     [super viewWillAppear:animated];
-    self.navigationItem.title = @"Home";
+    self.navigationItem.title = @"Total Vehicles";
     self.mainTextLabel.text = [NSString stringWithFormat: @"Parked Vehicles : %ld", [parking totalVehicles]];
 }
 - (void)didReceiveMemoryWarning {

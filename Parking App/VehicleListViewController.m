@@ -35,9 +35,23 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 @implementation VehicleListViewController
 
 #pragma mark - Lifecycle
+
+//- (void)viewDidAppear:(BOOL)animated {
+//    self.isEditButtonToggledOn = NO;
+//    [self.enterEditModeButton setTitle:EDIT_TOGGLED_OFF_TITLE forState:UIControlStateNormal];
+//    [self.tableView setEditing:NO];
+//    self.deleteSelectedButton.hidden = YES;
+//}
+- (void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
+    self.isEditButtonToggledOn = NO;
+    [self.enterEditModeButton setTitle:EDIT_TOGGLED_OFF_TITLE forState:UIControlStateNormal];
+    [self.tableView setEditing:NO];
+    self.deleteSelectedButton.hidden = YES;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //[self.tableView setEditing:YES];
+    [self.tableView reloadData];
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
     [self.tableView setEstimatedRowHeight:400.0];
     [self.tableView setAllowsMultipleSelectionDuringEditing:YES];

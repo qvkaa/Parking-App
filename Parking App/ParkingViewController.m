@@ -57,9 +57,14 @@
 
 #pragma mark - Lifecycle
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+     self.navigationItem.title = @"Parking";
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationItem.title = @"Parking";
+    self.data = 0;
+    [self closeErrorView:YES];
     
  //   self.errorView.hidden = NO;
     
@@ -92,10 +97,27 @@
 #pragma mark - Data Validation
 
 - (void) setData:(NSUInteger)data {
-    _data = _data | data;
+    if (data == -1) {
+        _data = 0;
+    } else {
+        _data = _data | data;
+    }
 }
 
 - (BOOL) isDataValid {
+    
+   
+    self.data = -1;
+    self.data = [ValidateDataUtil isValidYear:self.yearTextField.text];
+    NSInteger length = 8;
+    self.data = [ValidateDataUtil isValidLicense:self.licenseTextField.text requiredLength:length];
+    length = 7;
+    self.data = [ValidateDataUtil isValidLicense:self.licenseTextField.text requiredLength:length];
+    self.data = [ValidateDataUtil isValidManufacturer:self.manufacturerTextField.text];
+    self.data = [ValidateDataUtil isValidModel:self.modelTextField.text];
+    self.data = [ValidateDataUtil isValidColor:self.colorTextField.text];
+   
+
     return (self.data == ValidAll) ? YES : NO;
 }
 - (NSString *)errorMessage {
@@ -139,20 +161,19 @@
 #pragma mark - IBActions
 
 - (IBAction)clickParkingButton:(id)sender {
-    self.data = [ValidateDataUtil isValidYear:self.yearTextField.text];
-    NSInteger length = 8;
-    self.data = [ValidateDataUtil isValidLicense:self.licenseTextField.text requiredLength:length];
-    length = 7;
-    self.data = [ValidateDataUtil isValidLicense:self.licenseTextField.text requiredLength:length];
-    self.data = [ValidateDataUtil isValidManufacturer:self.manufacturerTextField.text];
-    self.data = [ValidateDataUtil isValidModel:self.modelTextField.text];
-    self.data = [ValidateDataUtil isValidColor:self.colorTextField.text];
-    if ([self isDataValid]) {
-        NSLog(@"success");
-    } else {
-        NSLog(@"failure");
-    }
-    
+//    self.data = [ValidateDataUtil isValidYear:self.yearTextField.text];
+//    NSInteger length = 8;
+//    self.data = [ValidateDataUtil isValidLicense:self.licenseTextField.text requiredLength:length];
+//    length = 7;
+//    self.data = [ValidateDataUtil isValidLicense:self.licenseTextField.text requiredLength:length];
+//    self.data = [ValidateDataUtil isValidManufacturer:self.manufacturerTextField.text];
+//    self.data = [ValidateDataUtil isValidModel:self.modelTextField.text];
+//    self.data = [ValidateDataUtil isValidColor:self.colorTextField.text];
+//    if ([self isDataValid]) {
+//        NSLog(@"success");
+//    } else {
+//        NSLog(@"failure");
+//    }
     if ([self isDataValid]) {
           //  AppDelegate* delegate = [[UIApplication sharedApplication] delegate ];
             ParkingLot *parking = [ParkingLot defaultParking];
