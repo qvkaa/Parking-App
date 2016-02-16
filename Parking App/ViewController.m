@@ -13,6 +13,10 @@
 //#import "SecondViewController.h"
 
 @interface ViewController ()
+- (IBAction)goToParking:(id)sender;
+//@property (weak, nonatomic) IBOutlet UIButton *parkingButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *mainTextLabel;
 
 @end
 
@@ -21,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.MainTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    self.mainTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     
     //[self.MainButton setTitle:@"Park Now" forState:UIControlStateNormal];
     // Do any additional setup after loading the view, typically from a nib.
@@ -30,7 +34,7 @@
     ParkingLot *parking = [ParkingLot defaultParking];
     [super viewWillAppear:animated];
     self.navigationItem.title = @"Home";
-    self.MainTextLabel.text = [NSString stringWithFormat: @"Parked Vehicles : %ld", [parking totalVehicles]];
+    self.mainTextLabel.text = [NSString stringWithFormat: @"Parked Vehicles : %ld", [parking totalVehicles]];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
