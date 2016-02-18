@@ -103,9 +103,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="customCellLabel" destination="sNw-z6-JJk" id="ueh-ct-9fI"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

@@ -24,6 +24,8 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 #pragma mark - BOOL
 @property (assign) BOOL isEditButtonToggledOn;
 
+
+#pragma mark - UITableView
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 //@property (nonatomic, strong) UIImageView *imageView;
 
@@ -43,6 +45,7 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 //    self.deleteSelectedButton.hidden = YES;
 //}
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self.tableView reloadData];
     self.isEditButtonToggledOn = NO;
     [self.enterEditModeButton setTitle:EDIT_TOGGLED_OFF_TITLE forState:UIControlStateNormal];
@@ -51,8 +54,9 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"xibCell"];
     [self.tableView reloadData];
-    [self.tableView setRowHeight:UITableViewAutomaticDimension];
+    [self.tableView setRowHeight:125.0];
     [self.tableView setEstimatedRowHeight:400.0];
     [self.tableView setAllowsMultipleSelectionDuringEditing:YES];
     [self.enterEditModeButton setTitle:EDIT_TOGGLED_OFF_TITLE forState:UIControlStateNormal];
@@ -136,18 +140,38 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     NSUInteger numberOfVehicles = [parking totalVehicles];
     return numberOfVehicles;
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     ParkingLot *parking = [ParkingLot defaultParking];
-    CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-   
-    [cell.customCellLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    cell.customCellLabel.numberOfLines = NUMBER_OF_LINES;
-    cell.customCellLabel.text = [[parking vehicleAtIndex:indexPath.row] vehicleInfo];
- //   [cell.customCellLabel setPreferredMaxLayoutWidth:400.0];
+    CustomTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"xibCell" forIndexPath:indexPath];
+//    if (!cell)
+//    {
+//        
+//        [tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"xibCell"];
+//        cell = [tableView dequeueReusableCellWithIdentifier:@"xibCell"];
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"xibCell"];
+//    }
+    [cell.vehicleInfoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    cell.vehicleInfoLabel.numberOfLines = NUMBER_OF_LINES;
+    cell.vehicleInfoLabel.text = [[parking vehicleAtIndex:indexPath.row] vehicleInfo];
+    cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: [parking imageAtIndex:indexPath.row] ]]];
+    NSLog(@"%@",[parking imageAtIndex:indexPath.row]);
+    [cell.vehicleInfoLabel setPreferredMaxLayoutWidth:400.0];
+
     return cell;
 }
+
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//   
+//    ParkingLot *parking = [ParkingLot defaultParking];
+//    CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"xibCell" forIndexPath:indexPath];
+//   
+//    [cell.customCellLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    cell.customCellLabel.numberOfLines = NUMBER_OF_LINES;
+//    cell.customCellLabel.text = [[parking vehicleAtIndex:indexPath.row] vehicleInfo];
+// //   [cell.customCellLabel setPreferredMaxLayoutWidth:400.0];
+//    return cell;
+//}
 
 
 

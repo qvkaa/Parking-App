@@ -22,6 +22,7 @@
 		8357503D1C6C969400ADF5CB /* DataErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8357503C1C6C969400ADF5CB /* DataErrorView.xib */; };
 		835750401C6C96A600ADF5CB /* DataErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8357503F1C6C96A600ADF5CB /* DataErrorView.m */; };
 		835A7FF11C6398A900CE49A1 /* ParkingLot.m in Sources */ = {isa = PBXBuildFile; fileRef = 835A7FF01C6398A900CE49A1 /* ParkingLot.m */; };
+		835ED7E61C74B56B0009709E /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835ED7E51C74B56B0009709E /* CustomTableViewCell.xib */; };
 		836DF0E61C69F91400A9E862 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		8357503F1C6C96A600ADF5CB /* DataErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataErrorView.m; sourceTree = "<group>"; };
 		835A7FEF1C6398A900CE49A1 /* ParkingLot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkingLot.h; sourceTree = "<group>"; };
 		835A7FF01C6398A900CE49A1 /* ParkingLot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkingLot.m; sourceTree = "<group>"; };
+		835ED7E51C74B56B0009709E /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		836DF0E41C69F91400A9E862 /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -195,6 +197,7 @@
 				8357503E1C6C96A600ADF5CB /* DataErrorView.h */,
 				8357503F1C6C96A600ADF5CB /* DataErrorView.m */,
 				8357503C1C6C969400ADF5CB /* DataErrorView.xib */,
+				835ED7E51C74B56B0009709E /* CustomTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				5F1CB20D1C56552C00650671 /* LaunchScreen.storyboard in Resources */,
 				8357503D1C6C969400ADF5CB /* DataErrorView.xib in Resources */,
 				5F1CB20A1C56552C00650671 /* Assets.xcassets in Resources */,
+				835ED7E61C74B56B0009709E /* CustomTableViewCell.xib in Resources */,
 				5F1CB2081C56552C00650671 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,66 +16,12 @@ static NSInteger totalParkedVehicles = 0;
 @property (strong,nonatomic,readwrite)NSString *model;
 @property (strong,nonatomic,readwrite)NSNumber *yearOfManufacture;
 
+
 @end
 
 @implementation Vehicle
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        _plateLicenseNumber = @"";
-        _color = @"";
-        _manufacturer = @"";
-        _model = @"";
-        _yearOfManufacture = @0;
-    }
-    
-    return self;
-}
-- (instancetype)initWithPlateLicense:(NSString *)plate
-                              color:(NSString *)color
-                        manufacturer:(NSString *)manufacturer
-                               model:(NSString *)model
-                                year:(NSNumber *)year {
-    self = [super init];
-    if (self) {
-        _plateLicenseNumber = plate;
-        _manufacturer = manufacturer;
-        _model = model;
-        _yearOfManufacture = year;
-        _color = color;
-        totalParkedVehicles++;
-    }
-    return self;
-}
-+ (NSInteger)totalParkedVehicles {
-    return totalParkedVehicles;
-}
-
-- (NSString *)vehicleInfo {
-    return [NSString stringWithFormat:
-            @"Plate # :%@"
-            "\nColor : %@"
-            "\nManufacturer : %@"
-            "\nModel : %@"
-            "\nYear : %@",
-            self.plateLicenseNumber,
-            self.color,
-            self.manufacturer,
-            self.model,
-            self.yearOfManufacture];
-}
-
--(void)encodeWithCoder:(NSCoder *)encoder
-{
-    //Encode the properties of the object
-    [encoder encodeObject:self.plateLicenseNumber forKey:@"plate"];
-    [encoder encodeObject:self.color forKey:@"color"];
-    [encoder encodeObject:self.manufacturer forKey:@"manufacturer"];
-    [encoder encodeObject:self.model forKey:@"model"];
-    [encoder encodeObject:self.yearOfManufacture forKey:@"year"];
-}
-
+#pragma mark - lifecycle
 -(id)initWithCoder:(NSCoder *)decoder
 {
     self = [super init];
@@ -90,5 +36,71 @@ static NSInteger totalParkedVehicles = 0;
     }
     return self;
 }
+-(void)encodeWithCoder:(NSCoder *)encoder
+{
+    //Encode the properties of the object
+    [encoder encodeObject:self.plateLicenseNumber forKey:@"plate"];
+    [encoder encodeObject:self.color forKey:@"color"];
+    [encoder encodeObject:self.manufacturer forKey:@"manufacturer"];
+    [encoder encodeObject:self.model forKey:@"model"];
+    [encoder encodeObject:self.yearOfManufacture forKey:@"year"];
+    [encoder encodeObject:self.imageURL forKey:@"url"];
+}
+
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _plateLicenseNumber = @"";
+        _color = @"";
+        _manufacturer = @"";
+        _model = @"";
+        _yearOfManufacture = @0;
+        _imageURL = @"";
+    }
+    
+    return self;
+}
+- (instancetype)initWithPlateLicense:(NSString *)plate
+                              color:(NSString *)color
+                        manufacturer:(NSString *)manufacturer
+                               model:(NSString *)model
+                                year:(NSNumber *)year
+                                 url:(NSString *)url {
+    self = [super init];
+    if (self) {
+        _plateLicenseNumber = plate;
+        _manufacturer = manufacturer;
+        _model = model;
+        _yearOfManufacture = year;
+        _color = color;
+        _imageURL = url;
+        totalParkedVehicles++;
+    }
+    return self;
+}
+#pragma mark - class methods
++ (NSInteger)totalParkedVehicles {
+    return totalParkedVehicles;
+}
+
+#pragma mark - public methods
+- (NSString *)vehicleInfo {
+    return [NSString stringWithFormat:
+            @"Plate # :%@"
+            "\nColor : %@"
+            "\nManufacturer : %@"
+            "\nModel : %@"
+            "\nYear : %@"
+            "\nUrl : %@",
+            self.plateLicenseNumber,
+            self.color,
+            self.manufacturer,
+            self.model,
+            self.yearOfManufacture,
+            self.imageURL];
+}
+
+
 
 @end

@@ -15,12 +15,13 @@
 @property (strong,nonatomic,readonly)NSString *manufacturer;
 @property (strong,nonatomic,readonly)NSString *model;
 @property (strong,nonatomic,readonly)NSNumber *yearOfManufacture;
-
+@property (strong,nonatomic,readonly)NSString *imageURL;
 - (instancetype)initWithPlateLicense:(NSString *)plate
                                  color:(NSString *)color
                            manufacturer:(NSString *)manufacturer
                                   model:(NSString *)model
-                                   year:(NSNumber *)year;
+                                   year:(NSNumber *)year
+                                    url:(NSString *)url;
 + (NSInteger)totalParkedVehicles;
 
 - (NSString *)vehicleInfo;

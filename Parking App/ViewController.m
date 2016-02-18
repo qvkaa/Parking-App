@@ -13,7 +13,7 @@
 //#import "SecondViewController.h"
 
 @interface ViewController ()
-- (IBAction)goToParking:(id)sender;
+//- (IBAction)goToParking:(id)sender;
 //@property (weak, nonatomic) IBOutlet UIButton *parkingButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *mainTextLabel;
@@ -22,7 +22,7 @@
 
 @implementation ViewController
 
-
+#pragma mark - Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.mainTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
@@ -40,27 +40,28 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)handleMainButtonClick:(id)sender {
-    /*AppDelegate* delegate = [[UIApplication sharedApplication] delegate ];
-    Vehicle* v = [[Vehicle alloc]initWithPlateLicense:@"asd"
-                                               colour:@"red"
-                                         manufacturer:@"renault"
-                                                model:@"model"
-                                                 year:@12];
 
-    [delegate.vehicles addObject:v];
-    NSLog(@"%ld",[Vehicle totalParkedVehicles]);
-     */
-  //  [firstViewController presentModalViewController:secondViewController animated:YES];
-  //  SecondViewController *second = [[SecondViewController alloc] initWithNibName:nil bundle:nil ];
-  //  [self presentViewController:second animated:YES completion:NULL];
-    }
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-}
-
-- (IBAction)goToParking:(id)sender {
-    [self performSegueWithIdentifier:@"SegueToNextPage" sender:self];
-}
+//- (IBAction)handleMainButtonClick:(id)sender {
+//    /*AppDelegate* delegate = [[UIApplication sharedApplication] delegate ];
+//    Vehicle* v = [[Vehicle alloc]initWithPlateLicense:@"asd"
+//                                               colour:@"red"
+//                                         manufacturer:@"renault"
+//                                                model:@"model"
+//                                                 year:@12];
+//
+//    [delegate.vehicles addObject:v];
+//    NSLog(@"%ld",[Vehicle totalParkedVehicles]);
+//     */
+//  //  [firstViewController presentModalViewController:secondViewController animated:YES];
+//  //  SecondViewController *second = [[SecondViewController alloc] initWithNibName:nil bundle:nil ];
+//  //  [self presentViewController:second animated:YES completion:NULL];
+//    }
+//
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//}
+//
+//- (IBAction)goToParking:(id)sender {
+//    [self performSegueWithIdentifier:@"SegueToNextPage" sender:self];
+//}
 @end

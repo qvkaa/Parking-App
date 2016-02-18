@@ -19,7 +19,7 @@
 
 @synthesize delegate = _delegate;
 
-#pragma mark - Lifecycle
+
 //- (instancetype)init {
 //    self = [super init];
 //    if (self) {
@@ -58,7 +58,7 @@
 //    }
 //
 //}
-
+#pragma mark - Method for delegate
 - (IBAction)closeErrorButton:(id)sender {
     if ([self.delegate respondsToSelector:@selector(closeErrorView:)]) {
         [self.delegate closeErrorView:YES];

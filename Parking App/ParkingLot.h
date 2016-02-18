@@ -27,4 +27,5 @@
 
 - (void)resetData;
 
+- (NSString *)imageAtIndex:(NSUInteger)index;
 @end

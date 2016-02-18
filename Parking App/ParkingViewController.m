@@ -15,7 +15,8 @@
 //
 //static const NSInteger ERROR_VIEW_WIDTH = 300;
 //static const NSInteger ERROR_VIEW_HEIGTH = 250;
-
+static const NSString *KEY = @"6672b42695aa8cfbcb8e7137a52ac235";
+static const NSString *SECRET = @"0d150382efad5764";
 @interface ParkingViewController()
 
 #pragma mark - Property
@@ -65,7 +66,7 @@
     [super viewWillAppear:animated];
     self.data = 0;
     [self closeErrorView:YES];
-    
+   // [self imageWithColor:@"red" model:@"mustang" manufacturer:@"ford"];
  //   self.errorView.hidden = NO;
     
     
@@ -94,6 +95,55 @@
     }
     return _errorView;
 }
+#pragma mark - URLrequests
+- (void)getInfoFromTextFields {
+    
+    NSString *urlString =[NSString stringWithFormat:
+     @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&per_page=1&format=json&nojsoncallback=1",
+     KEY, [NSString stringWithFormat:@"%@+%@+%@",
+           self.manufacturerTextField.text,
+           self.modelTextField.text,
+           self.colorTextField.text ]];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *jsonData = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSError* errorr;
+        NSDictionary* json = [NSJSONSerialization
+                              JSONObjectWithData:data //1
+                              
+                              options:kNilOptions
+                              error: &errorr];
+        
+        NSDictionary *photos = [json objectForKey:@"photos"];
+        NSArray *array = [photos objectForKey:@"photo"];
+        NSString *imageURL;
+        if ([array count] > 0) {
+        
+            NSDictionary *photo = [[photos objectForKey:@"photo"] objectAtIndex:0];
+            NSString *farmID = [photo objectForKey:@"farm"];
+            NSString *id = [photo objectForKey:@"id"];
+            NSString *server = [photo objectForKey:@"server"];
+            NSString *secret = [photo objectForKey:@"secret"];
+        
+            imageURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg", farmID, server, id, secret];
+        } else {
+            imageURL = @"";
+        }
+        Vehicle* v = [[Vehicle alloc]initWithPlateLicense:self.licenseTextField.text
+                                                    color:self.colorTextField.text
+                                             manufacturer:self.manufacturerTextField.text
+                                                    model:self.modelTextField.text
+                                                     year:@([self.yearTextField.text integerValue])
+                                                      url:imageURL
+                      ];
+        ParkingLot *parking = [ParkingLot defaultParking];
+        [parking addVehicle:v];
+        [parking saveData];
+    }];
+    
+    [jsonData resume];
+
+}
+
 #pragma mark - Data Validation
 
 - (void) setData:(NSUInteger)data {
@@ -158,39 +208,22 @@
     return UIInterfaceOrientationPortrait;
 }
 
+
 #pragma mark - IBActions
 
 - (IBAction)clickParkingButton:(id)sender {
-//    self.data = [ValidateDataUtil isValidYear:self.yearTextField.text];
-//    NSInteger length = 8;
-//    self.data = [ValidateDataUtil isValidLicense:self.licenseTextField.text requiredLength:length];
-//    length = 7;
-//    self.data = [ValidateDataUtil isValidLicense:self.licenseTextField.text requiredLength:length];
-//    self.data = [ValidateDataUtil isValidManufacturer:self.manufacturerTextField.text];
-//    self.data = [ValidateDataUtil isValidModel:self.modelTextField.text];
-//    self.data = [ValidateDataUtil isValidColor:self.colorTextField.text];
-//    if ([self isDataValid]) {
-//        NSLog(@"success");
-//    } else {
-//        NSLog(@"failure");
-//    }
-    if ([self isDataValid]) {
-          //  AppDelegate* delegate = [[UIApplication sharedApplication] delegate ];
-            ParkingLot *parking = [ParkingLot defaultParking];
-            Vehicle* v = [[Vehicle alloc]initWithPlateLicense:self.licenseTextField.text
-                                                        color:self.colorTextField.text
-                                                 manufacturer:self.manufacturerTextField.text
-                                                        model:self.modelTextField.text
-                                                         year:@([self.yearTextField.text integerValue])
-                      ];
-        [parking addVehicle:v];
-        [parking saveData];
 
+    if ([self isDataValid]) {
+        
+        [self getInfoFromTextFields];
+        
     } else {
+        
         [self disableViews];
         self.errorView.hidden = NO;
         self.errorView.errorLabel.numberOfLines = 0;
         self.errorView.errorLabel.text = [self errorMessage];
+        
     }
 }
 - (void)disableViews {

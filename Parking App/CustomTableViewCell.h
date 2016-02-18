@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface CustomTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *vehiclePicture;
+@property (weak, nonatomic) IBOutlet UILabel *vehicleInfoLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *customCellLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *customCellLabel;
 
 
 @end

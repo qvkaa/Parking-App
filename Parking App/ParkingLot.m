@@ -13,6 +13,7 @@ NSString * const VEHICLES = @"VEHICLES";
 @interface ParkingLot()
 
 @property (strong, nonatomic) NSMutableArray *vehicles;
+@property (strong, nonatomic) NSMutableArray *vehiclePicURLS; //of NSString
 
 @end
 
@@ -87,7 +88,14 @@ NSString * const VEHICLES = @"VEHICLES";
 - (void)removeVehicleAtIndex:(NSUInteger)index {
     [self.vehicles removeObjectAtIndex:index];
 }
-
+- (NSString *)imageAtIndex:(NSUInteger)index {
+    NSUInteger size = [self.vehicles count];
+    if (index < size) {
+        return self.vehiclePicURLS[index];
+    } else {
+        return nil;
+    }
+}
 - (Vehicle *)vehicleAtIndex:(NSUInteger)index {
     NSUInteger size = [self.vehicles count];
     if (index < size) {
