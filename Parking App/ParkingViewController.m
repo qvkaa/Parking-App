@@ -98,13 +98,18 @@ static const NSString *SECRET = @"0d150382efad5764";
 #pragma mark - URLrequests
 - (void)getInfoFromTextFields {
     
+    NSLog(@"%@",[NSString stringWithFormat:@"%@+%@+%@",
+                 self.manufacturerTextField.text,
+                 self.modelTextField.text,
+                 self.colorTextField.text ]);
     NSString *urlString =[NSString stringWithFormat:
-     @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&per_page=1&format=json&nojsoncallback=1",
-     KEY, [NSString stringWithFormat:@"%@+%@+%@",
+     @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&tag_mode=all&per_page=1&format=json&nojsoncallback=1",
+     KEY, [NSString stringWithFormat:@"car,%@,%@,%@",
            self.manufacturerTextField.text,
            self.modelTextField.text,
            self.colorTextField.text ]];
-    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration: [NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSLog(@"%@",urlString);
     NSURLSessionDataTask *jsonData = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSError* errorr;
         NSDictionary* json = [NSJSONSerialization
@@ -124,8 +129,10 @@ static const NSString *SECRET = @"0d150382efad5764";
             NSString *server = [photo objectForKey:@"server"];
             NSString *secret = [photo objectForKey:@"secret"];
         
-            imageURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg", farmID, server, id, secret];
+            imageURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@_t.jpg", farmID, server, id, secret];
+            NSLog(@"%@",imageURL);
         } else {
+            NSLog(@"no images found");
             imageURL = @"";
         }
         Vehicle* v = [[Vehicle alloc]initWithPlateLicense:self.licenseTextField.text
@@ -135,6 +142,7 @@ static const NSString *SECRET = @"0d150382efad5764";
                                                      year:@([self.yearTextField.text integerValue])
                                                       url:imageURL
                       ];
+        NSLog(@"%@",imageURL);
         ParkingLot *parking = [ParkingLot defaultParking];
         [parking addVehicle:v];
         [parking saveData];

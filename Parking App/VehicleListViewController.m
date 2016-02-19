@@ -154,8 +154,19 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     [cell.vehicleInfoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     cell.vehicleInfoLabel.numberOfLines = NUMBER_OF_LINES;
     cell.vehicleInfoLabel.text = [[parking vehicleAtIndex:indexPath.row] vehicleInfo];
-    cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: [parking imageAtIndex:indexPath.row] ]]];
-    NSLog(@"%@",[parking imageAtIndex:indexPath.row]);
+    if ([[parking vehicleAtIndex:indexPath.row].imageURL isEqualToString:@""] || [parking vehicleAtIndex:indexPath.row].imageURL == nil ) {
+        [cell.vehiclePicture  setContentMode:UIViewContentModeScaleAspectFit];
+        NSLog(@"aaaa");
+        
+        cell.vehiclePicture.image = [UIImage imageNamed:@"defaultCar"];
+        [cell.vehiclePicture setClipsToBounds:YES];
+        //cell.imageView  contentMode = UIViewContentModeScaleAspectFit;
+    } else {
+        cell.vehiclePicture.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: [parking vehicleAtIndex:indexPath.row].imageURL]]];
+       // cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        NSLog(@"%ld   %@",indexPath.row, [parking vehicleAtIndex:indexPath.row].imageURL);
+    }
+        //  NSLog(@"%@",[parking imageAtIndex:indexPath.row]);
     [cell.vehicleInfoLabel setPreferredMaxLayoutWidth:400.0];
 
     return cell;

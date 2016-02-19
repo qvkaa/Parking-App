@@ -15,7 +15,7 @@ static NSInteger totalParkedVehicles = 0;
 @property (strong,nonatomic,readwrite)NSString *manufacturer;
 @property (strong,nonatomic,readwrite)NSString *model;
 @property (strong,nonatomic,readwrite)NSNumber *yearOfManufacture;
-
+@property (strong,nonatomic,readwrite)NSString *imageURL;
 
 @end
 
@@ -33,6 +33,7 @@ static NSInteger totalParkedVehicles = 0;
         self.manufacturer = [decoder decodeObjectForKey:@"manufacturer"];
         self.model = [decoder decodeObjectForKey:@"model"];
         self.yearOfManufacture = [decoder decodeObjectForKey:@"year"];
+        self.imageURL = [decoder decodeObjectForKey:@"url"];
     }
     return self;
 }
@@ -91,14 +92,12 @@ static NSInteger totalParkedVehicles = 0;
             "\nColor : %@"
             "\nManufacturer : %@"
             "\nModel : %@"
-            "\nYear : %@"
-            "\nUrl : %@",
+            "\nYear : %@",
             self.plateLicenseNumber,
             self.color,
             self.manufacturer,
             self.model,
-            self.yearOfManufacture,
-            self.imageURL];
+            self.yearOfManufacture];
 }
 
 
