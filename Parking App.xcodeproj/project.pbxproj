@@ -21,9 +21,11 @@
 		5F802A911C57C7B900CE362C /* ParkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F802A901C57C7B900CE362C /* ParkingViewController.m */; };
 		8357503D1C6C969400ADF5CB /* DataErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8357503C1C6C969400ADF5CB /* DataErrorView.xib */; };
 		835750401C6C96A600ADF5CB /* DataErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8357503F1C6C96A600ADF5CB /* DataErrorView.m */; };
+		8359C0E91C777E230058A029 /* FlickrImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359C0E81C777E230058A029 /* FlickrImage.m */; };
 		835A7FF11C6398A900CE49A1 /* ParkingLot.m in Sources */ = {isa = PBXBuildFile; fileRef = 835A7FF01C6398A900CE49A1 /* ParkingLot.m */; };
 		835ED7E61C74B56B0009709E /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835ED7E51C74B56B0009709E /* CustomTableViewCell.xib */; };
 		836DF0E61C69F91400A9E862 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */; };
+		839AFAAA1C7B3E6C005E05C8 /* WebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 839AFAA91C7B3E6C005E05C8 /* WebServiceManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,11 +73,15 @@
 		8357503C1C6C969400ADF5CB /* DataErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataErrorView.xib; sourceTree = "<group>"; };
 		8357503E1C6C96A600ADF5CB /* DataErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataErrorView.h; sourceTree = "<group>"; };
 		8357503F1C6C96A600ADF5CB /* DataErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataErrorView.m; sourceTree = "<group>"; };
+		8359C0E71C777E230058A029 /* FlickrImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrImage.h; sourceTree = "<group>"; };
+		8359C0E81C777E230058A029 /* FlickrImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrImage.m; sourceTree = "<group>"; };
 		835A7FEF1C6398A900CE49A1 /* ParkingLot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkingLot.h; sourceTree = "<group>"; };
 		835A7FF01C6398A900CE49A1 /* ParkingLot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkingLot.m; sourceTree = "<group>"; };
 		835ED7E51C74B56B0009709E /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		836DF0E41C69F91400A9E862 /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
+		839AFAA81C7B3E6C005E05C8 /* WebServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceManager.h; sourceTree = "<group>"; };
+		839AFAA91C7B3E6C005E05C8 /* WebServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +215,10 @@
 				5F1CB2311C56559600650671 /* Vehicle.m */,
 				835A7FEF1C6398A900CE49A1 /* ParkingLot.h */,
 				835A7FF01C6398A900CE49A1 /* ParkingLot.m */,
+				8359C0E71C777E230058A029 /* FlickrImage.h */,
+				8359C0E81C777E230058A029 /* FlickrImage.m */,
+				839AFAA81C7B3E6C005E05C8 /* WebServiceManager.h */,
+				839AFAA91C7B3E6C005E05C8 /* WebServiceManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -345,7 +355,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				839AFAAA1C7B3E6C005E05C8 /* WebServiceManager.m in Sources */,
 				5F1CB2321C56559600650671 /* Vehicle.m in Sources */,
+				8359C0E91C777E230058A029 /* FlickrImage.m in Sources */,
 				5F716A3F1C58D5E5007C63F1 /* ValidateDataUtil.m in Sources */,
 				835A7FF11C6398A900CE49A1 /* ParkingLot.m in Sources */,
 				5F1CB2051C56552C00650671 /* ViewController.m in Sources */,

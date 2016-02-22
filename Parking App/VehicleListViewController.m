@@ -11,7 +11,6 @@
 #import "ParkingLot.h"
 #import "CustomTableViewCell.h"
 
-static const NSInteger NUMBER_OF_LINES = 5;
 static  NSString *EDIT_TOGGLED_OFF_TITLE = @"Edit";
 static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 @interface VehicleListViewController() <UITableViewDataSource, UITableViewDelegate>
@@ -56,8 +55,8 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"xibCell"];
     [self.tableView reloadData];
-    [self.tableView setRowHeight:125.0];
-    [self.tableView setEstimatedRowHeight:400.0];
+   // [self.tableView setRowHeight:125.0];
+    //[self.tableView setEstimatedRowHeight:400.0];
     [self.tableView setAllowsMultipleSelectionDuringEditing:YES];
     [self.enterEditModeButton setTitle:EDIT_TOGGLED_OFF_TITLE forState:UIControlStateNormal];
     self.deleteSelectedButton.hidden = YES;
@@ -134,6 +133,13 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 }
 
 #pragma mark - Delegate methods
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat height = 125.0;
+  //  ParkingLot *parking = [ParkingLot defaultParking];
+    
+    
+    return height;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     ParkingLot *parking = [ParkingLot defaultParking];
@@ -144,73 +150,36 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 {
     ParkingLot *parking = [ParkingLot defaultParking];
     CustomTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"xibCell" forIndexPath:indexPath];
-//    if (!cell)
-//    {
-//        
-//        [tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"xibCell"];
-//        cell = [tableView dequeueReusableCellWithIdentifier:@"xibCell"];
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"xibCell"];
-//    }
     [cell.vehicleInfoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    cell.vehicleInfoLabel.numberOfLines = NUMBER_OF_LINES;
     cell.vehicleInfoLabel.text = [[parking vehicleAtIndex:indexPath.row] vehicleInfo];
-    if ([[parking vehicleAtIndex:indexPath.row].imageURL isEqualToString:@""] || [parking vehicleAtIndex:indexPath.row].imageURL == nil ) {
-        [cell.vehiclePicture  setContentMode:UIViewContentModeScaleAspectFit];
-        NSLog(@"aaaa");
-        
+   
+    if ([[parking vehicleAtIndex:indexPath.row].flickrImage imageURL] == nil ) {
         cell.vehiclePicture.image = [UIImage imageNamed:@"defaultCar"];
-        [cell.vehiclePicture setClipsToBounds:YES];
-        //cell.imageView  contentMode = UIViewContentModeScaleAspectFit;
     } else {
-        cell.vehiclePicture.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: [parking vehicleAtIndex:indexPath.row].imageURL]]];
-       // cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        NSLog(@"%ld   %@",indexPath.row, [parking vehicleAtIndex:indexPath.row].imageURL);
+        NSURL *url = [[parking vehicleAtIndex:indexPath.row].flickrImage imageURL];
+        NSData *dataURL = [NSData dataWithContentsOfURL:url];
+        cell.vehiclePicture.image = [UIImage imageWithData:dataURL];
     }
-        //  NSLog(@"%@",[parking imageAtIndex:indexPath.row]);
-    [cell.vehicleInfoLabel setPreferredMaxLayoutWidth:400.0];
-
     return cell;
 }
-
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//   
-//    ParkingLot *parking = [ParkingLot defaultParking];
-//    CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"xibCell" forIndexPath:indexPath];
-//   
-//    [cell.customCellLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    cell.customCellLabel.numberOfLines = NUMBER_OF_LINES;
-//    cell.customCellLabel.text = [[parking vehicleAtIndex:indexPath.row] vehicleInfo];
-// //   [cell.customCellLabel setPreferredMaxLayoutWidth:400.0];
-//    return cell;
-//}
-
-
-
-// During startup (-viewDidLoad or in storyboard) do:
-
-
-
-// Override to support conditional editing of the table view.
-// This only needs to be implemented if you are going to be returning NO
-// for some items. By default, all items are editable.
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return YES if you want the specified item to be editable.
     return YES;
 }
 
-// Override to support editing the table view.
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        ParkingLot *parking = [ParkingLot defaultParking];
-        [parking removeVehicleAtIndex:indexPath.row];
-        NSLog(@"Deleting row %ld",indexPath.row);
-        [tableView reloadData];
-        [parking saveData]; 
-        
-    }
-}
+
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        ParkingLot *parking = [ParkingLot defaultParking];
+//        [parking removeVehicleAtIndex:indexPath.row];
+//        NSLog(@"Deleting row %ld",indexPath.row);
+//        [tableView reloadData];
+//        [parking saveData]; 
+//        
+//    }
+//}
 
 
 

@@ -7,21 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FlickrImage.h"
 
 @interface Vehicle : NSObject <NSCoding>
 
-@property (strong,nonatomic)NSString *plateLicenseNumber;
-@property (strong,nonatomic)NSString *color;
-@property (strong,nonatomic,readonly)NSString *manufacturer;
-@property (strong,nonatomic,readonly)NSString *model;
-@property (strong,nonatomic,readonly)NSNumber *yearOfManufacture;
-@property (strong,nonatomic,readonly)NSString *imageURL;
+@property (strong,nonatomic) NSString *plateLicenseNumber;
+@property (strong,nonatomic) NSString *color;
+@property (strong,nonatomic,readonly) NSString *manufacturer;
+@property (strong,nonatomic,readonly) NSString *model;
+@property (strong,nonatomic,readonly) NSNumber *yearOfManufacture;
+//@property (strong,nonatomic,readonly)NSString *imageURL;
+@property (strong,nonatomic,readonly)FlickrImage *flickrImage;
+
 - (instancetype)initWithPlateLicense:(NSString *)plate
-                                 color:(NSString *)color
-                           manufacturer:(NSString *)manufacturer
-                                  model:(NSString *)model
-                                   year:(NSNumber *)year
-                                    url:(NSString *)url;
+                               color:(NSString *)color
+                        manufacturer:(NSString *)manufacturer
+                               model:(NSString *)model
+                                year:(NSNumber *)year
+                               image:(FlickrImage *)image;
+
 + (NSInteger)totalParkedVehicles;
 
 - (NSString *)vehicleInfo;

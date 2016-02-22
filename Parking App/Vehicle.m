@@ -12,11 +12,11 @@ static NSInteger totalParkedVehicles = 0;
 
 @interface Vehicle()
 
-@property (strong,nonatomic,readwrite)NSString *manufacturer;
-@property (strong,nonatomic,readwrite)NSString *model;
-@property (strong,nonatomic,readwrite)NSNumber *yearOfManufacture;
-@property (strong,nonatomic,readwrite)NSString *imageURL;
-
+@property (strong,nonatomic,readwrite) NSString *manufacturer;
+@property (strong,nonatomic,readwrite) NSString *model;
+@property (strong,nonatomic,readwrite) NSNumber *yearOfManufacture;
+//@property (strong,nonatomic,readwrite)NSString *imageURL;
+@property (strong,nonatomic,readwrite)FlickrImage *flickrImage;
 @end
 
 @implementation Vehicle
@@ -33,7 +33,7 @@ static NSInteger totalParkedVehicles = 0;
         self.manufacturer = [decoder decodeObjectForKey:@"manufacturer"];
         self.model = [decoder decodeObjectForKey:@"model"];
         self.yearOfManufacture = [decoder decodeObjectForKey:@"year"];
-        self.imageURL = [decoder decodeObjectForKey:@"url"];
+        self.flickrImage = [decoder decodeObjectForKey:@"flickr"];
     }
     return self;
 }
@@ -45,7 +45,7 @@ static NSInteger totalParkedVehicles = 0;
     [encoder encodeObject:self.manufacturer forKey:@"manufacturer"];
     [encoder encodeObject:self.model forKey:@"model"];
     [encoder encodeObject:self.yearOfManufacture forKey:@"year"];
-    [encoder encodeObject:self.imageURL forKey:@"url"];
+    [encoder encodeObject:self.flickrImage forKey:@"flickr"];
 }
 
 
@@ -57,7 +57,7 @@ static NSInteger totalParkedVehicles = 0;
         _manufacturer = @"";
         _model = @"";
         _yearOfManufacture = @0;
-        _imageURL = @"";
+        _flickrImage = nil;
     }
     
     return self;
@@ -67,7 +67,7 @@ static NSInteger totalParkedVehicles = 0;
                         manufacturer:(NSString *)manufacturer
                                model:(NSString *)model
                                 year:(NSNumber *)year
-                                 url:(NSString *)url {
+                               image:(FlickrImage *)image {
     self = [super init];
     if (self) {
         _plateLicenseNumber = plate;
@@ -75,7 +75,7 @@ static NSInteger totalParkedVehicles = 0;
         _model = model;
         _yearOfManufacture = year;
         _color = color;
-        _imageURL = url;
+        _flickrImage = image;
         totalParkedVehicles++;
     }
     return self;

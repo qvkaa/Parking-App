@@ -9,18 +9,14 @@
 #import "ParkingLot.h"
 
 NSString * const VEHICLES = @"VEHICLES";
-//NSString * const VEHICLE_URLS = @"VEHICLE_URLS";
+
 @interface ParkingLot()
 
 @property (strong, nonatomic) NSMutableArray *vehicles;     //of Vehicle
-//@property (strong, nonatomic) NSMutableArray *vehiclePicURLS; //of NSString
 
 @end
 
 @implementation ParkingLot
-
-//@synthesize defaults = _defaults;
-
 #pragma mark - Lifecycle
 
 + (id)defaultParking {
@@ -32,31 +28,12 @@ NSString * const VEHICLES = @"VEHICLES";
     return sharedParkingLot;
 }
 
-//- (NSUserDefaults *)defaults {
-//     _defaults = [NSUserDefaults standardUserDefaults];
-//    return _defaults;
-//}
-
-
-//- (instancetype)init{
-//    self = [super init];
-//    
-//    if (self) {
-//       
-//      
-//        _vehicles = [[NSMutableArray alloc] init];
-//    }
-//    return self;
-//}
-
 #pragma mark - Add/Remove Vehicles
 
 - (void)loadData {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [defaults objectForKey:VEHICLES];
     _vehicles = [NSMutableArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
-//    data = [defaults objectForKey:VEHICLE_URLS];
-//    _vehiclePicURLS = [NSMutableArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
 }
 - (void)resetData {
     NSDictionary *defaultsDictionary = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
@@ -70,7 +47,6 @@ NSString * const VEHICLES = @"VEHICLES";
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSData *dataSave = [NSKeyedArchiver archivedDataWithRootObject:[NSArray arrayWithArray:self.vehicles]];
         [defaults setObject:dataSave forKey:VEHICLES];
-//        [defaults setObject:dataSave forKey:VEHICLE_URLS];
         [defaults synchronize];
     }
 }
@@ -83,28 +59,16 @@ NSString * const VEHICLES = @"VEHICLES";
     
     return _vehicles;
 }
-//- (NSMutableArray *)vehiclePicURLS {
-//    if (!_vehiclePicURLS) {
-//        _vehiclePicURLS = [[NSMutableArray alloc] init];
-//    }
-//    return _vehiclePicURLS;
-//}
 
 - (void)addVehicle:(Vehicle *)vehicle {
     [self.vehicles addObject:vehicle];
 }
-//- (void)addImage:(NSString *)url {
-//    [self.vehiclePicURLS addObject:url];
-//}
+
 
 - (void)removeVehicleAtIndex:(NSUInteger)index {
     [self.vehicles removeObjectAtIndex:index];
-//    [self removeImageAtIndex:index];
 }
-//- (void)removeImageAtIndex:(NSUInteger)index {
-//    [self.vehiclePicURLS removeObjectAtIndex:index];
-//}
-//
+
 
 
 - (Vehicle *)vehicleAtIndex:(NSUInteger)index {
@@ -115,14 +79,7 @@ NSString * const VEHICLES = @"VEHICLES";
         return nil;
     }
 }
-//- (NSString *)imageAtIndex:(NSUInteger)index {
-//    NSUInteger size = [self.vehicles count];
-//    if (index < size) {
-//        return self.vehiclePicURLS[index];
-//    } else {
-//        return nil;
-//    }
-//}
+
 - (NSUInteger)totalVehicles {
     return [self.vehicles count];
 }
