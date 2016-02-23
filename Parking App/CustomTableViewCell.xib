@@ -7,11 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="xibCell" rowHeight="178" id="TtG-S0-7Tn" customClass="CustomTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="472" height="125"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="xibCell" rowHeight="287" id="TtG-S0-7Tn" customClass="CustomTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="460" height="234"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TtG-S0-7Tn" id="KUC-a7-WMH">
-                <rect key="frame" x="0.0" y="0.0" width="472" height="124"/>
+                <rect key="frame" x="0.0" y="0.0" width="460" height="233"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g80-Z8-Mel">
@@ -39,7 +39,7 @@
                 <outlet property="vehicleInfoLabel" destination="g80-Z8-Mel" id="7Sn-5t-yf7"/>
                 <outlet property="vehiclePicture" destination="cZ1-3n-11m" id="ksU-qt-Ywx"/>
             </connections>
-            <point key="canvasLocation" x="339" y="289.5"/>
+            <point key="canvasLocation" x="345" y="344"/>
         </tableViewCell>
     </objects>
 </document>

@@ -55,7 +55,7 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"xibCell"];
     [self.tableView reloadData];
-   // [self.tableView setRowHeight:125.0];
+    //[self.tableView setRowHeight:125.0];
     //[self.tableView setEstimatedRowHeight:400.0];
     [self.tableView setAllowsMultipleSelectionDuringEditing:YES];
     [self.enterEditModeButton setTitle:EDIT_TOGGLED_OFF_TITLE forState:UIControlStateNormal];
@@ -140,25 +140,52 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     
     return height;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     ParkingLot *parking = [ParkingLot defaultParking];
     NSUInteger numberOfVehicles = [parking totalVehicles];
     return numberOfVehicles;
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ParkingLot *parking = [ParkingLot defaultParking];
     CustomTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"xibCell" forIndexPath:indexPath];
     [cell.vehicleInfoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     cell.vehicleInfoLabel.text = [[parking vehicleAtIndex:indexPath.row] vehicleInfo];
-   
-    if ([[parking vehicleAtIndex:indexPath.row].flickrImage imageURL] == nil ) {
-        cell.vehiclePicture.image = [UIImage imageNamed:@"defaultCar"];
-    } else {
-        NSURL *url = [[parking vehicleAtIndex:indexPath.row].flickrImage imageURL];
-        NSData *dataURL = [NSData dataWithContentsOfURL:url];
-        cell.vehiclePicture.image = [UIImage imageWithData:dataURL];
+    
+     cell.vehiclePicture.image = [UIImage imageNamed:@"defaultCar"];
+    
+    
+    
+    if ([[parking vehicleAtIndex:indexPath.row].flickrImage imageURL]) {
+        [cell.vehiclePicture setHidden:YES];
+        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        indicator.autoresizingMask =
+        UIViewAutoresizingFlexibleTopMargin |
+        UIViewAutoresizingFlexibleRightMargin |
+        UIViewAutoresizingFlexibleBottomMargin |
+        UIViewAutoresizingFlexibleLeftMargin;
+        
+        indicator.center = CGPointMake(CGRectGetMidX(cell.vehiclePicture.bounds), CGRectGetMidY(cell.vehiclePicture.bounds));
+        [cell addSubview:indicator];
+        [indicator startAnimating];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+            
+            NSURL *url = [[parking vehicleAtIndex:indexPath.row].flickrImage imageURLWithImageSize:ImageSizeDefault];
+            NSData *dataURL = [NSData dataWithContentsOfURL:url];
+            UIImage *tempImage = [UIImage imageWithData:dataURL];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                cell.vehiclePicture.image = tempImage;
+                [indicator stopAnimating];
+                
+                [cell.vehiclePicture setHidden:NO];
+            });
+            
+
+        });
     }
     return cell;
 }

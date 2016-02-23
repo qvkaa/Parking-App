@@ -39,8 +39,11 @@ static const NSString *SECRET = @"0d150382efad5764";
     
     return _session;
 }
-#pragma mark
-- (void)fetchImageInfoForManufacturer:(NSString *)manufacturer model:(NSString *)model color:(NSString *)color  withCompletionBlock:(void (^)(NSDictionary *photo))completionBlock; {
+#pragma mark - Public methods
+//- (void)fetchImageInfoForManufacturer:(NSString *)manufacturer model:(NSString *)model color:(NSString *)color withCompletionBlock:(void (^)(NSDictionary *photo))completionBlock; {
+//    
+//}
+- (void)fetchImageInfoForManufacturer:(NSString *)manufacturer model:(NSString *)model color:(NSString *)color  withCompletionBlock:(void (^)(NSDictionary *photo))completionBlock {
     NSString *urlString =[NSString stringWithFormat:
                           @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&tag_mode=all&per_page=1&format=json&nojsoncallback=1",
                           KEY, [NSString stringWithFormat:@"car,%@,%@,%@",
@@ -60,7 +63,7 @@ static const NSString *SECRET = @"0d150382efad5764";
         
         NSDictionary *photos = [json objectForKey:@"photos"];
         NSArray *array = [photos objectForKey:@"photo"];
-        NSString *imageURL;
+      //  NSString *imageURL;
         if ([array count] > 0) {
             
             NSDictionary *photo = [[photos objectForKey:@"photo"] objectAtIndex:0];
@@ -68,8 +71,9 @@ static const NSString *SECRET = @"0d150382efad5764";
             completionBlock(photo);
 
         } else {
+            completionBlock(nil);
             NSLog(@"no images found");
-            imageURL = @"";
+       //     imageURL = @"";
         }
     }];
     

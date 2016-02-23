@@ -143,14 +143,19 @@
         NSString *imageID = [photo objectForKey:@"id"];
         NSString *server = [photo objectForKey:@"server"];
         NSString *secret = [photo objectForKey:@"secret"];
-        FlickrImage *image = [[FlickrImage alloc] initWithImageID:imageID farmID:farmID server:server secret:secret];
+        FlickrImage *image;
+        if (photo) {
+            image = [[FlickrImage alloc] initWithImageID:imageID farmID:farmID server:server secret:secret];
+        } else {
+            image = nil;
+        }
         
         Vehicle* v = [[Vehicle alloc] initWithPlateLicense:self.licenseTextField.text
                                                      color:self.colorTextField.text
                                               manufacturer:self.manufacturerTextField.text
                                                      model:self.modelTextField.text
                                                       year:@([self.yearTextField.text integerValue])
-                                                     image:image];
+                                                     image: image];
         
         ParkingLot *parking = [ParkingLot defaultParking];
         [parking addVehicle:v];
