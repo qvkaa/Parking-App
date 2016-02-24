@@ -9,7 +9,8 @@
 #import "VehicleListViewController.h"
 #import "Vehicle.h"
 #import "ParkingLot.h"
-#import "CustomTableViewCell.h"
+#import "CustomTableViewCell.h" 
+#import "UIImageView+AFNetworking.h"
 
 static  NSString *EDIT_TOGGLED_OFF_TITLE = @"Edit";
 static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
@@ -153,34 +154,24 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     CustomTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"xibCell" forIndexPath:indexPath];
     [cell.vehicleInfoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     cell.vehicleInfoLabel.text = [[parking vehicleAtIndex:indexPath.row] vehicleInfo];
-    
-     cell.vehiclePicture.image = [UIImage imageNamed:@"defaultCar"];
-    
+    cell.vehiclePicture.image = [UIImage imageNamed:@"defaultCar"];
+    [cell.pictureLoadingIndicator stopAnimating];
+    [cell.pictureLoadingIndicator setHidden:YES];
     
     
     if ([[parking vehicleAtIndex:indexPath.row].flickrImage imageURL]) {
         [cell.vehiclePicture setHidden:YES];
-        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        
-        indicator.autoresizingMask =
-        UIViewAutoresizingFlexibleTopMargin |
-        UIViewAutoresizingFlexibleRightMargin |
-        UIViewAutoresizingFlexibleBottomMargin |
-        UIViewAutoresizingFlexibleLeftMargin;
-        
-        indicator.center = CGPointMake(CGRectGetMidX(cell.vehiclePicture.bounds), CGRectGetMidY(cell.vehiclePicture.bounds));
-        [cell addSubview:indicator];
-        [indicator startAnimating];
+        [cell.pictureLoadingIndicator startAnimating];
+         [cell.pictureLoadingIndicator setHidden:NO];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
             
             NSURL *url = [[parking vehicleAtIndex:indexPath.row].flickrImage imageURLWithImageSize:ImageSizeDefault];
             NSData *dataURL = [NSData dataWithContentsOfURL:url];
             UIImage *tempImage = [UIImage imageWithData:dataURL];
             dispatch_async(dispatch_get_main_queue(), ^{
-                
+                [cell.pictureLoadingIndicator stopAnimating];
+                [cell.pictureLoadingIndicator setHidden:YES];
                 cell.vehiclePicture.image = tempImage;
-                [indicator stopAnimating];
-                
                 [cell.vehiclePicture setHidden:NO];
             });
             
@@ -194,7 +185,6 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     // Return YES if you want the specified item to be editable.
     return YES;
 }
-
 
 
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

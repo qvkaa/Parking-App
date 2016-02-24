@@ -11,6 +11,7 @@
 @interface CustomTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *vehiclePicture;
 @property (weak, nonatomic) IBOutlet UILabel *vehicleInfoLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *pictureLoadingIndicator;
 
 //@property (weak, nonatomic) IBOutlet UILabel *customCellLabel;
 

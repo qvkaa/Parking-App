@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFNetworking.h"
 
-@interface WebServiceManager : NSObject
+@interface WebServiceManager : AFHTTPSessionManager
 
-+ (id)defaultWebServiceManager;
+//+ (id)defaultWebServiceManager;
 
 - (void)fetchImageInfoForManufacturer:(NSString *)manufacturer model:(NSString *)model color:(NSString *)color withCompletionBlock:(void (^)(NSDictionary *photo))completionBlock;
 

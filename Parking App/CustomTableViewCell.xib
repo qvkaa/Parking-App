@@ -27,8 +27,17 @@
                             <constraint firstAttribute="width" constant="140" id="mPR-QP-A8z"/>
                         </constraints>
                     </imageView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9oN-wF-sF0">
+                        <rect key="frame" x="33" y="10" width="100" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="50S-cB-ff5"/>
+                            <constraint firstAttribute="height" constant="100" id="m4n-cy-Mos"/>
+                        </constraints>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="9oN-wF-sF0" firstAttribute="centerY" secondItem="cZ1-3n-11m" secondAttribute="centerY" id="17o-cy-nRd"/>
+                    <constraint firstItem="9oN-wF-sF0" firstAttribute="centerX" secondItem="cZ1-3n-11m" secondAttribute="centerX" id="2AC-L8-ttU"/>
                     <constraint firstItem="g80-Z8-Mel" firstAttribute="top" secondItem="KUC-a7-WMH" secondAttribute="top" constant="10" id="HDm-9n-BQs"/>
                     <constraint firstItem="g80-Z8-Mel" firstAttribute="leading" secondItem="cZ1-3n-11m" secondAttribute="trailing" constant="10" id="eXk-AJ-lpA"/>
                     <constraint firstItem="cZ1-3n-11m" firstAttribute="top" secondItem="KUC-a7-WMH" secondAttribute="top" constant="10" id="fsb-Gd-C1C"/>
@@ -36,6 +45,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="pictureLoadingIndicator" destination="9oN-wF-sF0" id="Kdt-9A-bk0"/>
                 <outlet property="vehicleInfoLabel" destination="g80-Z8-Mel" id="7Sn-5t-yf7"/>
                 <outlet property="vehiclePicture" destination="cZ1-3n-11m" id="ksU-qt-Ywx"/>
             </connections>
