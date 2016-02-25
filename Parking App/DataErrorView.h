@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol DataErrorViewDelegate
+@protocol DataErrorViewDelegate <NSObject>
 // Required means if they want to use the delegate they
 // have to implement it.
 @required
@@ -16,7 +16,7 @@
 
 @interface DataErrorView : UIView
 #pragma mark - delegate
-@property (nonatomic,assign) id delegate;
+@property (weak, nonatomic) id<DataErrorViewDelegate> delegate;
 #pragma mark - UILabel
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 

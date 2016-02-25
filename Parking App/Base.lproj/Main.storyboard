@@ -186,8 +186,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="152" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Color" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Arl-6n-ksJ">
+                                <rect key="frame" x="76" y="189" width="169" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="169" id="wjp-uv-zp5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Manufacturer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hr2-qr-YTb">
+                                <rect key="frame" x="76" y="229" width="169" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="169" id="SCe-dT-Oj0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Model" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kpe-ly-C11">
+                                <rect key="frame" x="76" y="269" width="169" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="169" id="RX3-yo-RUY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Year of manufacture" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="35N-c2-L48">
+                                <rect key="frame" x="76" y="309" width="169" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="169" id="Cqu-jn-JGd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the following data for your vehicle :" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jx-OJ-6M2">
+                                <rect key="frame" x="4" y="98" width="312" height="21"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="License Plate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ens-q9-7LV">
+                                <rect key="frame" x="76" y="149" width="169" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="169" id="OkA-JV-VIx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dza-te-XXn">
-                                <rect key="frame" x="118" y="326" width="85" height="30"/>
+                                <rect key="frame" x="118" y="369" width="85" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Park Vehicle">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -196,62 +243,23 @@
                                     <action selector="clickParkingButton:" destination="JOl-C7-rXo" eventType="touchUpInside" id="YtV-tA-4RS"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="152" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Color" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Arl-6n-ksJ">
-                                <rect key="frame" x="76" y="166" width="169" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Manufacturer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hr2-qr-YTb">
-                                <rect key="frame" x="76" y="206" width="169" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Model" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kpe-ly-C11">
-                                <rect key="frame" x="76" y="246" width="169" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Year of manufacture" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="35N-c2-L48">
-                                <rect key="frame" x="76" y="286" width="169" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the following data for your vehicle :" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jx-OJ-6M2">
-                                <rect key="frame" x="4" y="60" width="312" height="21"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="License Plate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ens-q9-7LV">
-                                <rect key="frame" x="76" y="126" width="169" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="169" id="upQ-uc-1ko"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="35N-c2-L48" firstAttribute="width" secondItem="Ens-q9-7LV" secondAttribute="width" id="06P-kY-ejh"/>
-                            <constraint firstItem="Ens-q9-7LV" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="1vW-mJ-2xq"/>
-                            <constraint firstItem="35N-c2-L48" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="EaJ-Ri-Jvg"/>
-                            <constraint firstItem="35N-c2-L48" firstAttribute="top" secondItem="Kpe-ly-C11" secondAttribute="bottom" constant="10" id="J6V-FG-dtN"/>
-                            <constraint firstItem="dza-te-XXn" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="Kfq-ZL-7A5"/>
-                            <constraint firstItem="Ens-q9-7LV" firstAttribute="top" secondItem="3jx-OJ-6M2" secondAttribute="bottom" constant="45" id="LU1-yi-Dcg"/>
-                            <constraint firstItem="hr2-qr-YTb" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="M2i-vM-dyS"/>
-                            <constraint firstItem="Arl-6n-ksJ" firstAttribute="top" secondItem="Ens-q9-7LV" secondAttribute="bottom" constant="10" id="MF1-pJ-Erz"/>
-                            <constraint firstItem="3jx-OJ-6M2" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="O23-mZ-DQ0"/>
-                            <constraint firstItem="hr2-qr-YTb" firstAttribute="width" secondItem="Ens-q9-7LV" secondAttribute="width" id="PaL-b2-B6E"/>
-                            <constraint firstItem="3jx-OJ-6M2" firstAttribute="top" secondItem="SRU-Si-QXO" secondAttribute="bottom" constant="40" id="XEn-Yp-LIV"/>
-                            <constraint firstItem="Kpe-ly-C11" firstAttribute="width" secondItem="Ens-q9-7LV" secondAttribute="width" id="fPA-LS-WEc"/>
-                            <constraint firstItem="Kpe-ly-C11" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="lly-jT-1lo"/>
-                            <constraint firstItem="hr2-qr-YTb" firstAttribute="top" secondItem="Arl-6n-ksJ" secondAttribute="bottom" constant="10" id="qNi-mc-ng2"/>
-                            <constraint firstItem="Arl-6n-ksJ" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="ra1-w6-0OY"/>
-                            <constraint firstItem="Kpe-ly-C11" firstAttribute="top" secondItem="hr2-qr-YTb" secondAttribute="bottom" constant="10" id="ynD-Sx-092"/>
-                            <constraint firstItem="Arl-6n-ksJ" firstAttribute="width" secondItem="Ens-q9-7LV" secondAttribute="width" id="zdZ-ca-aGK"/>
-                            <constraint firstItem="dza-te-XXn" firstAttribute="top" secondItem="35N-c2-L48" secondAttribute="bottom" constant="10" id="zwd-I0-0kG"/>
+                            <constraint firstItem="dza-te-XXn" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="LhF-YX-kXs"/>
+                            <constraint firstItem="Kpe-ly-C11" firstAttribute="centerY" secondItem="X8i-It-f38" secondAttribute="centerY" id="Mqc-pg-M8Z"/>
+                            <constraint firstItem="3jx-OJ-6M2" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="QEP-uN-xkS"/>
+                            <constraint firstItem="hr2-qr-YTb" firstAttribute="top" secondItem="Arl-6n-ksJ" secondAttribute="bottom" constant="10" id="T5r-EL-nPi"/>
+                            <constraint firstItem="dza-te-XXn" firstAttribute="top" secondItem="35N-c2-L48" secondAttribute="bottom" constant="30" id="VEn-1v-Qvi"/>
+                            <constraint firstItem="hr2-qr-YTb" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="cBP-23-2oG"/>
+                            <constraint firstItem="Ens-q9-7LV" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="cgu-dA-SCc"/>
+                            <constraint firstItem="Arl-6n-ksJ" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="dFI-3E-rvS"/>
+                            <constraint firstItem="35N-c2-L48" firstAttribute="top" secondItem="Kpe-ly-C11" secondAttribute="bottom" constant="10" id="lge-wq-v2S"/>
+                            <constraint firstItem="Kpe-ly-C11" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="pHL-3n-nPU"/>
+                            <constraint firstItem="Kpe-ly-C11" firstAttribute="top" secondItem="hr2-qr-YTb" secondAttribute="bottom" constant="10" id="pce-CI-xDm"/>
+                            <constraint firstItem="35N-c2-L48" firstAttribute="centerX" secondItem="X8i-It-f38" secondAttribute="centerX" id="s1P-nO-zct"/>
+                            <constraint firstItem="Arl-6n-ksJ" firstAttribute="top" secondItem="Ens-q9-7LV" secondAttribute="bottom" constant="10" id="wAj-AO-a8P"/>
+                            <constraint firstItem="Ens-q9-7LV" firstAttribute="top" secondItem="3jx-OJ-6M2" secondAttribute="bottom" constant="30" id="wjK-iV-eVw"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Add Vehicle" id="fYx-bz-31S"/>

@@ -17,7 +17,7 @@
 
 @implementation DataErrorView
 
-@synthesize delegate = _delegate;
+//@synthesize delegate = _delegate;
 
 
 //- (instancetype)init {
@@ -58,8 +58,10 @@
 //    }
 //
 //}
+
 #pragma mark - Method for delegate
 - (IBAction)closeErrorButton:(id)sender {
+    
     if ([self.delegate respondsToSelector:@selector(closeErrorView:)]) {
         [self.delegate closeErrorView:YES];
          //self.hidden = YES;

@@ -157,26 +157,45 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     cell.vehiclePicture.image = [UIImage imageNamed:@"defaultCar"];
     [cell.pictureLoadingIndicator stopAnimating];
     [cell.pictureLoadingIndicator setHidden:YES];
-    
-    
+  
     if ([[parking vehicleAtIndex:indexPath.row].flickrImage imageURL]) {
         [cell.vehiclePicture setHidden:YES];
         [cell.pictureLoadingIndicator startAnimating];
          [cell.pictureLoadingIndicator setHidden:NO];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
-            
-            NSURL *url = [[parking vehicleAtIndex:indexPath.row].flickrImage imageURLWithImageSize:ImageSizeDefault];
-            NSData *dataURL = [NSData dataWithContentsOfURL:url];
-            UIImage *tempImage = [UIImage imageWithData:dataURL];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [cell.pictureLoadingIndicator stopAnimating];
-                [cell.pictureLoadingIndicator setHidden:YES];
-                cell.vehiclePicture.image = tempImage;
-                [cell.vehiclePicture setHidden:NO];
-            });
-            
+        NSURLRequest *request = [NSURLRequest requestWithURL:[[parking vehicleAtIndex:indexPath.row].flickrImage imageURLWithImageSize:ImageSizeDefault]];
+        [cell.vehiclePicture setImageWithURLRequest:request
+    placeholderImage:nil
+    success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+        cell.vehiclePicture.image = image;
+        [cell.pictureLoadingIndicator stopAnimating];
+        [cell.pictureLoadingIndicator setHidden:YES];
+        [cell.vehiclePicture setHidden:NO];
+    }
+    failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+        NSLog(@"%@",[error description]);
+        cell.vehiclePicture.image = [UIImage imageNamed:@"defaultCar"];
+        [cell.pictureLoadingIndicator stopAnimating];
+        [cell.pictureLoadingIndicator setHidden:YES];
+        [cell.vehiclePicture setHidden:NO];
+    }];
+        //        [cell.vehiclePicture setImageWithURL:[[parking vehicleAtIndex:indexPath.row].flickrImage imageURLWithImageSize:ImageSizeDefault]];
+//        [cell.pictureLoadingIndicator stopAnimating];
+//        [cell.pictureLoadingIndicator setHidden:YES];
 
-        });
+        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+//            NSURL *url = [[parking vehicleAtIndex:indexPath.row].flickrImage imageURLWithImageSize:ImageSizeDefault];
+//            NSData *dataURL = [NSData dataWithContentsOfURL:url];
+//            UIImage *tempImage = [UIImage imageWithData:dataURL];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [cell.pictureLoadingIndicator stopAnimating];
+//                [cell.pictureLoadingIndicator setHidden:YES];
+//                cell.vehiclePicture.image = tempImage;
+//                [cell.vehiclePicture setHidden:NO];
+//            });
+//            
+//
+//        });
     }
     return cell;
 }

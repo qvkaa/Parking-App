@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
-
+#import "AFImageDownloader.h"
 @interface WebServiceManager : AFHTTPSessionManager
 
 //+ (id)defaultWebServiceManager;

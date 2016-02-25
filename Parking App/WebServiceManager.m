@@ -13,7 +13,7 @@ static const NSString *KEY = @"6672b42695aa8cfbcb8e7137a52ac235";
 static const NSString *SECRET = @"0d150382efad5764";
 
 @interface WebServiceManager()
-
+@property (strong,nonatomic)AFImageDownloader *downloader;
 //@property (strong, nonatomic) NSString *stringURL;
 //@property (strong, nonatomic) NSURLSession *session;
 //@property (strong, nonatomic) NSURLSessionDataTask *dataTask;
@@ -94,34 +94,33 @@ static const NSString *SECRET = @"0d150382efad5764";
                                                           model,
                                                         color]];
     
-     NSURL *URL = [NSURL URLWithString:urlString];
+    NSURL *URL = [NSURL URLWithString:urlString];
     NSLog(@"%@",urlString);
-     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-     [manager GET:URL.absoluteString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
-                 NSError* errorr;
-                 NSDictionary* json = [NSJSONSerialization
-                                       JSONObjectWithData:responseObject //1
+    // AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+     [[AFHTTPSessionManager manager] GET:URL.absoluteString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+     //            NSError* errorr;
+                 //NSDictionary* json = [NSJSONSerialization
+//                                       JSONObjectWithData:responseObject //1
+//         
+//                                       options:kNilOptions
+//                                       error: &errorr];
          
-                                       options:kNilOptions
-                                       error: &errorr];
-         
-                 NSDictionary *photos = [json objectForKey:@"photos"];
+                 NSDictionary *photos = [responseObject objectForKey:@"photos"];
                  NSArray *array = [photos objectForKey:@"photo"];
-               //  NSString *imageURL;
+
                  if ([array count] > 0) {
          
-                     NSDictionary *photo = [[photos objectForKey:@"________________photo"] objectAtIndex:0];
+                     NSDictionary *photo = [[photos objectForKey:@"photo"] objectAtIndex:0];
          
                      completionBlock(photo);
          
                  } else {
                      completionBlock(nil);
-                     NSLog(@"no images found");
-                //     imageURL = @"";
                  }
-    NSLog(@"_______________________JSON: %@", responseObject);
+   // NSLog(@"_______________________JSON: %@", responseObject);
      } failure:^(NSURLSessionTask *operation, NSError *error) {
-     NSLog(@"____________________Error: %@", error);
+         completionBlock(nil);
+    // NSLog(@"____________________Error: %@", error);
      }];
     
                           
