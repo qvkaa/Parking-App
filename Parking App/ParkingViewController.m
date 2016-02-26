@@ -108,7 +108,7 @@
         } else {
             image = nil;
         }
-        
+
         Vehicle* v = [[Vehicle alloc] initWithPlateLicense:self.licenseTextField.text
                                                      color:self.colorTextField.text
                                               manufacturer:self.manufacturerTextField.text

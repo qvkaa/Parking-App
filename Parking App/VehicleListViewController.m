@@ -168,8 +168,14 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
         cell.vehiclePicture.image = image;
         [cell.pictureLoadingIndicator stopAnimating];
-        [cell.pictureLoadingIndicator setHidden:YES];
-        [cell.vehiclePicture setHidden:NO];
+        cell.pictureLoadingIndicator.hidden = YES;
+        cell.vehiclePicture.hidden = NO;
+        cell.vehiclePicture.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnImage:)];
+        [cell.vehiclePicture addGestureRecognizer:tapGesture];
+        //        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] inittWithTarget:self action:@selector(tapGestureTap:)];
+//        // setup gesture as needed
+//        [imgConfirm addGestureRecognizer:gesture];
     }
     failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
         NSLog(@"%@",[error description]);
@@ -178,6 +184,8 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
         [cell.pictureLoadingIndicator setHidden:YES];
         [cell.vehiclePicture setHidden:NO];
     }];
+        
+       // cell.vehiclePicture did
         //        [cell.vehiclePicture setImageWithURL:[[parking vehicleAtIndex:indexPath.row].flickrImage imageURLWithImageSize:ImageSizeDefault]];
 //        [cell.pictureLoadingIndicator stopAnimating];
 //        [cell.pictureLoadingIndicator setHidden:YES];
@@ -217,6 +225,10 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 //    }
 //}
 
-
+#pragma mark - IBAction 
+- (IBAction)tapOnImage:(UITapGestureRecognizer *)sender {
+  //  self.tableView.hidden = YES;
+    NSLog(@"TAPPPPP");
+}
 
 @end
