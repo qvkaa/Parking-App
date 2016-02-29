@@ -48,7 +48,7 @@
     [super layoutSubviews];
     [self recenterIfNecessary];
     
-    CGRect visibleBounds = [self bounds];
+   // CGRect visibleBounds = [self bounds];
    
 }
 @end

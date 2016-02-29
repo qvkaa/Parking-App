@@ -16,7 +16,9 @@ static NSInteger totalParkedVehicles = 0;
 @property (strong,nonatomic,readwrite) NSString *model;
 @property (strong,nonatomic,readwrite) NSNumber *yearOfManufacture;
 //@property (strong,nonatomic,readwrite)NSString *imageURL;
-@property (strong,nonatomic,readwrite)FlickrImage *flickrImage;
+//@property (strong,nonatomic,readwrite)FlickrImage *flickrImage;
+@property (strong,nonatomic,readwrite) NSMutableArray *flickrImages; //of FlickrImage
+
 @end
 
 @implementation Vehicle
@@ -33,7 +35,7 @@ static NSInteger totalParkedVehicles = 0;
         self.manufacturer = [decoder decodeObjectForKey:@"manufacturer"];
         self.model = [decoder decodeObjectForKey:@"model"];
         self.yearOfManufacture = [decoder decodeObjectForKey:@"year"];
-        self.flickrImage = [decoder decodeObjectForKey:@"flickr"];
+        self.flickrImages = [decoder decodeObjectForKey:@"flickr"];
     }
     return self;
 }
@@ -45,7 +47,7 @@ static NSInteger totalParkedVehicles = 0;
     [encoder encodeObject:self.manufacturer forKey:@"manufacturer"];
     [encoder encodeObject:self.model forKey:@"model"];
     [encoder encodeObject:self.yearOfManufacture forKey:@"year"];
-    [encoder encodeObject:self.flickrImage forKey:@"flickr"];
+    [encoder encodeObject:self.flickrImages forKey:@"flickr"];
 }
 
 
@@ -57,7 +59,7 @@ static NSInteger totalParkedVehicles = 0;
         _manufacturer = @"";
         _model = @"";
         _yearOfManufacture = @0;
-        _flickrImage = nil;
+        _flickrImages = nil;
     }
     
     return self;
@@ -67,7 +69,7 @@ static NSInteger totalParkedVehicles = 0;
                         manufacturer:(NSString *)manufacturer
                                model:(NSString *)model
                                 year:(NSNumber *)year
-                               image:(FlickrImage *)image {
+                               images:(NSMutableArray *)images {
     self = [super init];
     if (self) {
         _plateLicenseNumber = plate;
@@ -75,7 +77,7 @@ static NSInteger totalParkedVehicles = 0;
         _model = model;
         _yearOfManufacture = year;
         _color = color;
-        _flickrImage = image;
+        _flickrImages = images;
         totalParkedVehicles++;
     }
     return self;

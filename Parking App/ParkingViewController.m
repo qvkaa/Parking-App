@@ -21,7 +21,6 @@
 @property (strong, nonatomic) DataErrorView *errorView;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *interactableViews;
 
-//@property (weak, nonatomic) IBOutlet UIView *errorView;
 #pragma mark - IBActions
 
 - (IBAction)clickParkingButton:(id)sender;
@@ -54,29 +53,19 @@
 }
 
 #pragma mark - Lifecycle
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewDidLoad {
+    [super viewDidLoad];
      self.navigationItem.title = @"Parking";
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.data = 0;
     [self closeErrorView:YES];
-   // [self imageWithColor:@"red" model:@"mustang" manufacturer:@"ford"];
- //   self.errorView.hidden = NO;
-    
-    
 }
 
 - (DataErrorView *)errorView {
     if( !_errorView) {
-             //setting the view in the middle of the super class
-//        CGFloat contentWidth = CGRectGetWidth(self.view.frame);
-//        CGFloat contentHeigth = CGRectGetHeight(self.view.frame);
-//        CGFloat x = contentWidth/2 - ERROR_VIEW_WIDTH/2;
-//        CGFloat y = contentHeigth/2 - ERROR_VIEW_HEIGTH/2;
-//        CGRect  viewRect = CGRectMake(x, y, ERROR_VIEW_WIDTH, ERROR_VIEW_HEIGTH);
         _errorView = [[[NSBundle mainBundle] loadNibNamed:@"DataErrorView" owner:nil options:nil] lastObject];
         if ([_errorView isKindOfClass:[DataErrorView class]]) {
             [self.view addSubview:self.errorView];
@@ -85,36 +74,42 @@
         } else {
             return nil;
         }
-
-//        _errorView = [[DataErrorView alloc] init];
-//        [self.view addSubview:self.errorView];
-//        [self.errorView setFrame:viewRect];
     }
     return _errorView;
 }
 #pragma mark - URLrequests
 - (void)getInfoFromTextFields {
     
-  
-    [[WebServiceManager manager] fetchImageInfoForManufacturer:self.manufacturerTextField.text model:self.modelTextField.text color:self.colorTextField.text withCompletionBlock:^(NSDictionary *photo) {
+    
+    [[WebServiceManager manager] fetchImageInfoForManufacturer:self.manufacturerTextField.text
+                                                         model:self.modelTextField.text
+                                                         color:self.colorTextField.text
+                                           withCompletionBlock:^(NSArray *array) {
+                            
+        NSMutableArray *photos = [[NSMutableArray alloc] initWithCapacity:[array count]];  // of FlickrImage
+            for (NSUInteger index = 0 ; index < [array count] ; ++index   ) {
+            NSDictionary *photo = [array objectAtIndex:index];
+          
+            NSString *farmID = [photo objectForKey:@"farm"];
+            NSString *imageID = [photo objectForKey:@"id"];
+            NSString *server = [photo objectForKey:@"server"];
+            NSString *secret = [photo objectForKey:@"secret"];
+            FlickrImage *image;
+            if (photo) {
+                image = [[FlickrImage alloc] initWithImageID:imageID farmID:farmID server:server secret:secret];
+            } else {
+                image = nil;
+            }
+            [photos addObject:image];
 
-        NSString *farmID = [photo objectForKey:@"farm"];
-        NSString *imageID = [photo objectForKey:@"id"];
-        NSString *server = [photo objectForKey:@"server"];
-        NSString *secret = [photo objectForKey:@"secret"];
-        FlickrImage *image;
-        if (photo) {
-            image = [[FlickrImage alloc] initWithImageID:imageID farmID:farmID server:server secret:secret];
-        } else {
-            image = nil;
         }
-
+        
         Vehicle* v = [[Vehicle alloc] initWithPlateLicense:self.licenseTextField.text
                                                      color:self.colorTextField.text
                                               manufacturer:self.manufacturerTextField.text
                                                      model:self.modelTextField.text
                                                       year:@([self.yearTextField.text integerValue])
-                                                     image: image];
+                                                     images: photos];
         
         ParkingLot *parking = [ParkingLot defaultParking];
         [parking addVehicle:v];

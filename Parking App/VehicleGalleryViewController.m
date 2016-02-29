@@ -1,21 +1,18 @@
 //
-//  VehicleListScrollViewController.m
+//  VehicleGalleryViewController.m
 //  Parking App
 //
-//  Created by yavoraleksiev on 2/26/16.
+//  Created by yavoraleksiev on 2/29/16.
 //  Copyright © 2016 Yavor Aleksiev. All rights reserved.
 //
 
-#import "VehicleListScrollViewController.h"
+#import "VehicleGalleryViewController.h"
 
-@interface VehicleListScrollViewController () <UIScrollViewDelegate,UIPageViewControllerDataSource,UIPageViewControllerDelegate>
-//<UITableViewDataSource, UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet VehicleListScrollView *vehicleListScrollView;
-
+@interface VehicleGalleryViewController ()
 
 @end
 
-@implementation VehicleListScrollViewController
+@implementation VehicleGalleryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

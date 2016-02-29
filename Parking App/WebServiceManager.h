@@ -13,6 +13,6 @@
 
 //+ (id)defaultWebServiceManager;
 
-- (void)fetchImageInfoForManufacturer:(NSString *)manufacturer model:(NSString *)model color:(NSString *)color withCompletionBlock:(void (^)(NSDictionary *photo))completionBlock;
+- (void)fetchImageInfoForManufacturer:(NSString *)manufacturer model:(NSString *)model color:(NSString *)color withCompletionBlock:(void (^)(NSArray *array))completionBlock;
 
 @end

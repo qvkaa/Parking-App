@@ -17,14 +17,14 @@
 @property (strong,nonatomic,readonly) NSString *model;
 @property (strong,nonatomic,readonly) NSNumber *yearOfManufacture;
 //@property (strong,nonatomic,readonly)NSString *imageURL;
-@property (strong,nonatomic,readonly)FlickrImage *flickrImage;
-
+//@property (strong,nonatomic,readonly)FlickrImage *flickrImage;
+@property (strong,nonatomic,readonly) NSMutableArray *flickrImages; //of FlickrImage
 - (instancetype)initWithPlateLicense:(NSString *)plate
                                color:(NSString *)color
                         manufacturer:(NSString *)manufacturer
                                model:(NSString *)model
                                 year:(NSNumber *)year
-                               image:(FlickrImage *)image;
+                               images:(NSMutableArray *)images;
 
 + (NSInteger)totalParkedVehicles;
 

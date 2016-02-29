@@ -43,9 +43,9 @@ static const NSString *SECRET = @"0d150382efad5764";
 //}
 //#pragma mark - Public methods
 
-- (void)fetchImageInfoForManufacturer:(NSString *)manufacturer model:(NSString *)model color:(NSString *)color  withCompletionBlock:(void (^)(NSDictionary *photo))completionBlock {
+- (void)fetchImageInfoForManufacturer:(NSString *)manufacturer model:(NSString *)model color:(NSString *)color  withCompletionBlock:(void (^)(NSArray *array))completionBlock {
 //    NSString *urlString =[NSString stringWithFormat:
-//                          @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&tag_mode=all&per_page=1&format=json&nojsoncallback=1",
+//                          @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&tag_mode=all&per_page=7&format=json&nojsoncallback=1",
 //                          KEY, [NSString stringWithFormat:@"car,%@,%@,%@",
 //                                manufacturer,
 //                                model,
@@ -87,40 +87,42 @@ static const NSString *SECRET = @"0d150382efad5764";
 //
 //    [jsonData resume];
     // 1
+    NSMutableString *tags = [[NSMutableString alloc] init];
+    [tags appendString:@"car"];
+    if ( ![color isEqualToString:@""] ) {
+        [tags appendString:[NSString stringWithFormat:@",%@",color]];
+    }
+    if ( ![manufacturer isEqualToString:@""] ) {
+        [tags appendString:[NSString stringWithFormat:@",%@",manufacturer]];
+    }
+    if ( ![model isEqualToString:@""] ) {
+        [tags appendString:[NSString stringWithFormat:@",%@",model]];
+    }
+    
     NSString *urlString =[NSString stringWithFormat:
-                                                    @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&tag_mode=all&per_page=1&format=json&nojsoncallback=1",
-                                                    KEY, [NSString stringWithFormat:@"car,%@,%@,%@",
-                                                         manufacturer,
-                                                          model,
-                                                        color]];
+                                                    @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&tag_mode=all&per_page=10&format=json&nojsoncallback=1",
+                                                    KEY, tags];
     
     NSURL *URL = [NSURL URLWithString:urlString];
     NSLog(@"%@",urlString);
-    // AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+   
      [[AFHTTPSessionManager manager] GET:URL.absoluteString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
-     //            NSError* errorr;
-                 //NSDictionary* json = [NSJSONSerialization
-//                                       JSONObjectWithData:responseObject //1
-//         
-//                                       options:kNilOptions
-//                                       error: &errorr];
+
          
                  NSDictionary *photos = [responseObject objectForKey:@"photos"];
                  NSArray *array = [photos objectForKey:@"photo"];
 
                  if ([array count] > 0) {
          
-                     NSDictionary *photo = [[photos objectForKey:@"photo"] objectAtIndex:0];
+//                     NSDictionary *photo = [[photos objectForKey:@"photo"] objectAtIndex:0];
          
-                     completionBlock(photo);
+                     completionBlock(array);
          
                  } else {
                      completionBlock(nil);
                  }
-   // NSLog(@"_______________________JSON: %@", responseObject);
      } failure:^(NSURLSessionTask *operation, NSError *error) {
          completionBlock(nil);
-    // NSLog(@"____________________Error: %@", error);
      }];
     
                           

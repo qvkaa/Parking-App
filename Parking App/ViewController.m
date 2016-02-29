@@ -25,14 +25,15 @@
 #pragma mark - Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.mainTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     
     //[self.MainButton setTitle:@"Park Now" forState:UIControlStateNormal];
     // Do any additional setup after loading the view, typically from a nib.
 }
 - (void)viewWillAppear:(BOOL)animated{
-    ParkingLot *parking = [ParkingLot defaultParking];
     [super viewWillAppear:animated];
+    ParkingLot *parking = [ParkingLot defaultParking];
     self.navigationItem.title = @"Total Vehicles";
     self.mainTextLabel.text = [NSString stringWithFormat: @"Parked Vehicles : %ld", [parking totalVehicles]];
 }
