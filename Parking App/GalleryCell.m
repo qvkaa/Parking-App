@@ -8,14 +8,29 @@
 
 #import "GalleryCell.h"
 
+@interface  GalleryCell()
+
+
+
+@end
+
 @implementation GalleryCell
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
+
+//- (UIImageView *)galleryImage {
+//    if( !_galleryImage) {
+//        _galleryImage = [[[NSBundle mainBundle] loadNibNamed:@"GalleryCell" owner:nil options:nil] lastObject];
+//        if ([_galleryImage isKindOfClass:[GalleryCell class]]) {
+//            [self.galleryImage addSubview:self.galleryImage ];
+//            [self.galleryImage setFrame:self.frame ];
+//            //self.errorView.delegate = self;
+//        } else {
+//            return nil;
+//        }
+//    }
+//    return _galleryImage;
+//}
+
 
 @end

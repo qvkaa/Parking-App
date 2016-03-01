@@ -11,10 +11,10 @@
 #import "ParkingLot.h"
 #import "CustomTableViewCell.h" 
 #import "UIImageView+AFNetworking.h"
-
+#import "VehicleGalleryViewController.h"
 static  NSString *EDIT_TOGGLED_OFF_TITLE = @"Edit";
 static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
-@interface VehicleListViewController() <UITableViewDataSource, UITableViewDelegate>
+@interface VehicleListViewController() 
 
 #pragma mark - UIButton
 @property (weak, nonatomic) IBOutlet UIButton *deleteSelectedButton;
@@ -51,6 +51,24 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     [self.enterEditModeButton setTitle:EDIT_TOGGLED_OFF_TITLE forState:UIControlStateNormal];
     [self.tableView setEditing:NO];
     self.deleteSelectedButton.hidden = YES;
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([sender isKindOfClass:[NSIndexPath class]]) {
+        NSIndexPath *path = sender;
+        NSInteger row = path.row;
+        
+        if ([[segue identifier] isEqualToString:@"openGallery"])
+        {
+            // Get reference to the destination view controller
+            VehicleGalleryViewController  *vc = [segue destinationViewController];
+            
+            // Pass any objects to the view controller here, like...
+            vc.tableViewRow = row;
+        }
+    }
+    
+    
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -174,8 +192,8 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
         cell.pictureLoadingIndicator.hidden = YES;
         cell.vehiclePicture.hidden = NO;
         cell.vehiclePicture.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnImage:)];
-        [cell.vehiclePicture addGestureRecognizer:tapGesture];
+//        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnImage:) ];
+//        [cell.vehiclePicture addGestureRecognizer:tapGesture ];
         //        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] inittWithTarget:self action:@selector(tapGestureTap:)];
 //        // setup gesture as needed
 //        [imgConfirm addGestureRecognizer:gesture];
@@ -190,7 +208,15 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     }
     return cell;
 }
-
+//- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (!self.tableView.editing) {
+        [self performSegueWithIdentifier:@"openGallery" sender:indexPath];
+    }
+    
+}
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return YES if you want the specified item to be editable.
     return YES;
@@ -209,9 +235,10 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 //}
 
 #pragma mark - IBAction 
-- (IBAction)tapOnImage:(UITapGestureRecognizer *)sender {
-  //  self.tableView.hidden = YES;
-    NSLog(@"TAPPPPP");
-}
+//- (IBAction)tapOnImage:(UITapGestureRecognizer *)sender {
+//  //  self.tableView.hidden = YES;
+//    NSLog(@"TAPPPPP");
+//    [self performSegueWithIdentifier:@"openGallery" sender:sender ];
+//}
 
 @end

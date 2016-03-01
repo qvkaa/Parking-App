@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GalleryCell : UIImageView
-
+@interface GalleryCell : UIView
+@property (weak, nonatomic) IBOutlet UIImageView *galleryImage;
 @end

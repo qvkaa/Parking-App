@@ -8,8 +8,17 @@
 
 #import "VehicleGalleryScrollView.h"
 
-@implementation VehicleGalleryScrollView
+@interface VehicleGalleryScrollView()
+@property (strong,nonatomic,readonly) NSSet *reusableGalleryCells; //of GalleryCell
+@property (strong,nonatomic) GalleryCell *cell;
+@property (strong,nonatomic) NSMutableArray *visibileCells;
+@property (strong,nonatomic) UIView *galleryContainerView;
 
+
+@end
+
+@implementation VehicleGalleryScrollView
+@synthesize reusableGalleryCells = _reusableGalleryCells;
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -19,15 +28,52 @@
 */
 #pragma mark - lifecycle
 
-- (instancetype)init {
-   self = [super init];
-    if (self) {
-        self.contentSize = CGSizeMake(5000, 500);
-        [self setIndicatorStyle:UIScrollViewIndicatorStyleBlack];
+//- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+//   self = [super initWithCoder:aDecoder];
+//    if (self) {
+//       // self.contentSize = CGSizeMake(5000, 500);
+//        [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+//        CGFloat contentWidth = self.superview.bounds.size.width * 5;
+//        CGFloat contentHeight = self.bounds.size.height;
+//        self.contentSize = CGSizeMake(contentWidth, contentHeight);
+//       
+//    }
+//    return self;
+//}
+#pragma mark - accessors
+- (NSMutableArray *)visibileCells {
+    if (!_visibileCells) {
+        _visibileCells = [[NSMutableArray alloc] initWithCapacity:5];
     }
-    return self;
+    return _visibileCells;
+}
+- (UIView *)galleryContainerView {
+    if (!_galleryContainerView) {
+        CGRect rect = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
+        _galleryContainerView = [[UIView alloc] initWithFrame:rect];
+        [self addSubview:self.galleryContainerView];
+    }
+    return _galleryContainerView;
+}
+#pragma mark - private
+
+- (NSSet *)reusableGalleryCells {
+    if (!_reusableGalleryCells) {
+        _reusableGalleryCells = [[NSSet alloc] init];
+    }
+    return _reusableGalleryCells;
 }
 
+#pragma mark - public
+- (GalleryCell *)dequeueReusableCell {
+    GalleryCell *cell = [self.reusableGalleryCells anyObject];
+    
+    if (!cell){
+        
+    }
+    
+    return cell;
+}
 #pragma mark - layout
 
 - (void)recenterIfNecessary {
@@ -41,4 +87,32 @@
     }
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    [self recenterIfNecessary];
+
+    CGRect visibleBounds = self.bounds;
+    CGFloat minVisibleX = CGRectGetMinX(visibleBounds);
+    CGFloat maxVisibleX = CGRectGetMaxX(visibleBounds);
+    [self tileCellsFromMinX:minVisibleX toMaxX:maxVisibleX];
+}
+
+- (void)tileCellsFromMinX:(CGFloat)minX toMaxX:(CGFloat)maxX {
+    CGFloat offset = self.bounds.size.width;
+    CGFloat cellX = minX;
+    while (cellX  < maxX) {
+        GalleryCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"GalleryCell" owner:nil options:nil] lastObject];
+        if ([cell isKindOfClass:[GalleryCell class]]) {
+            [self.galleryContainerView addSubview:cell];
+            
+            CGRect rect = CGRectMake(cellX, 0, self.bounds.size.width, self.bounds.size.height);
+            [self.galleryContainerView setFrame:rect];
+            cell.galleryImage.image = [UIImage imageNamed:@"defaultCar"];
+        }
+        cellX += offset;
+    }
+    
+
+}
 @end

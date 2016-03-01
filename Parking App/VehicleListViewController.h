@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VehicleListViewController : UIViewController //<UIScrollViewDelegate>
+@interface VehicleListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 
 @end

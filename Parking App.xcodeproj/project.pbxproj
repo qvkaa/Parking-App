@@ -28,6 +28,7 @@
 		837588061C8472DA001E1AA6 /* VehicleGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837588051C8472DA001E1AA6 /* VehicleGalleryViewController.m */; };
 		837588091C8473F6001E1AA6 /* VehicleGalleryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 837588081C8473F6001E1AA6 /* VehicleGalleryScrollView.m */; };
 		8375880C1C847585001E1AA6 /* GalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8375880B1C847585001E1AA6 /* GalleryCell.m */; };
+		83825A401C85CD1C00797E96 /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83825A3F1C85CD1C00797E96 /* GalleryCell.xib */; };
 		839AFAAA1C7B3E6C005E05C8 /* WebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 839AFAA91C7B3E6C005E05C8 /* WebServiceManager.m */; };
 		C15432632ADA7CB7D8D2B43D /* Pods_Parking_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3226E22E40A78000F61C128 /* Pods_Parking_App.framework */; };
 /* End PBXBuildFile section */
@@ -90,6 +91,7 @@
 		837588081C8473F6001E1AA6 /* VehicleGalleryScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VehicleGalleryScrollView.m; sourceTree = "<group>"; };
 		8375880A1C847585001E1AA6 /* GalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryCell.h; sourceTree = "<group>"; };
 		8375880B1C847585001E1AA6 /* GalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryCell.m; sourceTree = "<group>"; };
+		83825A3F1C85CD1C00797E96 /* GalleryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryCell.xib; sourceTree = "<group>"; };
 		839AFAA81C7B3E6C005E05C8 /* WebServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceManager.h; sourceTree = "<group>"; };
 		839AFAA91C7B3E6C005E05C8 /* WebServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceManager.m; sourceTree = "<group>"; };
 		9123FBEF00113A1A27F5853C /* Pods-Parking App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parking App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Parking App/Pods-Parking App.release.xcconfig"; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				835ED7E51C74B56B0009709E /* CustomTableViewCell.xib */,
 				8375880A1C847585001E1AA6 /* GalleryCell.h */,
 				8375880B1C847585001E1AA6 /* GalleryCell.m */,
+				83825A3F1C85CD1C00797E96 /* GalleryCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				8357503D1C6C969400ADF5CB /* DataErrorView.xib in Resources */,
 				5F1CB20A1C56552C00650671 /* Assets.xcassets in Resources */,
 				835ED7E61C74B56B0009709E /* CustomTableViewCell.xib in Resources */,
+				83825A401C85CD1C00797E96 /* GalleryCell.xib in Resources */,
 				5F1CB2081C56552C00650671 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

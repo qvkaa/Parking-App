@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "VehicleGalleryScrollView.h"
 
-@interface VehicleGalleryViewController : UIViewController
+
+@interface VehicleGalleryViewController : UIViewController <VehicleGalleryScrollViewDelegate,VehicleGalleryScrollViewDataSource>
+
+@property (nonatomic) NSInteger tableViewRow;
 
 @end

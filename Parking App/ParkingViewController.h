@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DataErrorView.h"
-@interface ParkingViewController : UIViewController <DataErrorViewDelegate,NSURLSessionDataDelegate , NSURLSessionTaskDelegate>
+@interface ParkingViewController : UIViewController <DataErrorViewDelegate, NSURLSessionDataDelegate , NSURLSessionTaskDelegate>
 
 
 @end

@@ -17,47 +17,7 @@
 
 @implementation DataErrorView
 
-//@synthesize delegate = _delegate;
 
-
-//- (instancetype)init {
-//    self = [super init];
-//    if (self) {
-//        self =[[[NSBundle mainBundle] loadNibNamed:@"DataErrorView" owner:nil options:nil] lastObject];
-//        if ([self isKindOfClass:[DataErrorView class]]) {
-//            return self;
-//        } else {
-//            return nil;
-//        }
-//    }
-//    return self;
-//}
-//
-//- (instancetype)initWithFrame:(CGRect)frame {
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        self =[[[NSBundle mainBundle] loadNibNamed:@"DataErrorView" owner:nil options:nil] lastObject];
-//        if ([self isKindOfClass:[DataErrorView class]]) {
-//            return self;
-//        } else {
-//            return nil;
-//        }
-//    }
-//    return self;
-//
-//}
-//+ (id)errorView
-//{
-//    DataErrorView *dataErrorView = [[[NSBundle mainBundle] loadNibNamed:@"DataErrorView" owner:nil options:nil] lastObject];
-//    
-//  
-//    if ([dataErrorView isKindOfClass:[DataErrorView class]]) {
-//        return dataErrorView;
-//    } else {
-//        return nil;
-//    }
-//
-//}
 
 #pragma mark - Method for delegate
 - (IBAction)closeErrorButton:(id)sender {
@@ -68,14 +28,5 @@
     }
 }
 
-
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end
