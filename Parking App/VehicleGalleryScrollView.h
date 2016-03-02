@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GalleryCell.h"
-
+@class GalleryScrollView;
 @protocol VehicleGalleryScrollViewDelegate <NSObject>
 
 
@@ -17,12 +17,12 @@
 
 @protocol VehicleGalleryScrollViewDataSource <NSObject>
 
-- (NSInteger)scrollView:(UIScrollView *)scrollView numberOfGalleryCellsInSection:(NSInteger)section;
+- (NSInteger)galleryScrollView:(GalleryScrollView *)scrollView numberOfGalleryCell:(NSUInteger)section;
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
-- (GalleryCell *)scrollView:(UIScrollView *)scrollView cellForCollumAtIndexPath:(NSIndexPath *)indexPath;
+- (GalleryCell *)galleryScrollView:(GalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index;
 
 @end
 
@@ -30,7 +30,7 @@
 
 
 
-@property (weak, nonatomic) id<VehicleGalleryScrollViewDataSource,VehicleGalleryScrollViewDelegate> galleryDelegate;
+@property (weak, nonatomic) id<UIScrollViewDelegate,VehicleGalleryScrollViewDataSource,VehicleGalleryScrollViewDelegate> galleryDelegate;
 @end
 
 

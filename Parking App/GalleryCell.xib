@@ -8,19 +8,77 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GalleryCell">
-            <rect key="frame" x="0.0" y="0.0" width="395" height="538"/>
+            <rect key="frame" x="0.0" y="0.0" width="341" height="643"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultCar" translatesAutoresizingMaskIntoConstraints="NO" id="zKg-5B-mp4">
-                    <rect key="frame" x="0.0" y="0.0" width="395" height="538"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NXg-KE-3iY">
+                    <rect key="frame" x="91" y="603" width="160" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rW-z0-Z33">
+                            <rect key="frame" x="100" y="0.0" width="60" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="36B-Ap-xgf"/>
+                                <constraint firstAttribute="width" constant="60" id="SOt-PL-VED"/>
+                            </constraints>
+                            <state key="normal" title="&gt;">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYn-pY-zEL">
+                            <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="4Ft-XC-Puw"/>
+                                <constraint firstAttribute="width" constant="80" id="LRb-2a-7qG"/>
+                            </constraints>
+                            <state key="normal" title="&lt;">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="dYn-pY-zEL" firstAttribute="leading" secondItem="NXg-KE-3iY" secondAttribute="leading" id="DIU-Lg-wxQ"/>
+                        <constraint firstAttribute="width" constant="160" id="HeJ-CK-B4H"/>
+                        <constraint firstAttribute="trailing" secondItem="0rW-z0-Z33" secondAttribute="trailing" id="PQe-V7-hlD"/>
+                        <constraint firstAttribute="bottom" secondItem="dYn-pY-zEL" secondAttribute="bottom" id="PR5-6Y-cCt"/>
+                        <constraint firstAttribute="height" constant="40" id="Rm0-eC-JxO"/>
+                        <constraint firstItem="dYn-pY-zEL" firstAttribute="top" secondItem="NXg-KE-3iY" secondAttribute="top" id="SBp-zh-sDP"/>
+                        <constraint firstItem="0rW-z0-Z33" firstAttribute="top" secondItem="NXg-KE-3iY" secondAttribute="top" id="mzU-ae-vNF"/>
+                        <constraint firstAttribute="bottom" secondItem="0rW-z0-Z33" secondAttribute="bottom" id="wSm-Cu-k1y"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultCar" translatesAutoresizingMaskIntoConstraints="NO" id="zKg-5B-mp4">
+                    <rect key="frame" x="0.0" y="40" width="341" height="563"/>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBb-Q1-uaj">
+                    <rect key="frame" x="0.0" y="0.0" width="341" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image 1 of 20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="en7-jX-Xb5">
+                            <rect key="frame" x="119" y="9" width="104" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="en7-jX-Xb5" firstAttribute="top" secondItem="pBb-Q1-uaj" secondAttribute="top" constant="9" id="4ew-ta-dNh"/>
+                        <constraint firstAttribute="height" constant="40" id="Q7z-R1-OKV"/>
+                        <constraint firstItem="en7-jX-Xb5" firstAttribute="centerX" secondItem="pBb-Q1-uaj" secondAttribute="centerX" id="VOG-GJ-vDP"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="zKg-5B-mp4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1mt-zk-d0u"/>
-                <constraint firstAttribute="trailing" secondItem="zKg-5B-mp4" secondAttribute="trailing" id="47r-gg-rP6"/>
-                <constraint firstAttribute="bottom" secondItem="zKg-5B-mp4" secondAttribute="bottom" id="QDx-0f-Eih"/>
-                <constraint firstItem="zKg-5B-mp4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aOd-hp-zcf"/>
+                <constraint firstAttribute="trailing" secondItem="zKg-5B-mp4" secondAttribute="trailing" id="8bH-mY-exG"/>
+                <constraint firstAttribute="bottom" secondItem="NXg-KE-3iY" secondAttribute="bottom" id="Gon-hs-vMA"/>
+                <constraint firstItem="zKg-5B-mp4" firstAttribute="top" secondItem="pBb-Q1-uaj" secondAttribute="bottom" id="JeA-2N-yBu"/>
+                <constraint firstItem="NXg-KE-3iY" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="MdH-i3-zow"/>
+                <constraint firstItem="zKg-5B-mp4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TXB-vn-rZb"/>
+                <constraint firstItem="pBb-Q1-uaj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yf7-Sj-Zs8"/>
+                <constraint firstItem="NXg-KE-3iY" firstAttribute="top" secondItem="zKg-5B-mp4" secondAttribute="bottom" id="a1m-sh-rfl"/>
+                <constraint firstItem="pBb-Q1-uaj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cl7-Vt-aWF"/>
+                <constraint firstAttribute="trailing" secondItem="pBb-Q1-uaj" secondAttribute="trailing" id="qx5-oT-ZNZ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
@@ -29,7 +87,7 @@
             <connections>
                 <outlet property="galleryImage" destination="zKg-5B-mp4" id="ng8-De-R1g"/>
             </connections>
-            <point key="canvasLocation" x="306.5" y="314"/>
+            <point key="canvasLocation" x="279.5" y="261.5"/>
         </view>
     </objects>
     <resources>

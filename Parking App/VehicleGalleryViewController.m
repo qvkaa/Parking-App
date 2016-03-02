@@ -20,10 +20,24 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CGFloat contentWidth = self.view.bounds.size.width * 5;
-    CGFloat contentHeight = self.galleryScrollView.bounds.size.height;
-    self.galleryScrollView.contentSize = CGSizeMake(contentWidth, contentHeight);
-    [self.galleryScrollView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+    
+//    CGFloat contentWidth = self.view.bounds.size.width * 5;
+//    CGFloat contentHeight = self.galleryScrollView.bounds.size.height;
+//    CGFloat frameH = self.galleryScrollView.bounds.size.height;
+//    NSLog(@"%f",contentHeight);
+//    NSLog(@"%f",frameH);
+//    [self.galleryScrollView setAutoresizesSubviews:NO];
+//    [self.galleryScrollView setAutoresizingMask:UIViewAutoresizingNone];
+//    self.galleryScrollView.contentSize = CGSizeMake(contentWidth, contentHeight);
+//    UIImage *img = [UIImage imageNamed:@"catee"];
+//    
+//    UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+//    [imgView setBackgroundColor:[UIColor blackColor]];
+//    imgView.frame = CGRectMake(0, 0, 300, 300);
+//    [imgView setContentMode:UIViewContentModeScaleAspectFit];
+//    [self.galleryScrollView addSubview:imgView];
+//    [self.galleryScrollView setIndicatorStyle:UIScrollViewIndicatorStyleBlack];
+//    
     //self.galleryScrollView.galleryContainerView
     
 //    self.galleryScrollView.galleryDelegate = self;

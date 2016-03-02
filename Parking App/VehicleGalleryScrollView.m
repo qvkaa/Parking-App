@@ -27,19 +27,40 @@
 }
 */
 #pragma mark - lifecycle
-
 //- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-//   self = [super initWithCoder:aDecoder];
-//    if (self) {
-//       // self.contentSize = CGSizeMake(5000, 500);
-//        [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
-//        CGFloat contentWidth = self.superview.bounds.size.width * 5;
-//        CGFloat contentHeight = self.bounds.size.height;
-//        self.contentSize = CGSizeMake(contentWidth, contentHeight);
-//       
+//    self = [super initWithCoder:aDecoder];
+//    CGSize size;
+//    {
+//        if (self) {
+//            size = self.bounds.size;
+//            self.contentSize = size;
+//        }
 //    }
 //    return self;
 //}
+//- (void)awakeFromNib {
+//    CGSize size;
+//   
+//            size = self.bounds.size;
+//            self.contentSize = size;
+//    [self setIndicatorStyle:UIScrollViewIndicatorStyleBlack];
+//  
+//}
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    CGFloat contentWidth = self.superview.bounds.size.width * 5;
+    CGFloat contentHeight = self.bounds.size.height;
+   self = [super initWithCoder:aDecoder];
+    if (self) {
+       // self.contentSize = CGSizeMake(5000, 500);
+        [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+        [self setBackgroundColor:[UIColor blackColor]];
+        CGFloat contentWidth = self.bounds.size.width * 5;
+        CGFloat contentHeight = self.bounds.size.height;
+        self.contentSize = CGSizeMake(contentWidth, contentHeight);
+       
+    }
+    return self;
+}
 #pragma mark - accessors
 - (NSMutableArray *)visibileCells {
     if (!_visibileCells) {
@@ -49,7 +70,9 @@
 }
 - (UIView *)galleryContainerView {
     if (!_galleryContainerView) {
-        CGRect rect = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
+        CGFloat height = self.contentSize.height;
+        CGFloat width = self.contentSize.width;
+        CGRect rect = CGRectMake(0, 0, width, height);
         _galleryContainerView = [[UIView alloc] initWithFrame:rect];
         [self addSubview:self.galleryContainerView];
     }
@@ -84,23 +107,41 @@
     
     if (distanceFromCenter > (contentWidth / 4.0)) {
         self.contentOffset = CGPointMake(centerOffsetX, currentOffset.y);
+        //change cells
     }
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    [self recenterIfNecessary];
+    //[self recenterIfNecessary];
 
-    CGRect visibleBounds = self.bounds;
-    CGFloat minVisibleX = CGRectGetMinX(visibleBounds);
-    CGFloat maxVisibleX = CGRectGetMaxX(visibleBounds);
-    [self tileCellsFromMinX:minVisibleX toMaxX:maxVisibleX];
+//    CGRect visibleBounds = self.bounds;
+//    CGFloat minVisibleX = CGRectGetMinX(visibleBounds);
+//    CGFloat maxVisibleX = CGRectGetMaxX(visibleBounds);
+//    [self tileCellsFromMinX:minVisibleX toMaxX:maxVisibleX];
+    CGFloat cellX = 0;
+    CGFloat offset = self.bounds.size.width;
+    CGFloat max = self.galleryContainerView.bounds.size.width - offset;
+    CGRect rect = CGRectMake(0, 0, offset, self.contentSize.height);
+    while (cellX <= max) {
+        GalleryCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"GalleryCell" owner:nil options:nil] lastObject];
+        if ([cell isKindOfClass:[GalleryCell class]]) {
+            rect.origin.x = cellX;
+            cell.frame = rect;
+            [self.galleryContainerView addSubview:cell];
+            
+            //[self.galleryContainerView setFrame:rect];
+         //   cell.galleryImage.image = [UIImage imageNamed:@"defaultCar"];
+        }
+        cellX += offset;
+    }
 }
 
 - (void)tileCellsFromMinX:(CGFloat)minX toMaxX:(CGFloat)maxX {
     CGFloat offset = self.bounds.size.width;
     CGFloat cellX = minX;
+    
     while (cellX  < maxX) {
         GalleryCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"GalleryCell" owner:nil options:nil] lastObject];
         if ([cell isKindOfClass:[GalleryCell class]]) {
@@ -112,7 +153,6 @@
         }
         cellX += offset;
     }
-    
 
 }
 @end

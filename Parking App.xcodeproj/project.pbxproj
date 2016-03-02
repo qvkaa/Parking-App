@@ -237,13 +237,13 @@
 			children = (
 				837588071C8473F6001E1AA6 /* VehicleGalleryScrollView.h */,
 				837588081C8473F6001E1AA6 /* VehicleGalleryScrollView.m */,
+				8375880A1C847585001E1AA6 /* GalleryCell.h */,
+				8375880B1C847585001E1AA6 /* GalleryCell.m */,
+				83825A3F1C85CD1C00797E96 /* GalleryCell.xib */,
 				8357503E1C6C96A600ADF5CB /* DataErrorView.h */,
 				8357503F1C6C96A600ADF5CB /* DataErrorView.m */,
 				8357503C1C6C969400ADF5CB /* DataErrorView.xib */,
 				835ED7E51C74B56B0009709E /* CustomTableViewCell.xib */,
-				8375880A1C847585001E1AA6 /* GalleryCell.h */,
-				8375880B1C847585001E1AA6 /* GalleryCell.m */,
-				83825A3F1C85CD1C00797E96 /* GalleryCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";

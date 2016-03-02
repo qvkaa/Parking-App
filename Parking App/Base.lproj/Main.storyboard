@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
@@ -143,11 +144,46 @@
                         <outlet property="enterEditModeButton" destination="Thr-mx-iKC" id="d0V-8g-UxE"/>
                         <outlet property="tableView" destination="Kds-tp-5T8" id="uAm-Zb-2DH"/>
                         <segue destination="Wdx-Wv-7rk" kind="push" identifier="openGallery" id="xC8-nE-BGY"/>
+                        <segue destination="ojv-gB-E6k" kind="push" identifier="openGallery1" id="etj-2a-E3D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q1l-TX-FZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="208" y="1674"/>
+        </scene>
+        <!--Gallery View Controller-->
+        <scene sceneID="mxV-kP-xhP">
+            <objects>
+                <viewController id="ojv-gB-E6k" customClass="GalleryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kt7-n9-2fY"/>
+                        <viewControllerLayoutGuide type="bottom" id="97k-Ll-EDC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GMf-Vw-guo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U57-LW-ZRk">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="U57-LW-ZRk" secondAttribute="trailing" id="58A-aJ-64O"/>
+                            <constraint firstItem="97k-Ll-EDC" firstAttribute="top" secondItem="U57-LW-ZRk" secondAttribute="bottom" id="F7p-4q-qbr"/>
+                            <constraint firstItem="U57-LW-ZRk" firstAttribute="leading" secondItem="GMf-Vw-guo" secondAttribute="leading" id="KCP-sx-Abb"/>
+                            <constraint firstItem="U57-LW-ZRk" firstAttribute="top" secondItem="kt7-n9-2fY" secondAttribute="bottom" id="YJ3-2U-R5J"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="kpy-dx-9Cs"/>
+                    <connections>
+                        <outlet property="containerSize" destination="U57-LW-ZRk" id="Zg2-U0-CDL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9IZ-0t-4tc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130" y="2483"/>
         </scene>
         <!--Vehicle Gallery View Controller-->
         <scene sceneID="G40-Z5-Z4a">
@@ -161,17 +197,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gkH-73-upL" customClass="VehicleGalleryScrollView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gkH-73-upL" customClass="VehicleGalleryScrollView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="425"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w8G-SB-QAD">
+                                <rect key="frame" x="16" y="489" width="30" height="30"/>
+                                <state key="normal" title="&lt;"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhQ-HR-NAN">
+                                <rect key="frame" x="274" y="489" width="30" height="30"/>
+                                <state key="normal" title="&gt;"/>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="gkH-73-upL" secondAttribute="trailing" id="5nH-kc-KOs"/>
-                            <constraint firstItem="gkH-73-upL" firstAttribute="leading" secondItem="ciU-iV-KDL" secondAttribute="leading" id="mOp-cE-brm"/>
-                            <constraint firstItem="gkH-73-upL" firstAttribute="top" secondItem="qQ0-52-XXA" secondAttribute="bottom" id="p0Y-RE-03G"/>
-                            <constraint firstItem="V42-8R-mTl" firstAttribute="top" secondItem="gkH-73-upL" secondAttribute="bottom" id="sg3-ws-vHK"/>
+                            <constraint firstAttribute="trailing" secondItem="gkH-73-upL" secondAttribute="trailing" id="7EK-Gv-pgz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FhQ-HR-NAN" secondAttribute="trailing" id="NF0-wh-110"/>
+                            <constraint firstItem="FhQ-HR-NAN" firstAttribute="top" secondItem="gkH-73-upL" secondAttribute="bottom" id="OPD-Ot-rDY"/>
+                            <constraint firstItem="w8G-SB-QAD" firstAttribute="leading" secondItem="ciU-iV-KDL" secondAttribute="leadingMargin" id="P1o-RP-NyO"/>
+                            <constraint firstItem="gkH-73-upL" firstAttribute="top" secondItem="qQ0-52-XXA" secondAttribute="bottom" id="bRO-JY-7EY"/>
+                            <constraint firstItem="V42-8R-mTl" firstAttribute="top" secondItem="w8G-SB-QAD" secondAttribute="bottom" id="gp4-id-ZNc"/>
+                            <constraint firstItem="V42-8R-mTl" firstAttribute="top" secondItem="FhQ-HR-NAN" secondAttribute="bottom" id="mg2-HJ-2Jt"/>
+                            <constraint firstItem="gkH-73-upL" firstAttribute="leading" secondItem="ciU-iV-KDL" secondAttribute="leading" id="qsU-H8-pKl"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MR3-cD-IIm"/>
@@ -181,7 +229,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QEp-YL-y2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="591" y="1674"/>
+            <point key="canvasLocation" x="617" y="2423"/>
         </scene>
         <!--Parking-->
         <scene sceneID="HmG-hQ-Nxw">
