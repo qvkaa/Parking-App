@@ -96,6 +96,8 @@
 
     } else {
         [self.reusableGalleryCells removeObject:cell];
+        [self.galleryContainerView addSubview:cell];
+
     }
     
     return cell;
