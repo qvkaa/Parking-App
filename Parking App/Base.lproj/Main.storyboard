@@ -188,7 +188,7 @@
         <!--Vehicle Gallery View Controller-->
         <scene sceneID="G40-Z5-Z4a">
             <objects>
-                <viewController id="Wdx-Wv-7rk" customClass="VehicleGalleryViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Wdx-Wv-7rk" customClass="VehicleGalleryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qQ0-52-XXA"/>
                         <viewControllerLayoutGuide type="bottom" id="V42-8R-mTl"/>
