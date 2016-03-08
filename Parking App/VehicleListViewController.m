@@ -182,7 +182,7 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     if ([[[parking vehicleAtIndex:indexPath.row].flickrImages objectAtIndex:0] imageURL]) {
         [cell.vehiclePicture setHidden:YES];
         [cell.pictureLoadingIndicator startAnimating];
-         [cell.pictureLoadingIndicator setHidden:NO];
+        [cell.pictureLoadingIndicator setHidden:NO];
         NSURLRequest *request = [NSURLRequest requestWithURL:[[[parking vehicleAtIndex:indexPath.row].flickrImages objectAtIndex:0] imageURLWithImageSize:ImageSizeDefault]];
         [cell.vehiclePicture setImageWithURLRequest:request
     placeholderImage:nil

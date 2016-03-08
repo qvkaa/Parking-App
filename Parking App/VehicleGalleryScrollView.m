@@ -10,11 +10,11 @@
 
 @interface VehicleGalleryScrollView()
 @property (strong,nonatomic,readonly) NSMutableSet *reusableGalleryCells; //of GalleryCell
-@property (strong,nonatomic) GalleryCell *cell;
 @property (strong,nonatomic) NSMutableArray *visibleCells; //of GalleryCell
-@property (strong,nonatomic) NSMutableArray *loadedCellsRects; // of NSValue of rects -> position in the container
 @property (strong,nonatomic) UIView *galleryContainerView;
-@property (nonatomic) NSInteger imageIndex;
+@property (nonatomic) NSInteger collumIndex;
+@property (nonatomic) NSInteger totalCells;
+@property (nonatomic) BOOL lastCellPlacedWasToTheRight;
 @property (nonatomic) BOOL isContentSizeSet;
 
 @end
@@ -29,6 +29,8 @@
     
     if (self) {
         _isContentSizeSet = NO;
+        _collumIndex = -1;
+        self.showsHorizontalScrollIndicator = NO;
     }
     return self;
 }
@@ -37,16 +39,6 @@
 - (NSMutableArray *)visibleCells {
     if (!_visibleCells) {
         _visibleCells = [[NSMutableArray alloc] initWithCapacity:5];
-        
-//        for(NSUInteger i = 0; i < 5 ; ++i) {
-//            GalleryCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"GalleryCell" owner:nil options:nil] lastObject];
-//            if ([cell isKindOfClass:[GalleryCell class]]) {
-//                [_visibleCells addObject:cell];
-//                CGRect rect = [[self.loadedCellsRects objectAtIndex:i] CGRectValue];
-//                cell.frame = rect;
-//                [self.galleryContainerView addSubview:cell];
-//            }
-//        }
     }
     return _visibleCells;
 }
@@ -60,21 +52,6 @@
     }
     return _galleryContainerView;
 }
-//- (NSMutableArray *)loadedCellsRects {
-//    if (!_loadedCellsRects) {
-//        _loadedCellsRects = [[NSMutableArray alloc] initWithCapacity:5];
-//        CGFloat height = self.contentSize.height;
-//        CGFloat width = self.bounds.size.width;
-//        CGFloat xPosition = 0;
-//        for (NSUInteger i = 0; i < 5 ; ++i) {
-//            CGRect rect = CGRectMake(xPosition, 0, width, height);
-//            [_loadedCellsRects addObject:[NSValue valueWithCGRect:rect]];
-//            xPosition += width;
-//        }
-//    }
-//   
-//    return _loadedCellsRects;
-//}
 #pragma mark - private
 
 - (NSMutableSet *)reusableGalleryCells {
@@ -109,19 +86,14 @@
     CGFloat contentWidth = [self contentSize].width;
     CGFloat centerOffsetX = (contentWidth - self.bounds.size.width) / 2.0 ;
     CGFloat distanceFromCenter = fabs(currentOffset.x - centerOffsetX);
-//    NSUInteger sub= [self.galleryContainerView.subviews count];
-//    NSUInteger vis = [self.visibleCells count];
-  //  NSLog(@"\ncurrent offset : %f\ncenter offset : %f\ndistance : %f\nsubs : %ld  vis :%ld\n",currentOffset.x,centerOffsetX,distanceFromCenter,sub, vis);
-//    if (distanceFromCenter > (contentWidth / 4.0)) {
     if (distanceFromCenter > (contentWidth / 4.0)) {
         self.contentOffset = CGPointMake(centerOffsetX, currentOffset.y);
-       
-        //move content
         for (GalleryCell *cell in self.visibleCells) {
             CGPoint center = cell.center;
             center.x += (centerOffsetX - currentOffset.x);
             cell.center = center;
-        }
+            
+       }
     }
 }
 
@@ -132,61 +104,72 @@
         CGFloat offset = self.bounds.size.width;
         CGFloat height = self.bounds.size.height;
         self.contentSize = CGSizeMake(offset*5,height );
+        if ([self.galleryDelegate respondsToSelector:@selector(numberOfGalleryCells)]) {
+            self.totalCells = [self.galleryDelegate numberOfGalleryCells];
+            NSLog(@"total %ld",_totalCells);
+            
+        }
         self.isContentSizeSet = YES;
     }
     
     [self recenterIfNecessary];
-    
     CGRect visibleBounds = self.bounds;
     CGFloat minVisibleX = CGRectGetMinX(visibleBounds);
     CGFloat maxVisibleX = CGRectGetMaxX(visibleBounds);
-    //NSLog(@"minx %f   maxX%f",minVisibleX,maxVisibleX);
     [self tileCellsFromMinX:minVisibleX toMaxX:maxVisibleX];
 
 }
 
-//- (GalleryCell *)insertGalleryCell {
-//    GalleryCell *cell = [self dequeueReusableCell];
-////    if (!cell) {
-////        cell = [[[NSBundle mainBundle] loadNibNamed:@"GalleryCell" owner:nil options:nil] lastObject];
-////        if ([cell isKindOfClass:[GalleryCell class]]) {
-////            [self.galleryContainerView addSubview:cell];
-////            //self.galleryDelegate galleryScrollView:self cellForCollumAtIndex:(NSUInteger)
-////        }
-////            //            CGRect rect = CGRectMake(cellX, 0, self.bounds.size.width, self.bounds.size.height);
-////            //            [self.galleryContainerView setFrame:rect];
-////            //            cell.galleryImage.image = [UIImage imageNamed:@"defaultCar"];
-////            //        }
-////
-////    }
-//    
-//    return cell;
-//}
-
 - (CGFloat)placeCellOnRight:(CGFloat)rightEdge {
-    GalleryCell *cell = [self dequeueReusableCell];
+    if (self.lastCellPlacedWasToTheRight) {
+        self.collumIndex++;
+    } else {
+        self.collumIndex += 2;
+    }
+    if (self.collumIndex >= self.totalCells ) {
+    self.collumIndex -= self.totalCells;
+    }else if (self.collumIndex < 0) {
+        self.collumIndex += self.totalCells;
+    }
+    self.lastCellPlacedWasToTheRight = YES;
+    NSLog(@"index right %ld",self.collumIndex);
+    GalleryCell *cell;
+    if ([self.galleryDelegate respondsToSelector:@selector(galleryScrollView:cellForCollumAtIndex:)]) {
+       cell = [self.galleryDelegate galleryScrollView:self cellForCollumAtIndex:self.collumIndex];
+       
+    }
     [self.visibleCells addObject:cell];
     CGRect frame = [cell frame];
     frame.origin.x = rightEdge;
     frame.origin.y = 0;
     frame.size.height = self.contentSize.height;
     frame.size.width = self.bounds.size.width;
-//    NSLog(@"place right %f",frame.origin.x);
-//    NSLog(@"self content offset %f",self.contentOffset.x);
     cell.frame = frame;
     return CGRectGetMaxX(frame);
 }
 
 - (CGFloat)placeCellOnLeft:(CGFloat)leftEdge {
-    GalleryCell *cell = [self dequeueReusableCell];
+    if (self.lastCellPlacedWasToTheRight) {
+        self.collumIndex -= 2;
+         NSLog(@"<< %ld",self.collumIndex);
+    } else {
+        self.collumIndex--;
+         NSLog(@"< %ld",self.collumIndex);
+    }
+    self.lastCellPlacedWasToTheRight = NO;
+    if (self.collumIndex >= self.totalCells ) {
+        self.collumIndex -= self.totalCells;
+    }else if (self.collumIndex < 0) {
+        self.collumIndex += self.totalCells;
+    }
+    GalleryCell *cell = [self.galleryDelegate galleryScrollView:self cellForCollumAtIndex:self.collumIndex]; // [self dequeueReusableCell];
+    NSLog(@"index current %ld",self.collumIndex);
     [self.visibleCells insertObject:cell atIndex:0];
     CGRect frame = [cell frame];
     frame.origin.x = leftEdge - self.bounds.size.width;
     frame.origin.y = 0;
     frame.size.height = self.contentSize.height;
     frame.size.width = self.bounds.size.width;
-//    NSLog(@"place left %f",frame.origin.x);
-//    NSLog(@"self content offset %f",self.contentOffset.x);
     cell.frame = frame;
     return CGRectGetMinX(frame);
 }
@@ -195,6 +178,7 @@
     GalleryCell *lastCell;
     // make sure at least one cell is placed
     if ([self.visibleCells count] == 0 ) {
+        self.lastCellPlacedWasToTheRight = YES;
         [self placeCellOnRight:minX];
         
     }

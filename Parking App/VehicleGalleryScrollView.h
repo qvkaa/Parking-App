@@ -17,13 +17,10 @@
 
 @protocol VehicleGalleryScrollViewDataSource <NSObject>
 
-- (NSInteger)galleryScrollView:(VehicleGalleryScrollView *)scrollView numberOfGalleryCell:(NSUInteger)section;
-
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+- (NSInteger)numberOfGalleryCells;
 
 - (GalleryCell *)galleryScrollView:(VehicleGalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index;
-- (NSInteger)galleryScrollView:(VehicleGalleryScrollView *)scrollView changeCurrentImageIndex:(NSInteger)index;
+
 @end
 
 @interface VehicleGalleryScrollView : UIScrollView

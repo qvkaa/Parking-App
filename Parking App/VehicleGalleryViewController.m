@@ -7,6 +7,8 @@
 //
 
 #import "VehicleGalleryViewController.h"
+#import "ParkingLot.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface VehicleGalleryViewController ()
 @property (strong, nonatomic) IBOutlet VehicleGalleryScrollView *galleryScrollView;
@@ -15,7 +17,10 @@
 
 @implementation VehicleGalleryViewController
 #pragma mark - lifecycle
-
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.galleryScrollView.galleryDelegate = self;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -55,10 +60,40 @@
 
 #pragma mark - delegate methods
 - (GalleryCell *)galleryScrollView:(VehicleGalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index {
-    return nil;
+    ParkingLot *parking = [ParkingLot defaultParking];
+    GalleryCell *cell = [scrollView dequeueReusableCell];
+    
+    cell.galleryImage.image = [UIImage imageNamed:@"defaultCar"];
+    NSInteger totalImages =  [[parking vehicleAtIndex:self.tableViewRow].flickrImages count];
+    if ( totalImages < 1) { // no images for that vehicle
+        return cell;
+    }
+    NSInteger cellIndex = index;
+    while (cellIndex < 0) {
+        cellIndex += totalImages;
+    }
+    cellIndex %= totalImages;
+    
+    if ([[[parking vehicleAtIndex:self.tableViewRow].flickrImages objectAtIndex:cellIndex] imageURL]) {
+               NSURLRequest *request = [NSURLRequest requestWithURL:[[[parking vehicleAtIndex:self.tableViewRow].flickrImages objectAtIndex:cellIndex] imageURLWithImageSize:ImageSizeDefault]];
+        [cell.galleryImage setImageWithURLRequest:request
+                                   placeholderImage:nil
+                                            success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+                                                cell.galleryImage.image = image;
+                                                [cell.galleryImage setBackgroundColor:[UIColor blackColor]];
+                                            }
+                                            failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+                                                NSLog(@"%@",[error description]);
+                                                cell.galleryImage.image = [UIImage imageNamed:@"defaultCar"];
+                                            }];
+    }
+    return cell;
+
 }
 
-- (NSInteger)galleryScrollView:(VehicleGalleryScrollView *)scrollView numberOfGalleryCell:(NSUInteger)section {
-    return 0;
+- (NSInteger)numberOfGalleryCells {
+    ParkingLot *parking = [ParkingLot defaultParking];
+    NSInteger totalImages =  [[parking vehicleAtIndex:self.tableViewRow].flickrImages count];
+    return totalImages;
 }
 @end
