@@ -220,5 +220,4 @@
         firstCell = [self.visibleCells objectAtIndex:0];
     }
 }
-
 @end
