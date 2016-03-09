@@ -93,16 +93,24 @@
     
     
     if (distanceFromCenter > (cellWidth / 2.0) ) {
+        
+        //determine if we need to shift left or right
         CGFloat offsetToCenter = cellWidth;
         if (currentOffset.x > centerOffsetX ) {
             offsetToCenter *= -1.0;
         }
+        
+        //shift the contennt offset
         CGPoint newPoint = CGPointMake(currentOffset.x + offsetToCenter, currentOffset.y);
         self.contentOffset = newPoint;
         //TO-DO handle possible overflow of self.hiddenOffset
+        
+        //update the hidden offset
         self.hiddenOffset += offsetToCenter;
-        NSLog(@"hidden offset : %f",self.hiddenOffset);
-        NSLog(@"%f %f %f ",currentOffset.x,centerOffsetX, distanceFromCenter);
+       // NSLog(@"hidden offset : %f",self.hiddenOffset);
+      //  NSLog(@"%f %f %f ",currentOffset.x,centerOffsetX, distanceFromCenter);
+        
+        //determine what cell we are on
         NSInteger cell = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
         NSLog(@"PAGE : %ld",cell);
 
@@ -114,11 +122,6 @@
             
        }
     }
-    
-    
-    
-
-
 }
 
 - (void)layoutSubviews {
@@ -136,10 +139,10 @@
         }
         self.isContentSizeSet = YES;
     }
-        [self recenterIfNecessary];
+    [self recenterIfNecessary];
     CGRect visibleBounds = self.bounds;
-    CGFloat minVisibleX = CGRectGetMinX(visibleBounds);
-    CGFloat maxVisibleX = CGRectGetMaxX(visibleBounds);
+    CGFloat minVisibleX = CGRectGetMinX(visibleBounds) - self.bounds.size.width ;
+    CGFloat maxVisibleX = CGRectGetMaxX(visibleBounds) + self.bounds.size.width;
     [self tileCellsFromMinX:minVisibleX toMaxX:maxVisibleX];
 
 }
@@ -198,26 +201,29 @@
     return CGRectGetMinX(frame);
 }
 - (void)tileCellsFromMinX:(CGFloat)minX toMaxX:(CGFloat)maxX {
+    CGFloat cellWidth = self.frame.size.width;
+    NSInteger cell = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
+    
     GalleryCell *firstCell;
     GalleryCell *lastCell;
     // make sure at least one cell is placed
     if ([self.visibleCells count] == 0 ) {
         self.lastCellPlacedWasToTheRight = YES;
-        [self placeCellOnRight:minX];
+        [self placeCellOnRight:minX+self.bounds.size.width];
         
     }
     
     //add cells that are missing on the right side
     lastCell = [self.visibleCells lastObject];
     CGFloat rightEdge = CGRectGetMaxX([lastCell frame]);
-    while (rightEdge < maxX) {
+    while (rightEdge < maxX && cell < self.totalCells - 1) {
         rightEdge = [self placeCellOnRight:rightEdge];
     }
     
     //add cells that are missing on the left side
     firstCell = [self.visibleCells objectAtIndex:0];
     CGFloat leftEdge = CGRectGetMinX([firstCell frame]);
-    while (leftEdge > minX) {
+    while (leftEdge > minX && cell > 0) {
         leftEdge = [self placeCellOnLeft:leftEdge];
     }
     
