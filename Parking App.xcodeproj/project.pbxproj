@@ -26,6 +26,7 @@
 		835ED7E61C74B56B0009709E /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835ED7E51C74B56B0009709E /* CustomTableViewCell.xib */; };
 		836A0A641C8F3F6800C4D69E /* GalleryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 836A0A631C8F3F6800C4D69E /* GalleryScrollView.m */; };
 		836DF0E61C69F91400A9E862 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */; };
+		837444D71C903B5300C6AC03 /* CustomGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837444D61C903B5300C6AC03 /* CustomGalleryCell.m */; };
 		837588061C8472DA001E1AA6 /* VehicleGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837588051C8472DA001E1AA6 /* VehicleGalleryViewController.m */; };
 		837588091C8473F6001E1AA6 /* VehicleGalleryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 837588081C8473F6001E1AA6 /* VehicleGalleryScrollView.m */; };
 		8375880C1C847585001E1AA6 /* GalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8375880B1C847585001E1AA6 /* GalleryCell.m */; };
@@ -88,6 +89,8 @@
 		836A0A631C8F3F6800C4D69E /* GalleryScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryScrollView.m; sourceTree = "<group>"; };
 		836DF0E41C69F91400A9E862 /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
+		837444D51C903B5300C6AC03 /* CustomGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGalleryCell.h; sourceTree = "<group>"; };
+		837444D61C903B5300C6AC03 /* CustomGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGalleryCell.m; sourceTree = "<group>"; };
 		837588041C8472DA001E1AA6 /* VehicleGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleGalleryViewController.h; sourceTree = "<group>"; };
 		837588051C8472DA001E1AA6 /* VehicleGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VehicleGalleryViewController.m; sourceTree = "<group>"; };
 		837588071C8473F6001E1AA6 /* VehicleGalleryScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleGalleryScrollView.h; sourceTree = "<group>"; };
@@ -249,6 +252,8 @@
 				8357503F1C6C96A600ADF5CB /* DataErrorView.m */,
 				8357503C1C6C969400ADF5CB /* DataErrorView.xib */,
 				835ED7E51C74B56B0009709E /* CustomTableViewCell.xib */,
+				837444D51C903B5300C6AC03 /* CustomGalleryCell.h */,
+				837444D61C903B5300C6AC03 /* CustomGalleryCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 				5F716A3F1C58D5E5007C63F1 /* ValidateDataUtil.m in Sources */,
 				8375880C1C847585001E1AA6 /* GalleryCell.m in Sources */,
 				835A7FF11C6398A900CE49A1 /* ParkingLot.m in Sources */,
+				837444D71C903B5300C6AC03 /* CustomGalleryCell.m in Sources */,
 				5F1CB2051C56552C00650671 /* ViewController.m in Sources */,
 				5F672AC31C5A6E0000FF9D9F /* VehicleListViewController.m in Sources */,
 				836A0A641C8F3F6800C4D69E /* GalleryScrollView.m in Sources */,

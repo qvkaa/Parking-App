@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @class GalleryScrollView;
-@protocol VehicleGalleryScrollViewDataSource <NSObject>
+@protocol GalleryScrollViewDataSource <NSObject>
 
 - (NSInteger)numberOfGalleryCellsForGalleryScrollView:(GalleryScrollView *)scrollView;
 
 - (UIView *)galleryScrollView:(GalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index;
 
 @end
-@interface GalleryScrollView : UIView
+@interface GalleryScrollView : UIScrollView
+
+@property (weak, nonatomic) id<GalleryScrollViewDataSource> galleryDelegate;
 
 @end

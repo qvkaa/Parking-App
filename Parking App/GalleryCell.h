@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface GalleryCell : UIView
-@property (weak, nonatomic) IBOutlet UIImageView *galleryImage;
+
 @end

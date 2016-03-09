@@ -35,9 +35,9 @@
 #pragma mark - accessors
 
 #pragma mark - delegate methods
-- (GalleryCell *)galleryScrollView:(VehicleGalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index {
+- (CustomGalleryCell *)galleryScrollView:(VehicleGalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index {
     ParkingLot *parking = [ParkingLot defaultParking];
-    GalleryCell *cell = [scrollView dequeueReusableCell];
+    CustomGalleryCell *cell = [scrollView dequeueReusableCell];
     
     cell.galleryImage.image = [UIImage imageNamed:@"defaultCar"];
     NSInteger totalImages =  [[parking vehicleAtIndex:self.tableViewRow].flickrImages count];

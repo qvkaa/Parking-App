@@ -16,6 +16,7 @@
 @property (nonatomic) NSInteger totalCells;
 @property (nonatomic) BOOL lastCellPlacedWasToTheRight;
 @property (nonatomic) BOOL isContentSizeSet;
+@property (nonatomic) CGFloat hiddenOffset; //due to recentering
 
 @end
 
@@ -30,7 +31,10 @@
     if (self) {
         _isContentSizeSet = NO;
         _collumIndex = -1;
-        self.showsHorizontalScrollIndicator = NO;
+        [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+        _hiddenOffset = 0.0f;
+        
+        //self.showsHorizontalScrollIndicator = NO;
     }
     return self;
 }
@@ -82,28 +86,49 @@
 #pragma mark - layout
 
 - (void)recenterIfNecessary {
+    CGFloat cellWidth = self.frame.size.width;
     CGPoint currentOffset = [self contentOffset];
-    CGFloat contentWidth = [self contentSize].width;
-    CGFloat centerOffsetX = (contentWidth - self.bounds.size.width) / 2.0 ;
-    CGFloat distanceFromCenter = fabs(currentOffset.x - centerOffsetX);
-    if (distanceFromCenter > (contentWidth / 4.0)) {
-        self.contentOffset = CGPointMake(centerOffsetX, currentOffset.y);
+    CGFloat centerOffsetX = (self.bounds.size.width);
+    CGFloat distanceFromCenter = fabs(currentOffset.x - centerOffsetX) ;
+    
+    
+    if (distanceFromCenter > (cellWidth / 2.0) ) {
+        CGFloat offsetToCenter = cellWidth;
+        if (currentOffset.x > centerOffsetX ) {
+            offsetToCenter *= -1.0;
+        }
+        CGPoint newPoint = CGPointMake(currentOffset.x + offsetToCenter, currentOffset.y);
+        self.contentOffset = newPoint;
+        //TO-DO handle possible overflow of self.hiddenOffset
+        self.hiddenOffset += offsetToCenter;
+        NSLog(@"hidden offset : %f",self.hiddenOffset);
+        NSLog(@"%f %f %f ",currentOffset.x,centerOffsetX, distanceFromCenter);
+        NSInteger cell = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
+        NSLog(@"PAGE : %ld",cell);
+
         for (GalleryCell *cell in self.visibleCells) {
-            CGPoint center = cell.center;
-            center.x += (centerOffsetX - currentOffset.x);
-            cell.center = center;
+            CGRect newRect = cell.frame;
+            newRect.origin.x += offsetToCenter;
+            [cell setFrame:newRect];
+
             
        }
     }
+    
+    
+    
+
+
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
     if (!self.isContentSizeSet) {
+        self.pagingEnabled = YES;
         CGFloat offset = self.bounds.size.width;
         CGFloat height = self.bounds.size.height;
-        self.contentSize = CGSizeMake(offset*5,height );
+        self.contentSize = CGSizeMake(offset*3,height );
         if ([self.galleryDelegate respondsToSelector:@selector(numberOfGalleryCells)]) {
             self.totalCells = [self.galleryDelegate numberOfGalleryCells];
             NSLog(@"total %ld",_totalCells);
@@ -111,8 +136,7 @@
         }
         self.isContentSizeSet = YES;
     }
-    
-    [self recenterIfNecessary];
+        [self recenterIfNecessary];
     CGRect visibleBounds = self.bounds;
     CGFloat minVisibleX = CGRectGetMinX(visibleBounds);
     CGFloat maxVisibleX = CGRectGetMaxX(visibleBounds);
@@ -132,7 +156,7 @@
         self.collumIndex += self.totalCells;
     }
     self.lastCellPlacedWasToTheRight = YES;
-    NSLog(@"index right %ld",self.collumIndex);
+  //  NSLog(@"index right %ld",self.collumIndex);
     GalleryCell *cell;
     if ([self.galleryDelegate respondsToSelector:@selector(galleryScrollView:cellForCollumAtIndex:)]) {
        cell = [self.galleryDelegate galleryScrollView:self cellForCollumAtIndex:self.collumIndex];
@@ -151,10 +175,10 @@
 - (CGFloat)placeCellOnLeft:(CGFloat)leftEdge {
     if (self.lastCellPlacedWasToTheRight) {
         self.collumIndex -= 2;
-         NSLog(@"<< %ld",self.collumIndex);
+      //   NSLog(@"<< %ld",self.collumIndex);
     } else {
         self.collumIndex--;
-         NSLog(@"< %ld",self.collumIndex);
+      //   NSLog(@"< %ld",self.collumIndex);
     }
     self.lastCellPlacedWasToTheRight = NO;
     if (self.collumIndex >= self.totalCells ) {
@@ -163,7 +187,7 @@
         self.collumIndex += self.totalCells;
     }
     GalleryCell *cell = [self.galleryDelegate galleryScrollView:self cellForCollumAtIndex:self.collumIndex]; // [self dequeueReusableCell];
-    NSLog(@"index current %ld",self.collumIndex);
+    //NSLog(@"index current %ld",self.collumIndex);
     [self.visibleCells insertObject:cell atIndex:0];
     CGRect frame = [cell frame];
     frame.origin.x = leftEdge - self.bounds.size.width;

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GalleryCell.h"
+#import "CustomGalleryCell.h"
 @class VehicleGalleryScrollView;
 @protocol VehicleGalleryScrollViewDelegate <NSObject>
 
@@ -19,7 +19,7 @@
 
 - (NSInteger)numberOfGalleryCells;
 
-- (GalleryCell *)galleryScrollView:(VehicleGalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index;
+- (CustomGalleryCell *)galleryScrollView:(VehicleGalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index;
 
 @end
 
@@ -27,7 +27,7 @@
 
 @property (weak, nonatomic) id<UIScrollViewDelegate,VehicleGalleryScrollViewDataSource,VehicleGalleryScrollViewDelegate> galleryDelegate;
 
-- (GalleryCell *)dequeueReusableCell;
+- (CustomGalleryCell *)dequeueReusableCell;
 @end
 
 
