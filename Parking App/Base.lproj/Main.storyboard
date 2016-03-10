@@ -204,10 +204,16 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w8G-SB-QAD">
                                 <rect key="frame" x="16" y="489" width="30" height="30"/>
                                 <state key="normal" title="&lt;"/>
+                                <connections>
+                                    <action selector="pressPreviousButton:" destination="Wdx-Wv-7rk" eventType="touchUpInside" id="jGO-Ad-zUU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhQ-HR-NAN">
                                 <rect key="frame" x="274" y="489" width="30" height="30"/>
                                 <state key="normal" title="&gt;"/>
+                                <connections>
+                                    <action selector="pressNextButton:" destination="Wdx-Wv-7rk" eventType="touchUpInside" id="RWA-mW-N4y"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

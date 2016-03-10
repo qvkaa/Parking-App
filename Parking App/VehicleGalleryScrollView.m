@@ -91,9 +91,8 @@
     CGPoint currentOffset = [self contentOffset];
     CGFloat centerOffsetX = (self.bounds.size.width);
     CGFloat distanceFromCenter = fabs(currentOffset.x - centerOffsetX) ;
-    
-    
-    if (distanceFromCenter > (cellWidth / 2.0) ) {
+    NSInteger cell = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
+    if (distanceFromCenter > (cellWidth / 2.0 )  && (cell != 0) && (cell != self.totalCells-1) ) {
         
         //determine if we need to shift left or right
         CGFloat offsetToCenter = cellWidth;
@@ -104,7 +103,7 @@
         //shift the contennt offset
         CGPoint newPoint = CGPointMake(currentOffset.x + offsetToCenter, currentOffset.y);
         self.contentOffset = newPoint;
-        //TO-DO handle possible overflow of self.hiddenOffset
+        //TODO: handle possible overflow of self.hiddenOffset
         
         //update the hidden offset
         self.hiddenOffset += offsetToCenter;
@@ -124,7 +123,7 @@
 
     CGFloat cellWidth = self.frame.size.width;
     CGFloat minimumLimit = cellWidth - 1;
-    CGFloat maximumLimit = cellWidth * + 1;
+    CGFloat maximumLimit = cellWidth + 1;
     NSInteger cell = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
   
     if (cell <= 0 &&  rect.origin.x < minimumLimit) {
@@ -171,7 +170,7 @@
     [self tileCellsFromMinX:minVisibleX toMaxX:maxVisibleX];
     CGFloat cellWidth = self.frame.size.width;
     self.collumIndex = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
-    [self checkIfVisibleRectIsInLimits:visibleBounds];
+  //  [self checkIfVisibleRectIsInLimits:visibleBounds];
 }
 
 - (CGFloat)placeCellOnRight:(CGFloat)rightEdge {
@@ -245,11 +244,41 @@
     
     //remove cells that have fallen off left edge
     firstCell = [self.visibleCells objectAtIndex:0];
-    while ((CGRectGetMaxX([firstCell frame]) - cellWidth / 2.0f) < minX) {
+    while ((CGRectGetMaxX([firstCell frame]) - cellWidth / 2.0) < minX) {
         [firstCell removeFromSuperview];
         [self.visibleCells removeObjectAtIndex:0];
         [self.reusableGalleryCells addObject:firstCell];
         firstCell = [self.visibleCells objectAtIndex:0];
+    }
+}
+- (void)centerToPreviousCell {
+    CGFloat cellWidth = self.frame.size.width;
+    
+    NSInteger cell = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
+    CGRect rect = self.bounds;
+    if (cell > 0 ) {
+        rect.origin.x -= cellWidth;
+        //[self scrollRectToVisible:rect animated:YES];
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{ [self scrollRectToVisible:rect animated:NO]; }
+                         completion:NULL];
+    }
+}
+- (void)centerToNextCell {
+    CGFloat cellWidth = self.frame.size.width;
+    
+    NSInteger cell = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
+    CGRect rect = self.bounds;
+    if (cell < self.totalCells-1 ) {
+        rect.origin.x += cellWidth;
+        //[self scrollRectToVisible:rect animated:YES];
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{ [self scrollRectToVisible:rect animated:NO]; }
+                         completion:NULL];
     }
 }
 @end

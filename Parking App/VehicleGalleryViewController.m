@@ -72,4 +72,12 @@
     NSInteger totalImages =  [[parking vehicleAtIndex:self.tableViewRow].flickrImages count];
     return totalImages;
 }
+#pragma mark - IBActions
+- (IBAction)pressPreviousButton:(id)sender {
+    [self.galleryScrollView centerToPreviousCell];
+}
+- (IBAction)pressNextButton:(id)sender {
+    [self.galleryScrollView centerToNextCell];
+}
+
 @end

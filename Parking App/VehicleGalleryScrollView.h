@@ -21,6 +21,7 @@
 
 - (CustomGalleryCell *)galleryScrollView:(VehicleGalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index;
 
+
 @end
 
 @interface VehicleGalleryScrollView : UIScrollView
@@ -28,6 +29,8 @@
 @property (weak, nonatomic) id<UIScrollViewDelegate,VehicleGalleryScrollViewDataSource,VehicleGalleryScrollViewDelegate> galleryDelegate;
 
 - (CustomGalleryCell *)dequeueReusableCell;
+- (void)centerToPreviousCell;
+- (void)centerToNextCell;
 @end
 
 
