@@ -31,10 +31,10 @@
     if (self) {
         _isContentSizeSet = NO;
         _collumIndex = -1;
-        [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+      //  [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
         _hiddenOffset = 0.0f;
-        
-        //self.showsHorizontalScrollIndicator = NO;
+        self.showsHorizontalScrollIndicator = NO;
+        [self setBackgroundColor:[UIColor blackColor]];
     }
     return self;
 }
@@ -53,6 +53,7 @@
         CGRect rect = CGRectMake(0, 0, width, height);
         _galleryContainerView = [[UIView alloc] initWithFrame:rect];
         [self addSubview:self.galleryContainerView];
+        
     }
     return _galleryContainerView;
 }
@@ -107,13 +108,8 @@
         
         //update the hidden offset
         self.hiddenOffset += offsetToCenter;
-       // NSLog(@"hidden offset : %f",self.hiddenOffset);
-      //  NSLog(@"%f %f %f ",currentOffset.x,centerOffsetX, distanceFromCenter);
         
         //determine what cell we are on
-        NSInteger cell = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
-        NSLog(@"PAGE : %ld",cell);
-
         for (GalleryCell *cell in self.visibleCells) {
             CGRect newRect = cell.frame;
             newRect.origin.x += offsetToCenter;
@@ -121,6 +117,37 @@
 
             
        }
+    }
+}
+
+- (void)checkIfVisibleRectIsInLimits:(CGRect)rect {
+
+    CGFloat cellWidth = self.frame.size.width;
+    CGFloat minimumLimit = cellWidth - 1;
+    CGFloat maximumLimit = cellWidth * + 1;
+    NSInteger cell = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
+  
+    if (cell <= 0 &&  rect.origin.x < minimumLimit) {
+        rect.origin.x = cellWidth;
+        //[self scrollRectToVisible:rect animated:YES];
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{ [self scrollRectToVisible:rect animated:NO]; }
+                         completion:NULL];
+    }
+
+    if (cell >= self.totalCells-1 && rect.origin.x > maximumLimit) {
+        rect.origin.x = cellWidth;
+        
+       // [self scrollRectToVisible:rect animated:YES ];
+        
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{ [self scrollRectToVisible:rect animated:NO]; }
+                         completion:NULL];
+        
     }
 }
 
@@ -134,8 +161,6 @@
         self.contentSize = CGSizeMake(offset*3,height );
         if ([self.galleryDelegate respondsToSelector:@selector(numberOfGalleryCells)]) {
             self.totalCells = [self.galleryDelegate numberOfGalleryCells];
-            NSLog(@"total %ld",_totalCells);
-            
         }
         self.isContentSizeSet = YES;
     }
@@ -144,22 +169,14 @@
     CGFloat minVisibleX = CGRectGetMinX(visibleBounds) - self.bounds.size.width ;
     CGFloat maxVisibleX = CGRectGetMaxX(visibleBounds) + self.bounds.size.width;
     [self tileCellsFromMinX:minVisibleX toMaxX:maxVisibleX];
-
+    CGFloat cellWidth = self.frame.size.width;
+    self.collumIndex = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
+    [self checkIfVisibleRectIsInLimits:visibleBounds];
 }
 
 - (CGFloat)placeCellOnRight:(CGFloat)rightEdge {
-    if (self.lastCellPlacedWasToTheRight) {
-        self.collumIndex++;
-    } else {
-        self.collumIndex += 2;
-    }
-    if (self.collumIndex >= self.totalCells ) {
-    self.collumIndex -= self.totalCells;
-    }else if (self.collumIndex < 0) {
-        self.collumIndex += self.totalCells;
-    }
-    self.lastCellPlacedWasToTheRight = YES;
-  //  NSLog(@"index right %ld",self.collumIndex);
+    CGFloat cellWidth = self.frame.size.width;
+    self.collumIndex = (NSInteger)floor(((rightEdge - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
     GalleryCell *cell;
     if ([self.galleryDelegate respondsToSelector:@selector(galleryScrollView:cellForCollumAtIndex:)]) {
        cell = [self.galleryDelegate galleryScrollView:self cellForCollumAtIndex:self.collumIndex];
@@ -176,21 +193,10 @@
 }
 
 - (CGFloat)placeCellOnLeft:(CGFloat)leftEdge {
-    if (self.lastCellPlacedWasToTheRight) {
-        self.collumIndex -= 2;
-      //   NSLog(@"<< %ld",self.collumIndex);
-    } else {
-        self.collumIndex--;
-      //   NSLog(@"< %ld",self.collumIndex);
-    }
-    self.lastCellPlacedWasToTheRight = NO;
-    if (self.collumIndex >= self.totalCells ) {
-        self.collumIndex -= self.totalCells;
-    }else if (self.collumIndex < 0) {
-        self.collumIndex += self.totalCells;
-    }
-    GalleryCell *cell = [self.galleryDelegate galleryScrollView:self cellForCollumAtIndex:self.collumIndex]; // [self dequeueReusableCell];
-    //NSLog(@"index current %ld",self.collumIndex);
+    CGFloat cellWidth = self.frame.size.width ;
+    CGFloat cellIndex = (NSInteger)floor(((leftEdge - self.hiddenOffset -(cellWidth/2.0)-1) * 2.0f + cellWidth) / (cellWidth * 2.0f));
+    self.collumIndex = cellIndex;
+    GalleryCell *cell = [self.galleryDelegate galleryScrollView:self cellForCollumAtIndex:self.collumIndex];
     [self.visibleCells insertObject:cell atIndex:0];
     CGRect frame = [cell frame];
     frame.origin.x = leftEdge - self.bounds.size.width;
@@ -202,51 +208,47 @@
 }
 - (void)tileCellsFromMinX:(CGFloat)minX toMaxX:(CGFloat)maxX {
     CGFloat cellWidth = self.frame.size.width;
-    NSInteger cell = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
+    NSInteger cell = (NSInteger)floor(((minX+cellWidth - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
     
     GalleryCell *firstCell;
     GalleryCell *lastCell;
+    
     // make sure at least one cell is placed
     if ([self.visibleCells count] == 0 ) {
         self.lastCellPlacedWasToTheRight = YES;
-        [self placeCellOnRight:minX+self.bounds.size.width];
+        [self placeCellOnRight:minX + self.bounds.size.width];
         
     }
     
     //add cells that are missing on the right side
     lastCell = [self.visibleCells lastObject];
     CGFloat rightEdge = CGRectGetMaxX([lastCell frame]);
-    while (rightEdge < maxX && cell < self.totalCells - 1) {
+    while ( (rightEdge + (cellWidth/2.0f)) < maxX && cell < self.totalCells - 1) {
         rightEdge = [self placeCellOnRight:rightEdge];
     }
     
     //add cells that are missing on the left side
     firstCell = [self.visibleCells objectAtIndex:0];
     CGFloat leftEdge = CGRectGetMinX([firstCell frame]);
-    while (leftEdge > minX && cell > 0) {
+    while ( (leftEdge - (cellWidth/2.0f)) > minX && cell > 0) {
         leftEdge = [self placeCellOnLeft:leftEdge];
     }
     
     //remove cells that have fallen off right edge
     lastCell = [self.visibleCells lastObject];
-    while ( [lastCell frame].origin.x > maxX) {
+    while ( [lastCell frame].origin.x + cellWidth/2.0 > maxX) {
         [lastCell removeFromSuperview];
         [self.visibleCells removeLastObject];
         [self.reusableGalleryCells addObject:lastCell];
-//        NSLog(@"right cell popped %ld",[self.reusableGalleryCells count]);
-//        NSLog(@"self content offset %f",self.contentOffset.x);
         lastCell = [self.visibleCells lastObject];
     }
     
     //remove cells that have fallen off left edge
     firstCell = [self.visibleCells objectAtIndex:0];
-    //NSLog(@"%f  < %f",CGRectGetMaxX([firstCell frame]) , minX);
-    while (CGRectGetMaxX([firstCell frame]) < minX) {
+    while ((CGRectGetMaxX([firstCell frame]) - cellWidth / 2.0f) < minX) {
         [firstCell removeFromSuperview];
         [self.visibleCells removeObjectAtIndex:0];
         [self.reusableGalleryCells addObject:firstCell];
-//        NSLog(@"left cell popped %ld",[self.reusableGalleryCells count]);
-//        NSLog(@"self content offset %f",self.contentOffset.x);
         firstCell = [self.visibleCells objectAtIndex:0];
     }
 }
