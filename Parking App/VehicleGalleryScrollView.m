@@ -35,6 +35,7 @@
         _hiddenOffset = 0.0f;
         self.showsHorizontalScrollIndicator = NO;
         [self setBackgroundColor:[UIColor blackColor]];
+        self.bounces = NO;
     }
     return self;
 }
@@ -164,15 +165,23 @@
         self.isContentSizeSet = YES;
     }
     [self recenterIfNecessary];
+    [self setTitle];
     CGRect visibleBounds = self.bounds;
     CGFloat minVisibleX = CGRectGetMinX(visibleBounds) - self.bounds.size.width ;
     CGFloat maxVisibleX = CGRectGetMaxX(visibleBounds) + self.bounds.size.width;
     [self tileCellsFromMinX:minVisibleX toMaxX:maxVisibleX];
     CGFloat cellWidth = self.frame.size.width;
     self.collumIndex = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
-  //  [self checkIfVisibleRectIsInLimits:visibleBounds];
+//    [self checkIfVisibleRectIsInLimits:visibleBounds];
 }
-
+- (void)setTitle {
+    
+    if ([self.galleryDelegate respondsToSelector:@selector(galleryScrollView:currentCellIndex:)]) {
+        CGFloat cellWidth = self.frame.size.width;
+        self.collumIndex = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
+        [self.galleryDelegate galleryScrollView:self currentCellIndex:self.collumIndex];
+    }
+}
 - (CGFloat)placeCellOnRight:(CGFloat)rightEdge {
     CGFloat cellWidth = self.frame.size.width;
     self.collumIndex = (NSInteger)floor(((rightEdge - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));

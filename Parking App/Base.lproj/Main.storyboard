@@ -231,6 +231,7 @@
                     <navigationItem key="navigationItem" id="MR3-cD-IIm"/>
                     <connections>
                         <outlet property="galleryScrollView" destination="gkH-73-upL" id="ne6-Tf-jNC"/>
+                        <outlet property="navigationBar" destination="MR3-cD-IIm" id="jWJ-n3-ZrQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QEp-YL-y2e" userLabel="First Responder" sceneMemberID="firstResponder"/>

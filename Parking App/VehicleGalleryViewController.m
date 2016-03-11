@@ -11,6 +11,7 @@
 #import "UIImageView+AFNetworking.h"
 
 @interface VehicleGalleryViewController ()
+@property (weak, nonatomic) IBOutlet UINavigationItem *navigationBar;
 @property (strong, nonatomic) IBOutlet VehicleGalleryScrollView *galleryScrollView;
 
 @end
@@ -71,6 +72,10 @@
     ParkingLot *parking = [ParkingLot defaultParking];
     NSInteger totalImages =  [[parking vehicleAtIndex:self.tableViewRow].flickrImages count];
     return totalImages;
+}
+- (void)galleryScrollView:(VehicleGalleryScrollView *)scrollView currentCellIndex:(NSInteger)index {
+    NSString *title = [NSString stringWithFormat:@"Image %ld / %ld",index+1,[self numberOfGalleryCells]];
+    self.navigationBar.title = title;
 }
 #pragma mark - IBActions
 - (IBAction)pressPreviousButton:(id)sender {
