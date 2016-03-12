@@ -9,7 +9,7 @@
 #import "VehicleGalleryViewController.h"
 #import "ParkingLot.h"
 #import "UIImageView+AFNetworking.h"
-
+#import "CustomGalleryCell.h"
 @interface VehicleGalleryViewController ()
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationBar;
 @property (strong, nonatomic) IBOutlet VehicleGalleryScrollView *galleryScrollView;
@@ -36,9 +36,9 @@
 #pragma mark - accessors
 
 #pragma mark - delegate methods
-- (CustomGalleryCell *)galleryScrollView:(VehicleGalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index {
+- (GalleryCell *)galleryScrollView:(VehicleGalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index {
     ParkingLot *parking = [ParkingLot defaultParking];
-    CustomGalleryCell *cell = [scrollView dequeueReusableCell];
+    CustomGalleryCell *cell = (CustomGalleryCell *)[scrollView dequeueReusableCellWithIdentifier:@"GalleryCell"];
     
     cell.galleryImage.image = [UIImage imageNamed:@"defaultCar"];
     NSInteger totalImages =  [[parking vehicleAtIndex:self.tableViewRow].flickrImages count];

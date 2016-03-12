@@ -144,46 +144,11 @@
                         <outlet property="enterEditModeButton" destination="Thr-mx-iKC" id="d0V-8g-UxE"/>
                         <outlet property="tableView" destination="Kds-tp-5T8" id="uAm-Zb-2DH"/>
                         <segue destination="Wdx-Wv-7rk" kind="push" identifier="openGallery" id="xC8-nE-BGY"/>
-                        <segue destination="ojv-gB-E6k" kind="push" identifier="openGallery1" id="etj-2a-E3D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q1l-TX-FZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="208" y="1674"/>
-        </scene>
-        <!--Gallery View Controller-->
-        <scene sceneID="mxV-kP-xhP">
-            <objects>
-                <viewController id="ojv-gB-E6k" customClass="GalleryViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="kt7-n9-2fY"/>
-                        <viewControllerLayoutGuide type="bottom" id="97k-Ll-EDC"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="GMf-Vw-guo">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U57-LW-ZRk">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="U57-LW-ZRk" secondAttribute="trailing" id="58A-aJ-64O"/>
-                            <constraint firstItem="97k-Ll-EDC" firstAttribute="top" secondItem="U57-LW-ZRk" secondAttribute="bottom" id="F7p-4q-qbr"/>
-                            <constraint firstItem="U57-LW-ZRk" firstAttribute="leading" secondItem="GMf-Vw-guo" secondAttribute="leading" id="KCP-sx-Abb"/>
-                            <constraint firstItem="U57-LW-ZRk" firstAttribute="top" secondItem="kt7-n9-2fY" secondAttribute="bottom" id="YJ3-2U-R5J"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="kpy-dx-9Cs"/>
-                    <connections>
-                        <outlet property="containerSize" destination="U57-LW-ZRk" id="Zg2-U0-CDL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9IZ-0t-4tc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="130" y="2483"/>
         </scene>
         <!--Vehicle Gallery View Controller-->
         <scene sceneID="G40-Z5-Z4a">

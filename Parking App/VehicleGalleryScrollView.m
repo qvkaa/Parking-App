@@ -71,9 +71,26 @@
 - (GalleryCell *)dequeueReusableCell{
     GalleryCell *cell = [self.reusableGalleryCells anyObject];
     if (!cell){
+        cell =  [[GalleryCell alloc] init];
+        [self.galleryContainerView addSubview:cell];
         
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"GalleryCell" owner:nil options:nil] lastObject];
+    } else {
+        [self.reusableGalleryCells removeObject:cell];
+        [self.galleryContainerView addSubview:cell];
+        
+    }
+    
+    return cell;
+}
+- (GalleryCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier {
+    GalleryCell *cell = [self.reusableGalleryCells anyObject];
+    if (!cell){
+        
+        cell = [[[NSBundle mainBundle] loadNibNamed:identifier owner:nil options:nil] lastObject];
         if ([cell isKindOfClass:[GalleryCell class]]) {
+            [self.galleryContainerView addSubview:cell];
+        } else {
+            cell =  [[GalleryCell alloc] init];
             [self.galleryContainerView addSubview:cell];
         }
 
@@ -183,6 +200,7 @@
     }
 }
 - (CGFloat)placeCellOnRight:(CGFloat)rightEdge {
+    NSLog(@"hidden %f",self.hiddenOffset);
     CGFloat cellWidth = self.frame.size.width;
     self.collumIndex = (NSInteger)floor(((rightEdge - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
     GalleryCell *cell;

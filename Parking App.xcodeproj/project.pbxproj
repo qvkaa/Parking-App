@@ -24,7 +24,6 @@
 		8359C0E91C777E230058A029 /* FlickrImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359C0E81C777E230058A029 /* FlickrImage.m */; };
 		835A7FF11C6398A900CE49A1 /* ParkingLot.m in Sources */ = {isa = PBXBuildFile; fileRef = 835A7FF01C6398A900CE49A1 /* ParkingLot.m */; };
 		835ED7E61C74B56B0009709E /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835ED7E51C74B56B0009709E /* CustomTableViewCell.xib */; };
-		836A0A641C8F3F6800C4D69E /* GalleryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 836A0A631C8F3F6800C4D69E /* GalleryScrollView.m */; };
 		836DF0E61C69F91400A9E862 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */; };
 		837444D71C903B5300C6AC03 /* CustomGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837444D61C903B5300C6AC03 /* CustomGalleryCell.m */; };
 		837588061C8472DA001E1AA6 /* VehicleGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837588051C8472DA001E1AA6 /* VehicleGalleryViewController.m */; };
@@ -85,8 +84,6 @@
 		835A7FEF1C6398A900CE49A1 /* ParkingLot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkingLot.h; sourceTree = "<group>"; };
 		835A7FF01C6398A900CE49A1 /* ParkingLot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkingLot.m; sourceTree = "<group>"; };
 		835ED7E51C74B56B0009709E /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
-		836A0A621C8F3F6800C4D69E /* GalleryScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryScrollView.h; sourceTree = "<group>"; };
-		836A0A631C8F3F6800C4D69E /* GalleryScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryScrollView.m; sourceTree = "<group>"; };
 		836DF0E41C69F91400A9E862 /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		837444D51C903B5300C6AC03 /* CustomGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGalleryCell.h; sourceTree = "<group>"; };
@@ -243,8 +240,6 @@
 			children = (
 				837588071C8473F6001E1AA6 /* VehicleGalleryScrollView.h */,
 				837588081C8473F6001E1AA6 /* VehicleGalleryScrollView.m */,
-				836A0A621C8F3F6800C4D69E /* GalleryScrollView.h */,
-				836A0A631C8F3F6800C4D69E /* GalleryScrollView.m */,
 				8375880A1C847585001E1AA6 /* GalleryCell.h */,
 				8375880B1C847585001E1AA6 /* GalleryCell.m */,
 				83825A3F1C85CD1C00797E96 /* GalleryCell.xib */,
@@ -468,7 +463,6 @@
 				837444D71C903B5300C6AC03 /* CustomGalleryCell.m in Sources */,
 				5F1CB2051C56552C00650671 /* ViewController.m in Sources */,
 				5F672AC31C5A6E0000FF9D9F /* VehicleListViewController.m in Sources */,
-				836A0A641C8F3F6800C4D69E /* GalleryScrollView.m in Sources */,
 				836DF0E61C69F91400A9E862 /* CustomTableViewCell.m in Sources */,
 				5F802A911C57C7B900CE362C /* ParkingViewController.m in Sources */,
 				835750401C6C96A600ADF5CB /* DataErrorView.m in Sources */,
