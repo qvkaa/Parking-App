@@ -200,7 +200,7 @@
     }
 }
 - (CGFloat)placeCellOnRight:(CGFloat)rightEdge {
-    NSLog(@"hidden %f",self.hiddenOffset);
+
     CGFloat cellWidth = self.frame.size.width;
     self.collumIndex = (NSInteger)floor(((rightEdge - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
     GalleryCell *cell;

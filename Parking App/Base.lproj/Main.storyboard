@@ -166,16 +166,24 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="425"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w8G-SB-QAD">
-                                <rect key="frame" x="16" y="489" width="30" height="30"/>
-                                <state key="normal" title="&lt;"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w8G-SB-QAD">
+                                <rect key="frame" x="16" y="489" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="QVP-jd-7L2"/>
+                                    <constraint firstAttribute="height" constant="30" id="geg-35-9oJ"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="arrowLeft"/>
                                 <connections>
                                     <action selector="pressPreviousButton:" destination="Wdx-Wv-7rk" eventType="touchUpInside" id="jGO-Ad-zUU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhQ-HR-NAN">
-                                <rect key="frame" x="274" y="489" width="30" height="30"/>
-                                <state key="normal" title="&gt;"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhQ-HR-NAN">
+                                <rect key="frame" x="254" y="489" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="2CA-oO-Asw"/>
+                                    <constraint firstAttribute="height" constant="30" id="BHb-g6-7cs"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="arrowRight"/>
                                 <connections>
                                     <action selector="pressNextButton:" destination="Wdx-Wv-7rk" eventType="touchUpInside" id="RWA-mW-N4y"/>
                                 </connections>
@@ -333,4 +341,8 @@
             <point key="canvasLocation" x="208" y="998"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrowLeft" width="434" height="364"/>
+        <image name="arrowRight" width="640" height="538"/>
+    </resources>
 </document>
