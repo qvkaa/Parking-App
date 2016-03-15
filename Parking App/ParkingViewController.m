@@ -40,7 +40,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *manufacturerTextField;
 @property (weak, nonatomic) IBOutlet UITextField *colorTextField;
 @property (weak, nonatomic) IBOutlet UITextField *licenseTextField;
-
+//@property (nonatomic) BOOL shouldShiftLabels;
 @end
 
 @implementation ParkingViewController
@@ -56,14 +56,101 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.navigationItem.title = @"Parking";
+//    self.shouldShiftLabels = YES;
 }
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.manufacturerTextField.hidden = YES;
+    self.yearTextField.hidden = YES;
+    self.modelTextField.hidden = YES;
+    self.licenseTextField.hidden = YES;
+    self.colorTextField.hidden = YES;
+}
+- (void)viewDidAppear:(BOOL)animated {
     self.data = 0;
     [self closeErrorView:YES];
+    [self shiftLabes];
+    [self animateLabels];
 }
+//- (void)viewDidLayoutSubviews {
+//    [super viewDidLayoutSubviews];
+//    if (self.shouldShiftLabels) {
+//        self.shouldShiftLabels = NO;
+//        [self shiftLabes];
+//    }
+//}
+#pragma mark - animation
 
+- (void)shiftLabes {
+    CGRect rect = self.yearTextField.frame;
+    
+    rect.origin.x -= self.view.bounds.size.width;
+    [self.yearTextField setFrame:rect];
+    
+    rect = self.modelTextField.frame;
+    rect.origin.x -= self.view.bounds.size.width;
+    [self.modelTextField setFrame:rect];
+    
+    rect = self.manufacturerTextField.frame;
+    rect.origin.x -= self.view.bounds.size.width;
+    [self.manufacturerTextField setFrame:rect];
+    
+    rect = self.colorTextField.frame;
+    rect.origin.x -= self.view.bounds.size.width;
+    [self.colorTextField setFrame:rect];
+    
+    
+    rect = self.licenseTextField.frame;
+    rect.origin.x -= self.view.bounds.size.width;
+    [self.licenseTextField setFrame:rect];
+}
+- (void)animateLabels {
+    CGFloat delay = 0.0f;
+    self.manufacturerTextField.hidden = NO;
+    self.yearTextField.hidden = NO;
+    self.modelTextField.hidden = NO;
+    self.licenseTextField.hidden = NO;
+    self.colorTextField.hidden = NO;
+    [UIView animateKeyframesWithDuration:0.5 delay:delay options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^ {
+        CGRect rect = self.licenseTextField.frame;
+        rect.origin.x += self.view.bounds.size.width;
+        [self.licenseTextField setFrame:rect];
+        
+    }completion:nil];
+    delay += 0.2;
+    [UIView animateKeyframesWithDuration:0.5 delay:delay options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^ {
+        CGRect rect = self.colorTextField.frame;
+        rect.origin.x += self.view.bounds.size.width;
+        [self.colorTextField setFrame:rect];
+        
+    }completion:nil];
+    delay += 0.2;
+    
+    
+    [UIView animateKeyframesWithDuration:0.5 delay:delay options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^ {
+        CGRect rect = self.manufacturerTextField.frame;
+        rect.origin.x += self.view.bounds.size.width;
+        [self.manufacturerTextField setFrame:rect];
+        
+    }completion:nil];
+    delay += 0.2;
+    
+    
+    [UIView animateKeyframesWithDuration:0.5 delay:delay options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^ {
+        CGRect rect = self.modelTextField.frame;
+        rect.origin.x += self.view.bounds.size.width;
+        [self.modelTextField setFrame:rect];
+        
+    }completion:nil];
+    delay += 0.2;
+    
+    [UIView animateKeyframesWithDuration:0.5 delay:delay options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^ {
+        CGRect rect = self.yearTextField.frame;
+        rect.origin.x += self.view.bounds.size.width;
+        [self.yearTextField setFrame:rect];
+        
+    }completion:nil];
+}
 - (DataErrorView *)errorView {
     if( !_errorView) {
         _errorView = [[[NSBundle mainBundle] loadNibNamed:@"DataErrorView" owner:nil options:nil] lastObject];
@@ -116,7 +203,6 @@
         [parking saveData];
     }];
 }
-
 #pragma mark - Data Validation
 
 - (void) setData:(NSUInteger)data {

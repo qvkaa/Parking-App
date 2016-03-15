@@ -25,7 +25,8 @@
 #pragma mark - Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    
     self.mainTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     
     //[self.MainButton setTitle:@"Park Now" forState:UIControlStateNormal];
@@ -36,6 +37,21 @@
     ParkingLot *parking = [ParkingLot defaultParking];
     self.navigationItem.title = @"Total Vehicles";
     self.mainTextLabel.text = [NSString stringWithFormat: @"Parked Vehicles : %ld", [parking totalVehicles]];
+    self.mainTextLabel.hidden = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    CGRect rect = self.mainTextLabel.frame;
+    rect.origin.x -= self.view.bounds.size.width;
+    [self.mainTextLabel setFrame:rect];
+    self.mainTextLabel.hidden = NO;
+    [UIView animateWithDuration:0.5 animations: ^{
+        CGRect rect = self.mainTextLabel.frame;
+        rect.origin.x += self.view.bounds.size.width;
+        [self.mainTextLabel setFrame:rect];
+    }];
+   
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
