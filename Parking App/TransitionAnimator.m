@@ -2,7 +2,7 @@
 //  TransitionAnimator.m
 //  Parking App
 //
-//  Created by yavoraleksiev on 3/15/16.
+//  Created by yavoraleksiev on 3/16/16.
 //  Copyright © 2016 Yavor Aleksiev. All rights reserved.
 //
 
@@ -16,4 +16,5 @@
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
     
 }
+
 @end

@@ -35,7 +35,7 @@
 
 #pragma mark - accessors
 
-#pragma mark - delegate methods
+#pragma mark - gallery scroll view delegate methods
 - (GalleryCell *)galleryScrollView:(VehicleGalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index {
     ParkingLot *parking = [ParkingLot defaultParking];
     CustomGalleryCell *cell = (CustomGalleryCell *)[scrollView dequeueReusableCellWithIdentifier:@"GalleryCell"];
@@ -77,6 +77,15 @@
     NSString *title = [NSString stringWithFormat:@"Image %ld / %ld",index+1,[self numberOfGalleryCells]];
     self.navigationBar.title = title;
 }
+
+#pragma mark - IViewControllerTransitioningDelegate methods
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    return nil;
+}
+
+
+
 #pragma mark - IBActions
 - (IBAction)pressPreviousButton:(id)sender {
     [self.galleryScrollView centerToPreviousCell];

@@ -24,13 +24,13 @@
 		8359C0E91C777E230058A029 /* FlickrImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359C0E81C777E230058A029 /* FlickrImage.m */; };
 		835A7FF11C6398A900CE49A1 /* ParkingLot.m in Sources */ = {isa = PBXBuildFile; fileRef = 835A7FF01C6398A900CE49A1 /* ParkingLot.m */; };
 		835ED7E61C74B56B0009709E /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835ED7E51C74B56B0009709E /* CustomTableViewCell.xib */; };
+		836BD4701C99699E00D2F4A7 /* AnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836BD46F1C99699E00D2F4A7 /* AnimationController.m */; };
 		836DF0E61C69F91400A9E862 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */; };
 		837444D71C903B5300C6AC03 /* CustomGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837444D61C903B5300C6AC03 /* CustomGalleryCell.m */; };
 		837588061C8472DA001E1AA6 /* VehicleGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837588051C8472DA001E1AA6 /* VehicleGalleryViewController.m */; };
 		837588091C8473F6001E1AA6 /* VehicleGalleryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 837588081C8473F6001E1AA6 /* VehicleGalleryScrollView.m */; };
 		8375880C1C847585001E1AA6 /* GalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8375880B1C847585001E1AA6 /* GalleryCell.m */; };
 		83825A401C85CD1C00797E96 /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83825A3F1C85CD1C00797E96 /* GalleryCell.xib */; };
-		8399D0611C98571B005CD849 /* TransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8399D0601C98571B005CD849 /* TransitionAnimator.m */; };
 		839AFAAA1C7B3E6C005E05C8 /* WebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 839AFAA91C7B3E6C005E05C8 /* WebServiceManager.m */; };
 		C15432632ADA7CB7D8D2B43D /* Pods_Parking_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3226E22E40A78000F61C128 /* Pods_Parking_App.framework */; };
 /* End PBXBuildFile section */
@@ -85,6 +85,8 @@
 		835A7FEF1C6398A900CE49A1 /* ParkingLot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParkingLot.h; sourceTree = "<group>"; };
 		835A7FF01C6398A900CE49A1 /* ParkingLot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParkingLot.m; sourceTree = "<group>"; };
 		835ED7E51C74B56B0009709E /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		836BD46E1C99699E00D2F4A7 /* AnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationController.h; sourceTree = "<group>"; };
+		836BD46F1C99699E00D2F4A7 /* AnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationController.m; sourceTree = "<group>"; };
 		836DF0E41C69F91400A9E862 /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		837444D51C903B5300C6AC03 /* CustomGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGalleryCell.h; sourceTree = "<group>"; };
@@ -96,8 +98,6 @@
 		8375880A1C847585001E1AA6 /* GalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryCell.h; sourceTree = "<group>"; };
 		8375880B1C847585001E1AA6 /* GalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryCell.m; sourceTree = "<group>"; };
 		83825A3F1C85CD1C00797E96 /* GalleryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryCell.xib; sourceTree = "<group>"; };
-		8399D05F1C98571B005CD849 /* TransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionAnimator.h; sourceTree = "<group>"; };
-		8399D0601C98571B005CD849 /* TransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionAnimator.m; sourceTree = "<group>"; };
 		839AFAA81C7B3E6C005E05C8 /* WebServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceManager.h; sourceTree = "<group>"; };
 		839AFAA91C7B3E6C005E05C8 /* WebServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceManager.m; sourceTree = "<group>"; };
 		9123FBEF00113A1A27F5853C /* Pods-Parking App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parking App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Parking App/Pods-Parking App.release.xcconfig"; sourceTree = "<group>"; };
@@ -174,13 +174,10 @@
 			isa = PBXGroup;
 			children = (
 				5F716A3C1C58D19D007C63F1 /* Utility */,
-				5F1CB2001C56552C00650671 /* AppDelegate.h */,
-				5F1CB2011C56552C00650671 /* AppDelegate.m */,
 				5F1CB2061C56552C00650671 /* Main.storyboard */,
 				5F1CB2091C56552C00650671 /* Assets.xcassets */,
-				5F1CB20B1C56552C00650671 /* LaunchScreen.storyboard */,
-				5F1CB20E1C56552C00650671 /* Info.plist */,
 				5F672ABD1C5A6D4A00FF9D9F /* ViewControllers */,
+				836BD4741C99910D00D2F4A7 /* Animator */,
 				836DF0EF1C6A4CCC00A9E862 /* Views */,
 				83CE59CF1C620B23009FDD1C /* Model */,
 				5F1CB1FD1C56552C00650671 /* Supporting Files */,
@@ -191,6 +188,10 @@
 		5F1CB1FD1C56552C00650671 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5F1CB20B1C56552C00650671 /* LaunchScreen.storyboard */,
+				5F1CB20E1C56552C00650671 /* Info.plist */,
+				5F1CB2001C56552C00650671 /* AppDelegate.h */,
+				5F1CB2011C56552C00650671 /* AppDelegate.m */,
 				5F1CB1FE1C56552C00650671 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -225,8 +226,6 @@
 				5F672AC21C5A6E0000FF9D9F /* VehicleListViewController.m */,
 				837588041C8472DA001E1AA6 /* VehicleGalleryViewController.h */,
 				837588051C8472DA001E1AA6 /* VehicleGalleryViewController.m */,
-				8399D05F1C98571B005CD849 /* TransitionAnimator.h */,
-				8399D0601C98571B005CD849 /* TransitionAnimator.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -238,6 +237,15 @@
 				5F716A3E1C58D5E5007C63F1 /* ValidateDataUtil.m */,
 			);
 			name = Utility;
+			sourceTree = "<group>";
+		};
+		836BD4741C99910D00D2F4A7 /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				836BD46E1C99699E00D2F4A7 /* AnimationController.h */,
+				836BD46F1C99699E00D2F4A7 /* AnimationController.m */,
+			);
+			name = Animator;
 			sourceTree = "<group>";
 		};
 		836DF0EF1C6A4CCC00A9E862 /* Views */ = {
@@ -468,13 +476,13 @@
 				837444D71C903B5300C6AC03 /* CustomGalleryCell.m in Sources */,
 				5F1CB2051C56552C00650671 /* ViewController.m in Sources */,
 				5F672AC31C5A6E0000FF9D9F /* VehicleListViewController.m in Sources */,
+				836BD4701C99699E00D2F4A7 /* AnimationController.m in Sources */,
 				836DF0E61C69F91400A9E862 /* CustomTableViewCell.m in Sources */,
 				5F802A911C57C7B900CE362C /* ParkingViewController.m in Sources */,
 				835750401C6C96A600ADF5CB /* DataErrorView.m in Sources */,
 				5F1CB2021C56552C00650671 /* AppDelegate.m in Sources */,
 				837588091C8473F6001E1AA6 /* VehicleGalleryScrollView.m in Sources */,
 				837588061C8472DA001E1AA6 /* VehicleGalleryViewController.m in Sources */,
-				8399D0611C98571B005CD849 /* TransitionAnimator.m in Sources */,
 				5F1CB1FF1C56552C00650671 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

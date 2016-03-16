@@ -12,38 +12,26 @@
 #import "CustomTableViewCell.h" 
 #import "UIImageView+AFNetworking.h"
 #import "VehicleGalleryViewController.h"
+#import "AnimationController.h"
 static  NSString *EDIT_TOGGLED_OFF_TITLE = @"Edit";
 static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 @interface VehicleListViewController() 
 
-#pragma mark - UIButton
 @property (weak, nonatomic) IBOutlet UIButton *deleteSelectedButton;
-
 @property (weak, nonatomic) IBOutlet UIButton *enterEditModeButton;
 
-#pragma mark - BOOL
+@property (strong, nonatomic) AnimationController *transition;
+
 @property (assign) BOOL isEditButtonToggledOn;
 
-
-#pragma mark - UITableView
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
-//@property (nonatomic, strong) UIImageView *imageView;
 
-//- (void)centerScrollViewContents;
-//- (void)scrollViewDoubleTapped:(UITapGestureRecognizer*)recognizer;
-//- (void)scrollViewTwoFingerTapped:(UITapGestureRecognizer*)recognizer;
 @end
 
 @implementation VehicleListViewController
 
 #pragma mark - Lifecycle
 
-//- (void)viewDidAppear:(BOOL)animated {
-//    self.isEditButtonToggledOn = NO;
-//    [self.enterEditModeButton setTitle:EDIT_TOGGLED_OFF_TITLE forState:UIControlStateNormal];
-//    [self.tableView setEditing:NO];
-//    self.deleteSelectedButton.hidden = YES;
-//}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
@@ -64,6 +52,8 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
             
             // Pass any objects to the view controller here, like...
             vc.tableViewRow = row;
+            vc.transitioningDelegate = self;
+            self.transition = [[AnimationController alloc] init];
         }
     }
     
@@ -74,42 +64,9 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"xibCell"];
     [self.tableView reloadData];
-    //[self.tableView setRowHeight:125.0];
-    //[self.tableView setEstimatedRowHeight:400.0];
     [self.tableView setAllowsMultipleSelectionDuringEditing:YES];
     [self.enterEditModeButton setTitle:EDIT_TOGGLED_OFF_TITLE forState:UIControlStateNormal];
     self.deleteSelectedButton.hidden = YES;
-//    AppDelegate* delegate = [[UIApplication sharedApplication] delegate ];
-//    NSUInteger totalVehicles = [delegate.vehicles count];
-//    NSUInteger labelHeight = totalVehicles * NUMBER_OF_LINES * DEFAULT_HEIGHT;
-//    NSUInteger labelSpacing = (totalVehicles+1) * DEFAULT_SPACING_HEIGHT;
-//    NSUInteger contentHeight = labelHeight + labelSpacing;
-//    CGFloat contentWidth = CGRectGetWidth(self.view.frame);
-//    NSLog(@"count %ld", [delegate.vehicles count]);
-//    NSLog(@"height : %ld  width : %f", contentHeight, contentWidth);
-////    self.scrollView.contentSize=CGSizeMake(contentWidth, contentHeight);
-//    NSInteger verticalSpacing= 0;
-//    
-//  //  NSMutableArray *labelViews = [[NSMutableArray alloc] init];
-//    
-//    for (int i = 0; i < totalVehicles; i++)
-//    {
-//        UILabel *label =  [[UILabel alloc] initWithFrame:CGRectMake(40,verticalSpacing,contentWidth,NUMBER_OF_LINES * DEFAULT_HEIGHT)];
-//        label.lineBreakMode = 0;
-//        label.numberOfLines = NUMBER_OF_LINES;
-//        label.text = [ ((Vehicle *)[delegate.vehicles objectAtIndex:i]) vehicleInfo];
-////        [self.scrollView addSubview:label];
-//        NSNumber *number = [NSNumber numberWithLong:verticalSpacing];
-//        NSDictionary *metrics = @{@"spacing":number};
-//        [label setTranslatesAutoresizingMaskIntoConstraints:NO];
-//        NSDictionary *views = NSDictionaryOfVariableBindings(label);
-////        NSArray *horizontalConstraints =[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[label]-40-|" options:0 metrics:nil views:views];
-////        NSArray *verticalConstraints =[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-spacing-[label]" options:0 metrics:metrics views:views];
-////        [self.scrollView addConstraint:horizontalConstraints[0]];
-////        [self.scrollView addConstraint:verticalConstraints[0]];
-//        verticalSpacing += DEFAULT_SPACING_HEIGHT + ( NUMBER_OF_LINES * DEFAULT_HEIGHT);
-//    }
-
 }
 #pragma mark - IBAction
 - (IBAction)enterEditModeAction:(id)sender {
@@ -151,7 +108,7 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     [parking saveData];
 }
 
-#pragma mark - Delegate methods
+#pragma mark -  tableview delegate methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat height = 125.0;
   //  ParkingLot *parking = [ParkingLot defaultParking];
@@ -192,11 +149,6 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
         cell.pictureLoadingIndicator.hidden = YES;
         cell.vehiclePicture.hidden = NO;
         cell.vehiclePicture.userInteractionEnabled = YES;
-//        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnImage:) ];
-//        [cell.vehiclePicture addGestureRecognizer:tapGesture ];
-        //        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] inittWithTarget:self action:@selector(tapGestureTap:)];
-//        // setup gesture as needed
-//        [imgConfirm addGestureRecognizer:gesture];
     }
     failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
         NSLog(@"%@",[error description]);
@@ -208,9 +160,7 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     }
     return cell;
 }
-//- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!self.tableView.editing) {
         [self performSegueWithIdentifier:@"openGallery" sender:indexPath];
@@ -222,23 +172,27 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     return YES;
 }
 
+#pragma mark - presentationControllerForPresentedViewController delegate methods
 
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        ParkingLot *parking = [ParkingLot defaultParking];
-//        [parking removeVehicleAtIndex:indexPath.row];
-//        NSLog(@"Deleting row %ld",indexPath.row);
-//        [tableView reloadData];
-//        [parking saveData]; 
-//        
-//    }
+- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source {
+    return self.transition;
+}
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    return nil;
+}
+#pragma mark - animation
+//- (id)animationControllerForPresentedController:(UIViewController *)presented
+//                           presentingController:(UIViewController *)presenting
+//                               sourceController:(UIViewController *)source
+//{
+//    self.animationController.isPresenting = YES;
+//    
+//    return self.animationController;
 //}
-
-#pragma mark - IBAction 
-//- (IBAction)tapOnImage:(UITapGestureRecognizer *)sender {
-//  //  self.tableView.hidden = YES;
-//    NSLog(@"TAPPPPP");
-//    [self performSegueWithIdentifier:@"openGallery" sender:sender ];
+//
+//- (id )animationControllerForDismissedController:(UIViewController *)dismissed {
+//    self.animationController.isPresenting = NO;
+//    
+//    return self.animationController;
 //}
-
 @end

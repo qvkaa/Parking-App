@@ -1,5 +1,5 @@
 //
-//  TransitionAnimator.h
+//  AnimationController.h
 //  Parking App
 //
 //  Created by yavoraleksiev on 3/16/16.
@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-@interface TransitionAnimator : NSObject <UIViewControllerAnimatedTransitioning>
+@interface AnimationController : NSObject <UIViewControllerAnimatedTransitioning>
 
 @end
