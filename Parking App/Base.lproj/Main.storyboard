@@ -66,7 +66,7 @@
         <!--Vehicle List View Controller-->
         <scene sceneID="mpF-J8-b3Z">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" id="e3y-gk-Jhm" customClass="VehicleListViewController" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" hidesBottomBarWhenPushed="YES" id="e3y-gk-Jhm" customClass="VehicleListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hXN-2G-cGz"/>
                         <viewControllerLayoutGuide type="bottom" id="0cx-sb-scu"/>
@@ -143,7 +143,6 @@
                         <outlet property="deleteSelectedButton" destination="Zat-AC-rCS" id="LWV-XY-YZF"/>
                         <outlet property="enterEditModeButton" destination="Thr-mx-iKC" id="d0V-8g-UxE"/>
                         <outlet property="tableView" destination="Kds-tp-5T8" id="uAm-Zb-2DH"/>
-                        <segue destination="Wdx-Wv-7rk" kind="push" identifier="openGallery" id="xC8-nE-BGY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q1l-TX-FZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -153,7 +152,7 @@
         <!--Vehicle Gallery View Controller-->
         <scene sceneID="G40-Z5-Z4a">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Wdx-Wv-7rk" customClass="VehicleGalleryViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VehicleGalleryViewController" automaticallyAdjustsScrollViewInsets="NO" id="Wdx-Wv-7rk" customClass="VehicleGalleryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qQ0-52-XXA"/>
                         <viewControllerLayoutGuide type="bottom" id="V42-8R-mTl"/>
@@ -202,6 +201,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MR3-cD-IIm"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="galleryScrollView" destination="gkH-73-upL" id="ne6-Tf-jNC"/>
                         <outlet property="navigationBar" destination="MR3-cD-IIm" id="jWJ-n3-ZrQ"/>
@@ -209,7 +210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QEp-YL-y2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="617" y="2423"/>
+            <point key="canvasLocation" x="617" y="1674"/>
         </scene>
         <!--Parking-->
         <scene sceneID="HmG-hQ-Nxw">

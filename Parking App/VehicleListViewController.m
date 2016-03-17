@@ -29,7 +29,13 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 @end
 
 @implementation VehicleListViewController
-
+#pragma mark - accessors
+- (AnimationController *)transition {
+    if (!_transition) {
+        _transition = [[AnimationController alloc] init];
+    }
+    return _transition;
+}
 #pragma mark - Lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -48,12 +54,16 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
         if ([[segue identifier] isEqualToString:@"openGallery"])
         {
             // Get reference to the destination view controller
-            VehicleGalleryViewController  *vc = [segue destinationViewController];
+            //VehicleGalleryViewController  *vc = [segue destinationViewController];
+//            VehicleGalleryViewController *vc = (VehicleGalleryViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"VehicleGalleryViewController"];// as! HerbDetailsViewController
+//            // Pass any objects to the view controller here, like...
+//            NSIndexPath *path = sender;
+//            NSInteger row = path.row;
+//            vc.tableViewRow = row;
+//            vc.transitioningDelegate = self;
+//            [self presentViewController:vc animated:YES completion:nil];
             
-            // Pass any objects to the view controller here, like...
-            vc.tableViewRow = row;
-            vc.transitioningDelegate = self;
-            self.transition = [[AnimationController alloc] init];
+          //  presentViewController(herbDetails, animated: true, completion: nil)
         }
     }
     
@@ -163,7 +173,15 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!self.tableView.editing) {
-        [self performSegueWithIdentifier:@"openGallery" sender:indexPath];
+    
+        NSInteger row = indexPath.row;
+        VehicleGalleryViewController *vc = (VehicleGalleryViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"VehicleGalleryViewController"];
+        
+        vc.tableViewRow = row;
+        vc.transitioningDelegate = self;
+        [self presentViewController:vc animated:YES completion:nil];
+
+        //[self performSegueWithIdentifier:@"openGallery" sender:indexPath];
     }
     
 }
@@ -174,7 +192,9 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 
 #pragma mark - presentationControllerForPresentedViewController delegate methods
 
-- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source {
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                            presentingController:(UIViewController *)presenting
+                                                                                sourceController:(UIViewController *)source {
     return self.transition;
 }
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
