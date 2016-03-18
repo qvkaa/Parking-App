@@ -38,6 +38,10 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 }
 #pragma mark - Lifecycle
 
+- (void)viewDidAppear:(BOOL)animated {
+    
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
@@ -53,6 +57,13 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
         
         if ([[segue identifier] isEqualToString:@"openGallery"])
         {
+            //VehicleGalleryViewController *vc = (VehicleGalleryViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"VehicleGalleryViewController"];
+            VehicleGalleryViewController *vc = [segue destinationViewController];
+            vc.tableViewRow = row;
+          //  vc.transitioningDelegate = self;
+            
+            //[self presentViewController:vc animated:YES completion:nil];
+
             // Get reference to the destination view controller
             //VehicleGalleryViewController  *vc = [segue destinationViewController];
 //            VehicleGalleryViewController *vc = (VehicleGalleryViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"VehicleGalleryViewController"];// as! HerbDetailsViewController
@@ -174,14 +185,14 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!self.tableView.editing) {
     
-        NSInteger row = indexPath.row;
-        VehicleGalleryViewController *vc = (VehicleGalleryViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"VehicleGalleryViewController"];
-        
-        vc.tableViewRow = row;
-        vc.transitioningDelegate = self;
-        [self presentViewController:vc animated:YES completion:nil];
+//        NSInteger row = indexPath.row;
+//        VehicleGalleryViewController *vc = (VehicleGalleryViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"VehicleGalleryViewController"];
+//        
+//        vc.tableViewRow = row;
+//        vc.transitioningDelegate = self;
+//        [self presentViewController:vc animated:YES completion:nil];
 
-        //[self performSegueWithIdentifier:@"openGallery" sender:indexPath];
+        [self performSegueWithIdentifier:@"openGallery" sender:indexPath];
     }
     
 }
@@ -190,29 +201,15 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     return YES;
 }
 
-#pragma mark - presentationControllerForPresentedViewController delegate methods
+#pragma mark - transition delegate methods
 
-- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
-                                                                            presentingController:(UIViewController *)presenting
-                                                                                sourceController:(UIViewController *)source {
-    return self.transition;
-}
-- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    return nil;
-}
-#pragma mark - animation
-//- (id)animationControllerForPresentedController:(UIViewController *)presented
-//                           presentingController:(UIViewController *)presenting
-//                               sourceController:(UIViewController *)source
-//{
-//    self.animationController.isPresenting = YES;
-//    
-//    return self.animationController;
+//- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+//                                                                            presentingController:(UIViewController *)presenting
+//                                                                                sourceController:(UIViewController *)source {
+//    return self.transition;
 //}
-//
-//- (id )animationControllerForDismissedController:(UIViewController *)dismissed {
-//    self.animationController.isPresenting = NO;
-//    
-//    return self.animationController;
+//- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+//    return nil;
 //}
+
 @end

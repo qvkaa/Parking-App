@@ -66,7 +66,7 @@
         <!--Vehicle List View Controller-->
         <scene sceneID="mpF-J8-b3Z">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" hidesBottomBarWhenPushed="YES" id="e3y-gk-Jhm" customClass="VehicleListViewController" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="e3y-gk-Jhm" customClass="VehicleListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hXN-2G-cGz"/>
                         <viewControllerLayoutGuide type="bottom" id="0cx-sb-scu"/>
@@ -143,6 +143,7 @@
                         <outlet property="deleteSelectedButton" destination="Zat-AC-rCS" id="LWV-XY-YZF"/>
                         <outlet property="enterEditModeButton" destination="Thr-mx-iKC" id="d0V-8g-UxE"/>
                         <outlet property="tableView" destination="Kds-tp-5T8" id="uAm-Zb-2DH"/>
+                        <segue destination="Wdx-Wv-7rk" kind="custom" identifier="openGallery" customClass="CustomSegue" id="cvh-GJ-mRv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q1l-TX-FZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -210,7 +211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QEp-YL-y2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="617" y="1674"/>
+            <point key="canvasLocation" x="622" y="1690"/>
         </scene>
         <!--Parking-->
         <scene sceneID="HmG-hQ-Nxw">

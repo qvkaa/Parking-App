@@ -36,6 +36,7 @@
         self.showsHorizontalScrollIndicator = NO;
         [self setBackgroundColor:[UIColor blackColor]];
         self.bounces = NO;
+        [self setPagingEnabled:YES];
     }
     return self;
 }
@@ -172,7 +173,7 @@
     [super layoutSubviews];
     
     if (!self.isContentSizeSet) {
-        self.pagingEnabled = YES;
+            
         CGFloat offset = self.bounds.size.width;
         CGFloat height = self.bounds.size.height;
         self.contentSize = CGSizeMake(offset*3,height );
