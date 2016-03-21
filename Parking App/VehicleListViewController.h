@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VehicleListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>//,UIViewControllerTransitioningDelegate>
+@interface VehicleListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,UIViewControllerTransitioningDelegate>
 
 
 @end

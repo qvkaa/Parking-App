@@ -12,7 +12,7 @@
 #import "CustomGalleryCell.h"
 @interface VehicleGalleryViewController ()
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationBar;
-@property (strong, nonatomic) IBOutlet VehicleGalleryScrollView *galleryScrollView;
+
 
 @end
 

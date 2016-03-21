@@ -143,7 +143,7 @@
                         <outlet property="deleteSelectedButton" destination="Zat-AC-rCS" id="LWV-XY-YZF"/>
                         <outlet property="enterEditModeButton" destination="Thr-mx-iKC" id="d0V-8g-UxE"/>
                         <outlet property="tableView" destination="Kds-tp-5T8" id="uAm-Zb-2DH"/>
-                        <segue destination="Wdx-Wv-7rk" kind="custom" identifier="openGallery" customClass="CustomSegue" id="cvh-GJ-mRv"/>
+                        <segue destination="Wdx-Wv-7rk" kind="push" identifier="openGallery" id="cvh-GJ-mRv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q1l-TX-FZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -211,7 +211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QEp-YL-y2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="622" y="1690"/>
+            <point key="canvasLocation" x="630" y="1674"/>
         </scene>
         <!--Parking-->
         <scene sceneID="HmG-hQ-Nxw">
@@ -326,7 +326,7 @@
         <!--Vehicle List-->
         <scene sceneID="TeB-E2-xgk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uJG-by-HV7" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uJG-by-HV7" customClass="CustomNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Vehicle List" id="Mo7-vQ-EWk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RAU-hM-cAF">

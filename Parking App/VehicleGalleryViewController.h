@@ -11,7 +11,7 @@
 
 
 @interface VehicleGalleryViewController : UIViewController <VehicleGalleryScrollViewDelegate,VehicleGalleryScrollViewDataSource,UIScrollViewDelegate,UIViewControllerTransitioningDelegate>
-
+@property (strong, nonatomic) IBOutlet VehicleGalleryScrollView *galleryScrollView;
 @property (nonatomic) NSInteger tableViewRow;
-
+@property (nonatomic) CGRect originFrame;
 @end

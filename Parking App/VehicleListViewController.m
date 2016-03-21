@@ -13,6 +13,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "VehicleGalleryViewController.h"
 #import "AnimationController.h"
+#import "NavigationControllerCoordinator.h"
 static  NSString *EDIT_TOGGLED_OFF_TITLE = @"Edit";
 static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 @interface VehicleListViewController() 
@@ -26,6 +27,8 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
+
+
 @end
 
 @implementation VehicleListViewController
@@ -38,9 +41,6 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 }
 #pragma mark - Lifecycle
 
-- (void)viewDidAppear:(BOOL)animated {
-    
-}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -54,27 +54,17 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     if ([sender isKindOfClass:[NSIndexPath class]]) {
         NSIndexPath *path = sender;
         NSInteger row = path.row;
-        
+        CustomTableViewCell *cell = [self.tableView cellForRowAtIndexPath:sender];
+        //CGRect frame = cell.vehiclePicture.frame;
+        CGRect frame = [cell convertRect:cell.vehiclePicture.frame toView:self.view];
         if ([[segue identifier] isEqualToString:@"openGallery"])
         {
-            //VehicleGalleryViewController *vc = (VehicleGalleryViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"VehicleGalleryViewController"];
             VehicleGalleryViewController *vc = [segue destinationViewController];
             vc.tableViewRow = row;
-          //  vc.transitioningDelegate = self;
-            
-            //[self presentViewController:vc animated:YES completion:nil];
+            vc.originFrame = frame;
+        
+            vc.transitioningDelegate = self;
 
-            // Get reference to the destination view controller
-            //VehicleGalleryViewController  *vc = [segue destinationViewController];
-//            VehicleGalleryViewController *vc = (VehicleGalleryViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"VehicleGalleryViewController"];// as! HerbDetailsViewController
-//            // Pass any objects to the view controller here, like...
-//            NSIndexPath *path = sender;
-//            NSInteger row = path.row;
-//            vc.tableViewRow = row;
-//            vc.transitioningDelegate = self;
-//            [self presentViewController:vc animated:YES completion:nil];
-            
-          //  presentViewController(herbDetails, animated: true, completion: nil)
         }
     }
     
@@ -132,14 +122,10 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 #pragma mark -  tableview delegate methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat height = 125.0;
-  //  ParkingLot *parking = [ParkingLot defaultParking];
-    
-    
     return height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     ParkingLot *parking = [ParkingLot defaultParking];
     NSUInteger numberOfVehicles = [parking totalVehicles];
     return numberOfVehicles;
@@ -184,32 +170,17 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!self.tableView.editing) {
-    
-//        NSInteger row = indexPath.row;
-//        VehicleGalleryViewController *vc = (VehicleGalleryViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"VehicleGalleryViewController"];
-//        
-//        vc.tableViewRow = row;
-//        vc.transitioningDelegate = self;
-//        [self presentViewController:vc animated:YES completion:nil];
-
         [self performSegueWithIdentifier:@"openGallery" sender:indexPath];
     }
     
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return YES if you want the specified item to be editable.
+
     return YES;
 }
 
-#pragma mark - transition delegate methods
-
-//- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
-//                                                                            presentingController:(UIViewController *)presenting
-//                                                                                sourceController:(UIViewController *)source {
-//    return self.transition;
-//}
-//- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-//    return nil;
-//}
+- (void)preformTransition {
+    
+}
 
 @end

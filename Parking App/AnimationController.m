@@ -7,10 +7,11 @@
 //
 
 #import "AnimationController.h"
-
+#import "VehicleGalleryViewController.h"
+#import "VehicleListViewController.h"
 @interface AnimationController()
 @property (nonatomic) CGFloat duration;//    = 1.0
-@property (nonatomic) BOOL presenting;  // true
+
 @property (nonatomic) CGRect originFrame;// = CGRect.zero
 @end
 
@@ -35,17 +36,22 @@
 // This method can only  be a nop if the transition is interactive and not a percentDriven interactive transition.
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
     UIView *containerView = [transitionContext containerView];
-    UIViewController *toController = (UIViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey ];
+    VehicleGalleryViewController *toController = (VehicleGalleryViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey ];
     UIView *toView = toController.view;
     UIView *fromView;
-    UIViewController *fromController;
+    VehicleListViewController *fromController;
+    
+    if (self.presenting) {
+        self.originFrame = toController.originFrame;
+    }
+    fromController = (VehicleListViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 
     if (self.presenting) {
-        fromView = toView;
+        fromView = fromController.
+//        fromView = toView;
     } else {
-        fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
         fromView = fromController.view;
-       }
+    }
     
     CGRect initialFrame;
     if (self.presenting) {
@@ -82,7 +88,7 @@
         fromView.transform = scaleTransform;
         fromView.center = CGPointMake(CGRectGetMidX(initialFrame),CGRectGetMidY(initialFrame));
         fromView.clipsToBounds = YES;
-        [fromController.navigationController pushViewController:toController animated:NO];
+      //  [fromController.navigationController pushViewController:toController animated:NO];
     }
     
     [containerView addSubview:toView];
@@ -94,7 +100,7 @@
     } completion: ^(BOOL finished ){
         [transitionContext completeTransition:finished];
     }];
-    //TO-DO try to create it without segue
+   
 
 }
 #pragma mark - private

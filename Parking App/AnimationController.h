@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @interface AnimationController : NSObject <UIViewControllerAnimatedTransitioning>
-
+@property (nonatomic) BOOL presenting;  // true
 @end
