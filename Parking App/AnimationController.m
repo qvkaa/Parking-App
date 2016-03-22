@@ -37,18 +37,18 @@
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
     UIView *containerView = [transitionContext containerView];
     VehicleGalleryViewController *toController = (VehicleGalleryViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey ];
+    toController.galleryScrollView.backgroundColor = [UIColor whiteColor];
     UIView *toView = toController.view;
     UIView *fromView;
     VehicleListViewController *fromController;
     
-    if (self.presenting) {
+    
+   if (self.presenting) {
         self.originFrame = toController.originFrame;
     }
     fromController = (VehicleListViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-
     if (self.presenting) {
-        fromView = fromController.
-//        fromView = toView;
+        fromView = toView;
     } else {
         fromView = fromController.view;
     }
@@ -63,6 +63,15 @@
     CGRect finalFrame;
     if (self.presenting) {
         finalFrame = fromView.frame;
+        CGFloat xScaleFactor = (finalFrame.size.width / initialFrame.size.width);
+        CGFloat prevHeight = initialFrame.size.height;
+        initialFrame.size.width = finalFrame.size.width / xScaleFactor;
+        initialFrame.size.height = finalFrame.size.height / xScaleFactor;
+        CGFloat currentHeight = initialFrame.size.height;
+        CGFloat newY = (currentHeight - prevHeight) / 2;
+        initialFrame.origin.y -=    newY;
+        fromView.backgroundColor = [UIColor clearColor];
+        toController.galleryScrollView.backgroundColor = [UIColor whiteColor];
     } else {
         finalFrame = self.originFrame;
     }
@@ -74,7 +83,6 @@
     } else {
         xScaleFactor = (finalFrame.size.width / initialFrame.size.width);
     }
-    
     CGFloat yScaleFactor;
     if (self.presenting) {
         yScaleFactor =  (initialFrame.size.height) / (finalFrame.size.height);
@@ -83,12 +91,12 @@
     }
     
     CGAffineTransform scaleTransform = CGAffineTransformMakeScale(xScaleFactor, yScaleFactor);
-    
+
     if (self.presenting) {
         fromView.transform = scaleTransform;
         fromView.center = CGPointMake(CGRectGetMidX(initialFrame),CGRectGetMidY(initialFrame));
         fromView.clipsToBounds = YES;
-      //  [fromController.navigationController pushViewController:toController animated:NO];
+          //  [fromController.navigationController pushViewController:toController animated:NO];
     }
     
     [containerView addSubview:toView];
@@ -100,8 +108,106 @@
     } completion: ^(BOOL finished ){
         [transitionContext completeTransition:finished];
     }];
-   
+       
+    
 
+    
+    // --------
+    
+//    self.originFrame = toController.originFrame;
+//    fromView = toView;
+//    fromController = (VehicleListViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+//    CGRect initialFrame = toController.originFrame;
+//    CGRect finalFrame = toController.galleryScrollView.frame;
+//    
+//    CGFloat xScaleFactor = (finalFrame.size.width / initialFrame.size.width);
+//    CGFloat yScaleFactor = (finalFrame.size.height / initialFrame.size.height);
+//    xScaleFactor = MIN(xScaleFactor, yScaleFactor);
+//    yScaleFactor = MIN(xScaleFactor, yScaleFactor);
+//    
+//    
+//    finalFrame.size.height = initialFrame.size.height * yScaleFactor;
+//    finalFrame.size.width = initialFrame.size.width * xScaleFactor;
+//    //finalFrame.origin.center = CGPointMake(CGRectGetMidX(initialFrame),CGRectGetMidY(initialFrame));
+//    CGAffineTransform scaleTransform = CGAffineTransformMakeScale(xScaleFactor, yScaleFactor);
+//    UIImageView *imageToBeTransformed = fromController.imageToBeAnimated;
+//    //imageToBeTransformed.transform = scaleTransform;
+//    //imageToBeTransformed.center = CGPointMake(CGRectGetMidX(initialFrame),CGRectGetMidY(initialFrame));
+//    //fromView.clipsToBounds = YES;
+//    [containerView addSubview:fromView];
+//    [containerView bringSubviewToFront:imageToBeTransformed];
+//    
+//        [UIView animateWithDuration:self.duration delay:0.4 usingSpringWithDamping:0.4 initialSpringVelocity:0.0 options:0 animations:^{
+//            imageToBeTransformed.transform  =  scaleTransform ;
+//            imageToBeTransformed.center = CGPointMake(CGRectGetMidX(finalFrame),CGRectGetMidY(finalFrame));
+//        } completion: ^(BOOL finished ){
+//            [transitionContext completeTransition:finished];
+//        }];
+
+    // ---------
+    
+    
+    
+//    if (self.presenting) {
+//        self.originFrame = toController.originFrame;
+//    }
+//    fromController = (VehicleListViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+//
+//    if (self.presenting) {
+//        fromView = toView;
+//    } else {
+//        fromView = fromController.view;
+//    }
+//    
+//    CGRect initialFrame;
+//    if (self.presenting) {
+//        initialFrame = self.originFrame;
+//    } else {
+//        initialFrame = fromView.frame;
+//    }
+//    
+//    CGRect finalFrame;
+//    if (self.presenting) {
+//        finalFrame = fromView.frame;
+//    } else {
+//        finalFrame = self.originFrame;
+//    }
+//    
+//    
+//    CGFloat xScaleFactor;
+//    if (self.presenting) {
+//        xScaleFactor = (initialFrame.size.width / finalFrame.size.width);
+//    } else {
+//        xScaleFactor = (finalFrame.size.width / initialFrame.size.width);
+//    }
+//    
+//    CGFloat yScaleFactor;
+//    if (self.presenting) {
+//        yScaleFactor =  (initialFrame.size.height) / (finalFrame.size.height);
+//    } else {
+//        yScaleFactor = (finalFrame.size.height) / (initialFrame.size.height);
+//    }
+//    
+//    CGAffineTransform scaleTransform = CGAffineTransformMakeScale(xScaleFactor, yScaleFactor);
+//    
+//    if (self.presenting) {
+//        fromView.transform = scaleTransform;
+//        fromView.center = CGPointMake(CGRectGetMidX(initialFrame),CGRectGetMidY(initialFrame));
+//        fromView.clipsToBounds = YES;
+//      //  [fromController.navigationController pushViewController:toController animated:NO];
+//    }
+//    
+//    [containerView addSubview:toView];
+//    [containerView bringSubviewToFront:fromView];
+//    
+//    [UIView animateWithDuration:self.duration delay:0.4 usingSpringWithDamping:0.4 initialSpringVelocity:0.0 options:0 animations:^{
+//        fromView.transform  = self.presenting ? CGAffineTransformIdentity : scaleTransform;
+//        fromView.center = CGPointMake(CGRectGetMidX(finalFrame),CGRectGetMidY(finalFrame));
+//    } completion: ^(BOOL finished ){
+//        [transitionContext completeTransition:finished];
+//    }];
+//   
+//
 }
 #pragma mark - private
 

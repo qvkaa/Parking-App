@@ -10,5 +10,6 @@
 
 @interface VehicleListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,UIViewControllerTransitioningDelegate>
 
-
+@property (nonatomic) CGRect animationStartingFrame;
+@property (strong,nonatomic) UIImageView *imageToBeAnimated;
 @end

@@ -34,7 +34,7 @@
       //  [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
         _hiddenOffset = 0.0f;
         self.showsHorizontalScrollIndicator = NO;
-        [self setBackgroundColor:[UIColor blackColor]];
+       // [self setBackgroundColor:[UIColor blackColor]];
         self.bounces = NO;
         [self setPagingEnabled:YES];
     }

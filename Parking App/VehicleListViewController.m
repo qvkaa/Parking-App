@@ -28,7 +28,9 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 
-
+@property (strong, nonatomic) IBOutlet VehicleGalleryScrollView *galleryScrollView;
+@property (nonatomic) NSInteger tableViewRow;
+@property (nonatomic) CGRect originFrame;
 @end
 
 @implementation VehicleListViewController
@@ -62,7 +64,7 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
             VehicleGalleryViewController *vc = [segue destinationViewController];
             vc.tableViewRow = row;
             vc.originFrame = frame;
-        
+            self.imageToBeAnimated = cell.vehiclePicture;
             vc.transitioningDelegate = self;
 
         }
