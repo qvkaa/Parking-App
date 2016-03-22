@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VehicleGalleryScrollView.h"
+@interface VehicleListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,VehicleGalleryScrollViewDelegate,VehicleGalleryScrollViewDataSource,UIScrollViewDelegate>
 
-@interface VehicleListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,UIViewControllerTransitioningDelegate>
-
-@property (nonatomic) CGRect animationStartingFrame;
-@property (strong,nonatomic) UIImageView *imageToBeAnimated;
 @end

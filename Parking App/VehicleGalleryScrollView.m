@@ -24,7 +24,21 @@
 @synthesize reusableGalleryCells = _reusableGalleryCells;
 
 #pragma mark - lifecycle
-
+- (instancetype)init {
+    self = [super init];
+    
+    if (self) {
+        _isContentSizeSet = NO;
+        _collumIndex = -1;
+        //  [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+        _hiddenOffset = 0.0f;
+        self.showsHorizontalScrollIndicator = NO;
+        // [self setBackgroundColor:[UIColor blackColor]];
+        self.bounces = NO;
+        [self setPagingEnabled:YES];
+    }
+    return self;
+}
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     

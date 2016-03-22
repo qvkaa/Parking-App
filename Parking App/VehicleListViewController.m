@@ -14,6 +14,7 @@
 #import "VehicleGalleryViewController.h"
 #import "AnimationController.h"
 #import "NavigationControllerCoordinator.h"
+#import "CustomGalleryCell.h"
 static  NSString *EDIT_TOGGLED_OFF_TITLE = @"Edit";
 static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 @interface VehicleListViewController() 
@@ -21,7 +22,8 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 @property (weak, nonatomic) IBOutlet UIButton *deleteSelectedButton;
 @property (weak, nonatomic) IBOutlet UIButton *enterEditModeButton;
 
-@property (strong, nonatomic) AnimationController *transition;
+@property (nonatomic) CGRect animationStartingFrame;
+@property (strong,nonatomic) UIImageView *imageToBeAnimated;
 
 @property (assign) BOOL isEditButtonToggledOn;
 
@@ -34,13 +36,7 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 @end
 
 @implementation VehicleListViewController
-#pragma mark - accessors
-- (AnimationController *)transition {
-    if (!_transition) {
-        _transition = [[AnimationController alloc] init];
-    }
-    return _transition;
-}
+
 #pragma mark - Lifecycle
 
 
@@ -75,6 +71,8 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.galleryScrollView.galleryDelegate = self;
+    self.galleryScrollView.hidden = YES;
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"xibCell"];
     [self.tableView reloadData];
     [self.tableView setAllowsMultipleSelectionDuringEditing:YES];
@@ -184,5 +182,45 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 - (void)preformTransition {
     
 }
+
+#pragma mark - gallery scroll view delegate methods
+- (GalleryCell *)galleryScrollView:(VehicleGalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index {
+    ParkingLot *parking = [ParkingLot defaultParking];
+    CustomGalleryCell *cell = (CustomGalleryCell *)[scrollView dequeueReusableCellWithIdentifier:@"GalleryCell"];
+    
+    cell.galleryImage.image = [UIImage imageNamed:@"defaultCar"];
+    NSInteger totalImages =  [[parking vehicleAtIndex:self.tableViewRow].flickrImages count];
+    if ( totalImages < 1) { // no images for that vehicle
+        return cell;
+    }
+    NSInteger cellIndex = index;
+    while (cellIndex < 0) {
+        cellIndex += totalImages;
+    }
+    cellIndex %= totalImages;
+    
+    if ([[[parking vehicleAtIndex:self.tableViewRow].flickrImages objectAtIndex:cellIndex] imageURL]) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:[[[parking vehicleAtIndex:self.tableViewRow].flickrImages objectAtIndex:cellIndex] imageURLWithImageSize:ImageSizeDefault]];
+        [cell.galleryImage setImageWithURLRequest:request
+                                 placeholderImage:nil
+                                          success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+                                              cell.galleryImage.image = image;
+                                              [cell.galleryImage setBackgroundColor:[UIColor blackColor]];
+                                          }
+                                          failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+                                              NSLog(@"%@",[error description]);
+                                              cell.galleryImage.image = [UIImage imageNamed:@"defaultCar"];
+                                          }];
+    }
+    return cell;
+    
+}
+
+- (NSInteger)numberOfGalleryCells {
+    ParkingLot *parking = [ParkingLot defaultParking];
+    NSInteger totalImages =  [[parking vehicleAtIndex:self.tableViewRow].flickrImages count];
+    return totalImages;
+}
+
 
 @end
