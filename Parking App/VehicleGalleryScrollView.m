@@ -14,7 +14,6 @@
 @property (strong,nonatomic) UIView *galleryContainerView;
 @property (nonatomic) NSInteger collumIndex;
 @property (nonatomic) NSInteger totalCells;
-@property (nonatomic) BOOL lastCellPlacedWasToTheRight;
 @property (nonatomic) BOOL isContentSizeSet;
 @property (nonatomic) CGFloat hiddenOffset; //due to recentering
 
@@ -24,18 +23,22 @@
 @synthesize reusableGalleryCells = _reusableGalleryCells;
 
 #pragma mark - lifecycle
-- (instancetype)init {
-    self = [super init];
-    
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
         _isContentSizeSet = NO;
         _collumIndex = -1;
-        //  [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+          //  [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
         _hiddenOffset = 0.0f;
         self.showsHorizontalScrollIndicator = NO;
-        // [self setBackgroundColor:[UIColor blackColor]];
         self.bounces = NO;
+        self.backgroundColor = [UIColor clearColor];
         [self setPagingEnabled:YES];
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture)];
+        // Specify that the gesture must be a single tap
+        tapRecognizer.numberOfTapsRequired = 1;
+        // Add the tap gesture recognizer to the view
+        [self addGestureRecognizer:tapRecognizer];
     }
     return self;
 }
@@ -48,11 +51,17 @@
       //  [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
         _hiddenOffset = 0.0f;
         self.showsHorizontalScrollIndicator = NO;
-       // [self setBackgroundColor:[UIColor blackColor]];
+        self.backgroundColor = [UIColor clearColor];
         self.bounces = NO;
         [self setPagingEnabled:YES];
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture)];
+        // Specify that the gesture must be a single tap
+        tapRecognizer.numberOfTapsRequired = 1;
+        // Add the tap gesture recognizer to the view
+        [self addGestureRecognizer:tapRecognizer];
     }
     return self;
+   
 }
 
 #pragma mark - accessors
@@ -68,6 +77,7 @@
         CGFloat width = self.contentSize.width;
         CGRect rect = CGRectMake(0, 0, width, height);
         _galleryContainerView = [[UIView alloc] initWithFrame:rect];
+        _galleryContainerView.backgroundColor = [UIColor clearColor];
         [self addSubview:self.galleryContainerView];
         
     }
@@ -83,6 +93,35 @@
 }
 
 #pragma mark - public
+- (void)resetScrollView {
+    self.collumIndex = -1;
+    CGRect rect = self.bounds;
+    rect.origin.x = 0.0;
+    
+    for (GalleryCell *lastCell in self.visibleCells) {
+        [self.reusableGalleryCells addObject:lastCell];
+    }
+    self.visibleCells = nil;
+    self.isContentSizeSet = NO;
+    self.hiddenOffset = 0.0;
+  
+}
+- (GalleryCell *)currentVisibleView {
+    CGFloat cellWidth = self.frame.size.width;
+    NSUInteger index = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
+//    if ([self.visibleCells count] == 3) {
+//        return [self.visibleCells objectAtIndex:1];
+//    } else
+    if (index == 0) {
+        return [self.visibleCells objectAtIndex:0];
+    } else {
+        return [self.visibleCells objectAtIndex:1];
+    }
+}
+- (void)changeContainerBackGroundColor:(UIColor *)color {
+    self.galleryContainerView.backgroundColor = color;
+    
+}
 - (GalleryCell *)dequeueReusableCell{
     GalleryCell *cell = [self.reusableGalleryCells anyObject];
     if (!cell){
@@ -185,7 +224,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+    NSLog(@"%ld",[self.visibleCells count]);
     if (!self.isContentSizeSet) {
             
         CGFloat offset = self.bounds.size.width;
@@ -207,7 +246,6 @@
 //    [self checkIfVisibleRectIsInLimits:visibleBounds];
 }
 - (void)setTitle {
-    
     if ([self.galleryDelegate respondsToSelector:@selector(galleryScrollView:currentCellIndex:)]) {
         CGFloat cellWidth = self.frame.size.width;
         self.collumIndex = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
@@ -256,7 +294,6 @@
     
     // make sure at least one cell is placed
     if ([self.visibleCells count] == 0 ) {
-        self.lastCellPlacedWasToTheRight = YES;
         [self placeCellOnRight:minX + self.bounds.size.width];
         
     }
@@ -323,4 +360,11 @@
                          completion:NULL];
     }
 }
+
+- (void)respondToTapGesture {
+    if ([self.galleryDelegate respondsToSelector:@selector(userDidTap)]) {
+        [self.galleryDelegate userDidTap];
+    }
+}
+
 @end

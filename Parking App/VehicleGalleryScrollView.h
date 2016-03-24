@@ -18,15 +18,18 @@
 @protocol VehicleGalleryScrollViewDataSource <NSObject>
 
 - (NSInteger)numberOfGalleryCells;
-
 - (GalleryCell *)galleryScrollView:(VehicleGalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index;
+@optional
 - (void)galleryScrollView:(VehicleGalleryScrollView *)scrollView currentCellIndex:(NSInteger)index;
-
+- (void)userDidTap;
 @end
 
 @interface VehicleGalleryScrollView : UIScrollView
 
 @property (weak, nonatomic) id<UIScrollViewDelegate,VehicleGalleryScrollViewDataSource,VehicleGalleryScrollViewDelegate> galleryDelegate;
+- (void)resetScrollView;
+- (UIView *)currentVisibleView;
+- (void)changeContainerBackGroundColor:(UIColor *)color;
 - (GalleryCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
 - (GalleryCell *)dequeueReusableCell;
 - (void)centerToPreviousCell;

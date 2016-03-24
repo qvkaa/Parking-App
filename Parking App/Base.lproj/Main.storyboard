@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -18,7 +17,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="ntu-dr-GM8"/>
-                        <segue destination="uJG-by-HV7" kind="relationship" relationship="viewControllers" id="73I-RC-a1u"/>
+                        <segue destination="e3y-gk-Jhm" kind="relationship" relationship="viewControllers" id="wf4-fh-vhZ"/>
                         <segue destination="JOl-C7-rXo" kind="relationship" relationship="viewControllers" id="Bvw-89-4nP"/>
                     </connections>
                 </tabBarController>
@@ -62,10 +61,10 @@
             </objects>
             <point key="canvasLocation" x="850" y="332"/>
         </scene>
-        <!--Vehicle List View Controller-->
+        <!--Vehicle List-->
         <scene sceneID="mpF-J8-b3Z">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" id="e3y-gk-Jhm" customClass="VehicleListViewController" sceneMemberID="viewController">
+                <viewController title="Vehicle List" extendedLayoutIncludesOpaqueBars="YES" id="e3y-gk-Jhm" customClass="VehicleListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hXN-2G-cGz"/>
                         <viewControllerLayoutGuide type="bottom" id="0cx-sb-scu"/>
@@ -74,18 +73,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72B-ui-Zf6" customClass="VehicleGalleryScrollView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </scrollView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="100" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Kds-tp-5T8">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="70" width="320" height="498"/>
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="xibCell" id="4xN-hb-RtS" customClass="CustomTableViewCell">
-                                        <rect key="frame" x="0.0" y="50" width="320" height="100"/>
+                                        <rect key="frame" x="0.0" y="70" width="320" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4xN-hb-RtS" id="9XA-9Q-efs">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="99"/>
@@ -103,96 +98,55 @@
                                     <outlet property="delegate" destination="e3y-gk-Jhm" id="e6F-XU-kCE"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UgZ-XW-mF7">
+                                <rect key="frame" x="254" y="30" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ngB-pi-264"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="enterEditModeAction:" destination="e3y-gk-Jhm" eventType="touchUpInside" id="GVl-ao-KOL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oiv-MY-d9y">
+                                <rect key="frame" x="199" y="30" width="45" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="BqA-rC-e4B"/>
+                                </constraints>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteSelectedAction:" destination="e3y-gk-Jhm" eventType="touchUpInside" id="QgU-pT-SvM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="72B-ui-Zf6" firstAttribute="leading" secondItem="8X4-ua-gcb" secondAttribute="leading" id="1E0-xS-HDN"/>
-                            <constraint firstItem="Kds-tp-5T8" firstAttribute="leading" secondItem="8X4-ua-gcb" secondAttribute="leading" id="4ky-rb-vEZ"/>
-                            <constraint firstItem="Kds-tp-5T8" firstAttribute="top" secondItem="hXN-2G-cGz" secondAttribute="bottom" id="7AS-gM-whH"/>
-                            <constraint firstAttribute="trailing" secondItem="72B-ui-Zf6" secondAttribute="trailing" id="PbY-cA-YLo"/>
-                            <constraint firstItem="0cx-sb-scu" firstAttribute="top" secondItem="72B-ui-Zf6" secondAttribute="bottom" id="ZG0-lM-5w6"/>
-                            <constraint firstItem="72B-ui-Zf6" firstAttribute="top" secondItem="hXN-2G-cGz" secondAttribute="bottom" id="hoi-8X-NrD"/>
-                            <constraint firstAttribute="trailing" secondItem="Kds-tp-5T8" secondAttribute="trailing" id="vcB-Sa-7Th"/>
-                            <constraint firstItem="0cx-sb-scu" firstAttribute="top" secondItem="Kds-tp-5T8" secondAttribute="bottom" id="wms-uP-8ff"/>
+                            <constraint firstItem="Kds-tp-5T8" firstAttribute="leading" secondItem="8X4-ua-gcb" secondAttribute="leading" id="Ddg-6j-Knu"/>
+                            <constraint firstAttribute="trailing" secondItem="Kds-tp-5T8" secondAttribute="trailing" id="H7u-mx-ubt"/>
+                            <constraint firstAttribute="bottom" secondItem="Kds-tp-5T8" secondAttribute="bottom" id="Vgw-ig-Agm"/>
+                            <constraint firstAttribute="trailing" secondItem="UgZ-XW-mF7" secondAttribute="trailing" constant="20" id="Xf0-CD-3BT"/>
+                            <constraint firstItem="Kds-tp-5T8" firstAttribute="top" secondItem="oiv-MY-d9y" secondAttribute="bottom" constant="10" id="jn4-OK-XLQ"/>
+                            <constraint firstItem="UgZ-XW-mF7" firstAttribute="leading" secondItem="oiv-MY-d9y" secondAttribute="trailing" constant="10" id="oe7-K7-dPw"/>
+                            <constraint firstItem="UgZ-XW-mF7" firstAttribute="top" secondItem="hXN-2G-cGz" secondAttribute="bottom" constant="10" id="vrG-vs-ooA"/>
+                            <constraint firstItem="oiv-MY-d9y" firstAttribute="top" secondItem="hXN-2G-cGz" secondAttribute="bottom" constant="10" id="xFi-hv-JNZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cMa-Y7-ZCG">
-                        <rightBarButtonItems>
-                            <barButtonItem id="Guc-Nc-2Wa">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Thr-mx-iKC">
-                                    <rect key="frame" x="233" y="7" width="71" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <state key="normal" title="Edit">
-                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="enterEditModeAction:" destination="e3y-gk-Jhm" eventType="touchUpInside" id="NY7-P7-6Qp"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                            <barButtonItem id="0Zi-mo-J4e">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Zat-AC-rCS">
-                                    <rect key="frame" x="115" y="7" width="110" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <state key="normal" title="Delete Selected">
-                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="deleteSelectedAction:" destination="e3y-gk-Jhm" eventType="touchUpInside" id="ehv-JX-T6l"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
+                    <tabBarItem key="tabBarItem" title="Vehicle List" id="eCY-Lp-0QA"/>
                     <connections>
-                        <outlet property="deleteSelectedButton" destination="Zat-AC-rCS" id="LWV-XY-YZF"/>
-                        <outlet property="enterEditModeButton" destination="Thr-mx-iKC" id="d0V-8g-UxE"/>
-                        <outlet property="galleryScrollView" destination="72B-ui-Zf6" id="Qnn-z3-kT4"/>
+                        <outlet property="deleteSelectedButton" destination="oiv-MY-d9y" id="eMo-SV-JEa"/>
+                        <outlet property="enterEditModeButton" destination="UgZ-XW-mF7" id="up8-tn-qRW"/>
                         <outlet property="tableView" destination="Kds-tp-5T8" id="uAm-Zb-2DH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q1l-TX-FZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="208" y="1674"/>
-        </scene>
-        <!--Vehicle Gallery View Controller-->
-        <scene sceneID="G40-Z5-Z4a">
-            <objects>
-                <viewController storyboardIdentifier="VehicleGalleryViewController" automaticallyAdjustsScrollViewInsets="NO" id="Wdx-Wv-7rk" customClass="VehicleGalleryViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qQ0-52-XXA"/>
-                        <viewControllerLayoutGuide type="bottom" id="V42-8R-mTl"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ciU-iV-KDL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gkH-73-upL" customClass="VehicleGalleryScrollView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="V42-8R-mTl" firstAttribute="top" secondItem="gkH-73-upL" secondAttribute="bottom" id="3ES-lg-zdE"/>
-                            <constraint firstAttribute="trailing" secondItem="gkH-73-upL" secondAttribute="trailing" id="5X7-H5-RMs"/>
-                            <constraint firstItem="gkH-73-upL" firstAttribute="leading" secondItem="ciU-iV-KDL" secondAttribute="leading" id="MZ8-is-xN0"/>
-                            <constraint firstItem="gkH-73-upL" firstAttribute="top" secondItem="qQ0-52-XXA" secondAttribute="bottom" id="a4r-S0-BA9"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="MR3-cD-IIm"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="galleryScrollView" destination="gkH-73-upL" id="ne6-Tf-jNC"/>
-                        <outlet property="navigationBar" destination="MR3-cD-IIm" id="jWJ-n3-ZrQ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QEp-YL-y2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="630" y="1674"/>
+            <point key="canvasLocation" x="215" y="1102"/>
         </scene>
         <!--Parking-->
         <scene sceneID="HmG-hQ-Nxw">
@@ -303,25 +257,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YHY-zx-N73" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="609" y="-314"/>
-        </scene>
-        <!--Vehicle List-->
-        <scene sceneID="TeB-E2-xgk">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uJG-by-HV7" customClass="CustomNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Vehicle List" id="Mo7-vQ-EWk"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RAU-hM-cAF">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="e3y-gk-Jhm" kind="relationship" relationship="rootViewController" id="vTP-Uy-RQU"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oYW-r0-qjK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="208" y="998"/>
         </scene>
     </scenes>
 </document>

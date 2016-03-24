@@ -13,9 +13,10 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultCar" translatesAutoresizingMaskIntoConstraints="NO" id="zKg-5B-mp4">
                     <rect key="frame" x="0.0" y="0.0" width="341" height="643"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="zKg-5B-mp4" secondAttribute="bottom" id="Dve-Oh-ebW"/>
                 <constraint firstItem="zKg-5B-mp4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Zdl-1A-s76"/>

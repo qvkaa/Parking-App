@@ -78,14 +78,6 @@
     self.navigationBar.title = title;
 }
 
-#pragma mark - IViewControllerTransitioningDelegate methods
-
-//- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-//    return nil;
-//}
-
-
-
 #pragma mark - IBActions
 - (IBAction)pressPreviousButton:(id)sender {
     [self.galleryScrollView centerToPreviousCell];

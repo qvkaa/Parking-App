@@ -29,9 +29,9 @@
                         </constraints>
                     </imageView>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9oN-wF-sF0">
-                        <rect key="frame" x="33" y="10" width="100" height="100"/>
+                        <rect key="frame" x="13" y="10" width="140" height="100"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="50S-cB-ff5"/>
+                            <constraint firstAttribute="width" constant="140" id="50S-cB-ff5"/>
                             <constraint firstAttribute="height" constant="100" id="m4n-cy-Mos"/>
                         </constraints>
                     </activityIndicatorView>

@@ -209,44 +209,6 @@
 //   
 //
 }
-#pragma mark - private
 
-//- (void) presentAddEntryViewController:
-//(AddEntryViewController *)addEntryController
-//              overParentViewController:(UIViewController *)parentController
-//                    usingContainerView:(UIView *)containerView
-//                     transitionContext:
-//(id<UIViewControllerContextTransitioning>)transitionContext
-//{
-//    
-//    [containerView addSubview:parentController.view];
-//    [containerView addSubview:addEntryController.view];
-//    
-//    UIView *addEntryView = addEntryController.view;
-//    UIView *parentView = parentController.view;
-//    CGPoint center = parentView.center;
-//    
-//    UIInterfaceOrientation orientation =
-//    parentController.interfaceOrientation;
-//    if (UIInterfaceOrientationIsPortrait(orientation))    {
-//        addEntryView.frame = CGRectMake(0.0, 0.0, 280.0, 170.0);
-//    }
-//    else
-//    {
-//        addEntryView.frame = CGRectMake(0.0, 0.0, 170.0, 280.0);
-//    }
-//    
-//    addEntryView.center = center;
-//    addEntryView.alpha = 0.0;
-//    
-//    [UIView
-//     animateWithDuration:AnimationDuration
-//     animations:^{
-//         addEntryView.alpha = 1.0;
-//     }
-//     completion:^(BOOL finished) {
-//         [transitionContext completeTransition:YES];
-//     }];    
-//}
 
 @end
