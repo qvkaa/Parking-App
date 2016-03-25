@@ -224,7 +224,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    NSLog(@"%ld",[self.visibleCells count]);
+    
     if (!self.isContentSizeSet) {
             
         CGFloat offset = self.bounds.size.width;
@@ -363,6 +363,10 @@
 
 - (void)respondToTapGesture {
     if ([self.galleryDelegate respondsToSelector:@selector(userDidTap)]) {
+        if ([self.galleryDelegate respondsToSelector:@selector(swapProfileImageWithIndex:)]) {
+            [self.galleryDelegate swapProfileImageWithIndex:self.collumIndex];
+        }
+        
         [self.galleryDelegate userDidTap];
     }
 }

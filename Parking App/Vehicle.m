@@ -102,6 +102,9 @@ static NSInteger totalParkedVehicles = 0;
             self.yearOfManufacture];
 }
 
-
+- (void)swapVehicleAtIndex:(NSUInteger)index1 withIndex:(NSUInteger)index2 {
+    [self.flickrImages exchangeObjectAtIndex:index1 withObjectAtIndex:index2];
+    
+}
 
 @end

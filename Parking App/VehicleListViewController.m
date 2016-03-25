@@ -24,15 +24,12 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 @property (nonatomic) BOOL tableViewModeOn;
 @property (nonatomic) CGRect animationStartingFrame;
 @property (strong,nonatomic) UIImageView *imageToBeAnimated;
-
 @property (assign) BOOL isEditButtonToggledOn;
-
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
-
-
 @property (strong, nonatomic) VehicleGalleryScrollView *galleryScrollView;
 @property (nonatomic) NSInteger tableViewRow;
 @property (nonatomic) CGRect originFrame;
+@property (strong,nonatomic) CustomTableViewCell *currentTableViewCell;
 @end
 
 @implementation VehicleListViewController
@@ -151,6 +148,9 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     placeholderImage:nil
     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
         cell.vehiclePicture.image = image;
+        CGSize tempFrame = cell.vehiclePicture.image.size;
+        UIImage *tempImage = cell.vehiclePicture.image;
+      
         [cell.pictureLoadingIndicator stopAnimating];
         cell.pictureLoadingIndicator.hidden = YES;
         cell.vehiclePicture.hidden = NO;
@@ -171,12 +171,12 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     if (!self.tableView.editing) {
         [self disableViews];
         self.tableViewRow = indexPath.row;
+        self.currentTableViewCell = [self.tableView cellForRowAtIndexPath:indexPath];
+       // CustomTableViewCell *cell =
+        self.imageToBeAnimated = self.currentTableViewCell.vehiclePicture;
         
-        CustomTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        self.imageToBeAnimated = cell.vehiclePicture;
-        
-        CGRect rect = cell.vehiclePicture.frame;
-        rect.origin = [cell convertPoint:rect.origin toView:nil];
+        CGRect rect = self.currentTableViewCell.vehiclePicture.frame;
+        rect.origin = [self.currentTableViewCell convertPoint:rect.origin toView:nil];
         self.originFrame = rect;
         self.galleryScrollView = nil;
         self.galleryScrollView = [[VehicleGalleryScrollView alloc] initWithFrame:self.view.frame];
@@ -227,7 +227,7 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     
 }
 - (void)userDidTap {
-    [self enableViews];
+    
     self.tableViewModeOn = NO;
     [self animateSwitchBetweenModes];
 }
@@ -235,6 +235,17 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 //   // NSString *title = [NSString stringWithFormat:@"Image %ld / %ld",index+1,[self numberOfGalleryCells]];
 //    //self.navigationBar.title = title;
 //}
+- (void)swapProfileImageWithIndex:(NSUInteger)index {
+    ParkingLot *parking = [ParkingLot defaultParking];
+    if (index > 0) {
+        [[parking vehicleAtIndex:self.tableViewRow] swapVehicleAtIndex:index withIndex:0];
+        [self.tableView reloadData];
+        if ( self.currentTableViewCell) {
+            self.currentTableViewCell.vehiclePicture.hidden = YES;
+        }
+        [parking saveData];
+    }
+}
 - (NSInteger)numberOfGalleryCells {
     ParkingLot *parking = [ParkingLot defaultParking];
     NSInteger totalImages =  [[parking vehicleAtIndex:self.tableViewRow].flickrImages count];
@@ -256,32 +267,16 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 
 #pragma mark - animation 
 - (void)animateSwitchBetweenModes {
-    //UIView *containerView = [transitionContext containerView];
-    //VehicleGalleryViewController *toController = (VehicleGalleryViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey ];
-   // toController.galleryScrollView.backgroundColor = [UIColor whiteColor];
+   
     
-    UIView *toView;
-//    if (self.tableViewModeOn) {
-        toView = self.galleryScrollView;
-//    } else {
-//        CustomGalleryCell *tempCell = (CustomGalleryCell*)[self.galleryScrollView currentVisibleView];
-//        toView = tempCell.galleryImage;
-//    }
-    UIView *fromView;
-    //VehicleListViewController *fromController;
-    
-    
-    
-    //fromController = (VehicleListViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    
-    fromView = toView;
+    UIView *toView = self.galleryScrollView;
+    UIView *fromView = toView;
     
     CGRect initialFrame;
     if (self.tableViewModeOn) {
         initialFrame = self.originFrame;
     } else {
         initialFrame = fromView.frame;
-        
     }
     
     CGRect finalFrame;
@@ -294,19 +289,17 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
         CGFloat currentHeight = initialFrame.size.height;
         CGFloat newY = (currentHeight - prevHeight) / 2;
         initialFrame.origin.y -=    newY;
-       // fromView.backgroundColor = [UIColor clearColor];
-      //  toController.galleryScrollView.backgroundColor = [UIColor whiteColor];
     } else {
         CGRect tempRect = self.originFrame;
         CGFloat xScale = (initialFrame.size.width / tempRect.size.width);
+        CGFloat yScale = (initialFrame.size.height / tempRect.size.height);
+        xScale = MAX(xScale, yScale);
         tempRect.size.height = initialFrame.size.height / xScale;
         tempRect.size.width = initialFrame.size.width / xScale;
         CGFloat yDifference = (tempRect.size.height - self.originFrame.size.height)/2;
         tempRect.origin.y -= yDifference;
         finalFrame = tempRect;
-        
     }
-    
     
     CGFloat xScaleFactor;
     if (self.tableViewModeOn) {
@@ -327,9 +320,9 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
         fromView.transform = scaleTransform;
         fromView.center = CGPointMake(CGRectGetMidX(initialFrame),CGRectGetMidY(initialFrame));
         fromView.clipsToBounds = YES;
-        //  [fromController.navigationController pushViewController:toController animated:NO];
+        
     }
-    
+    self.currentTableViewCell.vehiclePicture.hidden = YES;
   
     CGFloat duration = 1;
     [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:0.4 initialSpringVelocity:0.0 options:0 animations:^{
@@ -342,7 +335,10 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
         }
     } completion: ^(BOOL finished ){
         if (!self.tableViewModeOn) {
+            [self enableViews];
             self.galleryScrollView.hidden = YES;
+            self.galleryScrollView = nil;
+            self.currentTableViewCell.vehiclePicture.hidden = NO;
         }
     }];
     

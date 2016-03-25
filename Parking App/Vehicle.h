@@ -29,7 +29,7 @@
 + (NSInteger)totalParkedVehicles;
 
 - (NSString *)vehicleInfo;
-
+- (void)swapVehicleAtIndex:(NSUInteger)index1 withIndex:(NSUInteger)index2;
 
 
 @end

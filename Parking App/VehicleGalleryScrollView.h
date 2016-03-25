@@ -22,6 +22,7 @@
 @optional
 - (void)galleryScrollView:(VehicleGalleryScrollView *)scrollView currentCellIndex:(NSInteger)index;
 - (void)userDidTap;
+- (void)swapProfileImageWithIndex:(NSUInteger)index;
 @end
 
 @interface VehicleGalleryScrollView : UIScrollView
