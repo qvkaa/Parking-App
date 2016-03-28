@@ -25,9 +25,10 @@
 - (void)swapProfileImageWithIndex:(NSUInteger)index;
 @end
 
-@interface VehicleGalleryScrollView : UIScrollView
+@interface VehicleGalleryScrollView : UIScrollView <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) id<UIScrollViewDelegate,VehicleGalleryScrollViewDataSource,VehicleGalleryScrollViewDelegate> galleryDelegate;
+- (BOOL)gestureRecognizer:(UIPanGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIPanGestureRecognizer *)otherGestureRecognizer;
 - (void)resetScrollView;
 - (UIView *)currentVisibleView;
 - (void)changeContainerBackGroundColor:(UIColor *)color;

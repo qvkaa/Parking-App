@@ -239,11 +239,11 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     ParkingLot *parking = [ParkingLot defaultParking];
     if (index > 0) {
         [[parking vehicleAtIndex:self.tableViewRow] swapVehicleAtIndex:index withIndex:0];
-        [self.tableView reloadData];
+        //
+        [parking saveData];
         if ( self.currentTableViewCell) {
             self.currentTableViewCell.vehiclePicture.hidden = YES;
         }
-        [parking saveData];
     }
 }
 - (NSInteger)numberOfGalleryCells {
@@ -271,12 +271,20 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     
     UIView *toView = self.galleryScrollView;
     UIView *fromView = toView;
-    
+    BOOL isInitalFramePortrait = YES;
     CGRect initialFrame;
     if (self.tableViewModeOn) {
         initialFrame = self.originFrame;
     } else {
         initialFrame = fromView.frame;
+        VehicleGalleryScrollView *tempView = (VehicleGalleryScrollView *)fromView;
+        CustomGalleryCell *tempCell = (CustomGalleryCell *)[tempView currentVisibleView];
+        CGSize imageSize = tempCell.galleryImage.image.size;
+        if ( imageSize.height > imageSize.width) {
+            isInitalFramePortrait = YES;
+        } else {
+            isInitalFramePortrait = NO;
+        }
     }
     
     CGRect finalFrame;
@@ -290,15 +298,26 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
         CGFloat newY = (currentHeight - prevHeight) / 2;
         initialFrame.origin.y -=    newY;
     } else {
-        CGRect tempRect = self.originFrame;
-        CGFloat xScale = (initialFrame.size.width / tempRect.size.width);
-        CGFloat yScale = (initialFrame.size.height / tempRect.size.height);
-        xScale = MAX(xScale, yScale);
-        tempRect.size.height = initialFrame.size.height / xScale;
-        tempRect.size.width = initialFrame.size.width / xScale;
-        CGFloat yDifference = (tempRect.size.height - self.originFrame.size.height)/2;
-        tempRect.origin.y -= yDifference;
-        finalFrame = tempRect;
+        if (isInitalFramePortrait) {
+            CGRect tempRect = self.originFrame;
+            CGFloat yScale = (initialFrame.size.height / tempRect.size.height);
+            tempRect.size.height = initialFrame.size.height / yScale;
+            tempRect.size.width = initialFrame.size.width / yScale;
+            CGFloat xDifference = (self.originFrame.size.width - tempRect.size.width)/2;
+            tempRect.origin.x += xDifference;
+            finalFrame = tempRect;
+        } else  {
+            CGRect tempRect = self.originFrame;
+            CGFloat xScale = (initialFrame.size.width / tempRect.size.width);
+            //        CGFloat yScale = (initialFrame.size.height / tempRect.size.height);
+            //        xScale = MAX(xScale, yScale);
+            tempRect.size.height = initialFrame.size.height / xScale;
+            tempRect.size.width = initialFrame.size.width / xScale;
+            CGFloat yDifference = (tempRect.size.height - self.originFrame.size.height)/2;
+            tempRect.origin.y -= yDifference;
+            finalFrame = tempRect;
+        }
+
     }
     
     CGFloat xScaleFactor;
@@ -339,6 +358,8 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
             self.galleryScrollView.hidden = YES;
             self.galleryScrollView = nil;
             self.currentTableViewCell.vehiclePicture.hidden = NO;
+            [self.tableView reloadData];
+            
         }
     }];
     

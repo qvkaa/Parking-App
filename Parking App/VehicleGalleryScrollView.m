@@ -35,10 +35,15 @@
         self.backgroundColor = [UIColor clearColor];
         [self setPagingEnabled:YES];
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture)];
+        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(respondToPanGesture:)];
+        panRecognizer.delegate = self;
+        panRecognizer.maximumNumberOfTouches = 1;
+
         // Specify that the gesture must be a single tap
         tapRecognizer.numberOfTapsRequired = 1;
         // Add the tap gesture recognizer to the view
         [self addGestureRecognizer:tapRecognizer];
+        [self addGestureRecognizer:panRecognizer];
     }
     return self;
 }
@@ -93,6 +98,7 @@
 }
 
 #pragma mark - public
+
 - (void)resetScrollView {
     self.collumIndex = -1;
     CGRect rect = self.bounds;
@@ -371,4 +377,21 @@
     }
 }
 
+- (void)respondToPanGesture:(UIPanGestureRecognizer *)recognizer {
+    CGPoint translation = [recognizer translationInView:recognizer.view];
+    
+    recognizer.view.center=CGPointMake(recognizer.view.center.x, recognizer.view.center.y+ translation.y);
+    
+    [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
+    NSLog(@"custom ");
+}
+#pragma mark - gesture delegate methods
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if ([gestureRecognizer isMemberOfClass: [UIPanGestureRecognizer class]] || [otherGestureRecognizer isMemberOfClass: [UIPanGestureRecognizer class]]) {
+        return YES;
+    }
+    return NO;
+}
 @end
