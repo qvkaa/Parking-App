@@ -16,12 +16,4 @@
 @implementation CustomTableViewCell
 
 
-- (IBAction)tapOnImage:(id)sender {
-    NSLog(@"TAP TAP TAP");
-}
-
-- (void)prepareForReuse {
-//    self.vehiclePicture.image = ..
-}
-
 @end

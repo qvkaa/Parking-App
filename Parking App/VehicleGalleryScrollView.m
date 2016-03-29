@@ -16,7 +16,11 @@
 @property (nonatomic) NSInteger totalCells;
 @property (nonatomic) BOOL isContentSizeSet;
 @property (nonatomic) CGFloat hiddenOffset; //due to recentering
-
+@property (nonatomic) BOOL scrollViewCenterDetermined;
+@property (nonatomic) CGPoint scrollViewCenter;
+@property (nonatomic) CGFloat currentLocationInSuperView;
+@property (nonatomic) BOOL animationBegan;
+@property (nonatomic) CGPoint startingLocationInSuperView;
 @end
 
 @implementation VehicleGalleryScrollView
@@ -28,21 +32,18 @@
     if (self) {
         _isContentSizeSet = NO;
         _collumIndex = -1;
-          //  [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+        _scrollViewCenterDetermined = NO;
         _hiddenOffset = 0.0f;
+        _currentLocationInSuperView = 999.0f;
+        _animationBegan = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.bounces = NO;
         self.backgroundColor = [UIColor clearColor];
         [self setPagingEnabled:YES];
-        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture)];
         UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(respondToPanGesture:)];
         panRecognizer.delegate = self;
         panRecognizer.maximumNumberOfTouches = 1;
 
-        // Specify that the gesture must be a single tap
-        tapRecognizer.numberOfTapsRequired = 1;
-        // Add the tap gesture recognizer to the view
-        [self addGestureRecognizer:tapRecognizer];
         [self addGestureRecognizer:panRecognizer];
     }
     return self;
@@ -53,17 +54,19 @@
     if (self) {
         _isContentSizeSet = NO;
         _collumIndex = -1;
-      //  [self setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+        _scrollViewCenterDetermined = NO;
         _hiddenOffset = 0.0f;
+        _currentLocationInSuperView = 999.0f;
+        _animationBegan = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.backgroundColor = [UIColor clearColor];
         self.bounces = NO;
         [self setPagingEnabled:YES];
-        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture)];
-        // Specify that the gesture must be a single tap
-        tapRecognizer.numberOfTapsRequired = 1;
-        // Add the tap gesture recognizer to the view
-        [self addGestureRecognizer:tapRecognizer];
+        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(respondToPanGesture:)];
+        panRecognizer.delegate = self;
+        panRecognizer.maximumNumberOfTouches = 1;
+        
+        [self addGestureRecognizer:panRecognizer];
     }
     return self;
    
@@ -367,31 +370,55 @@
     }
 }
 
-- (void)respondToTapGesture {
+- (void)dismissScrollView {
     if ([self.galleryDelegate respondsToSelector:@selector(userDidTap)]) {
         if ([self.galleryDelegate respondsToSelector:@selector(swapProfileImageWithIndex:)]) {
             [self.galleryDelegate swapProfileImageWithIndex:self.collumIndex];
         }
-        
         [self.galleryDelegate userDidTap];
     }
 }
 
 - (void)respondToPanGesture:(UIPanGestureRecognizer *)recognizer {
-    CGPoint translation = [recognizer translationInView:recognizer.view];
-    
-    recognizer.view.center=CGPointMake(recognizer.view.center.x, recognizer.view.center.y+ translation.y);
-    
-    [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
-    NSLog(@"custom ");
+    if (self.animationBegan) {
+        return;
+    }
+    if (self.currentLocationInSuperView <  (self.startingLocationInSuperView.y - 300.0f)) {
+        self.animationBegan = YES;
+        [self dismissScrollView];
+    } else {
+
+        if (recognizer.state == UIGestureRecognizerStateChanged || recognizer.state == UIGestureRecognizerStateBegan) {
+            if (!self.scrollViewCenterDetermined) {
+                self.scrollViewCenter = recognizer.view.center;
+                self.scrollViewCenterDetermined = YES;
+                self.startingLocationInSuperView = [recognizer locationInView:recognizer.view.superview];
+            }
+            CGFloat currentOffsetY = [recognizer translationInView:recognizer.view].y;
+           // NSLog(@"%f",currentOffsetY);
+            if (currentOffsetY < -10.0f) {
+                self.scrollEnabled = NO;
+            }
+        
+        if (!self.scrollEnabled && currentOffsetY < 0) {
+            self.currentLocationInSuperView = [recognizer locationInView:recognizer.view.superview].y;
+            CGPoint translation = [recognizer translationInView:recognizer.view];
+            recognizer.view.center=CGPointMake(recognizer.view.center.x, recognizer.view.center.y+ translation.y);
+            [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
+        }
+
+        } else if (recognizer.state == UIGestureRecognizerStateEnded){
+            self.scrollEnabled = YES;
+            [UIView animateWithDuration:0.3 animations:^{
+                recognizer.view.center = self.scrollViewCenter;
+            }];
+        }
+    }
 }
 #pragma mark - gesture delegate methods
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    if ([gestureRecognizer isMemberOfClass: [UIPanGestureRecognizer class]] || [otherGestureRecognizer isMemberOfClass: [UIPanGestureRecognizer class]]) {
-        return YES;
-    }
-    return NO;
+    return YES;
 }
 @end

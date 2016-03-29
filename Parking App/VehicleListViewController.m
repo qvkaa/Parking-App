@@ -148,9 +148,6 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     placeholderImage:nil
     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
         cell.vehiclePicture.image = image;
-        CGSize tempFrame = cell.vehiclePicture.image.size;
-        UIImage *tempImage = cell.vehiclePicture.image;
-      
         [cell.pictureLoadingIndicator stopAnimating];
         cell.pictureLoadingIndicator.hidden = YES;
         cell.vehiclePicture.hidden = NO;
