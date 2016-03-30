@@ -395,8 +395,9 @@
                 self.startingLocationInSuperView = [recognizer locationInView:recognizer.view.superview];
             }
             CGFloat currentOffsetY = [recognizer translationInView:recognizer.view].y;
+            CGFloat currentOffsetX = [recognizer translationInView:recognizer.view].x;
            // NSLog(@"%f",currentOffsetY);
-            if (currentOffsetY < -10.0f) {
+            if (currentOffsetY < -10.0f && (fabs(currentOffsetX) < 10.0f)) {
                 self.scrollEnabled = NO;
             }
         
