@@ -27,6 +27,7 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 @property (assign) BOOL isEditButtonToggledOn;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) VehicleGalleryScrollView *galleryScrollView;
+@property (strong, nonatomic) UIView *scrollViewBackGround;
 @property (nonatomic) NSInteger tableViewRow;
 @property (nonatomic) CGRect originFrame;
 @property (strong,nonatomic) CustomTableViewCell *currentTableViewCell;
@@ -176,10 +177,14 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
         rect.origin = [self.currentTableViewCell convertPoint:rect.origin toView:nil];
         self.originFrame = rect;
         self.galleryScrollView = nil;
-        self.galleryScrollView = [[VehicleGalleryScrollView alloc] initWithFrame:self.view.frame];
+        CGRect scrollViewFrame = self.view.frame;
+        scrollViewFrame.size.height -= self.tabBarController.tabBar.frame.size.height;
+        self.scrollViewBackGround.frame = scrollViewFrame;
+        self.galleryScrollView = [[VehicleGalleryScrollView alloc] initWithFrame:scrollViewFrame];
         self.galleryScrollView.galleryDelegate = self;
         [self.view addSubview:self.galleryScrollView];
         self.tableViewModeOn = YES;
+        self.scrollViewBackGround.hidden = NO;
         [self animateSwitchBetweenModes];
 
     }
@@ -192,6 +197,9 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 
 
 #pragma mark - gallery scroll view delegate methods
+- (void)setBackgroundAlphaTo:(CGFloat)alpha {
+    self.scrollViewBackGround.alpha = alpha;
+}
 - (GalleryCell *)galleryScrollView:(VehicleGalleryScrollView *)scrollView cellForCollumAtIndex:(NSUInteger)index {
     ParkingLot *parking = [ParkingLot defaultParking];
     CustomGalleryCell *cell = (CustomGalleryCell *)[scrollView dequeueReusableCellWithIdentifier:@"GalleryCell"];
@@ -345,14 +353,19 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
         fromView.transform  = self.tableViewModeOn ? CGAffineTransformIdentity : scaleTransform;
         fromView.center = CGPointMake(CGRectGetMidX(finalFrame),CGRectGetMidY(finalFrame));
         if (self.tableViewModeOn) {
-            self.galleryScrollView.backgroundColor = [UIColor blackColor];
+            self.scrollViewBackGround.alpha = 1;
+            //self.galleryScrollView.backgroundColor = [UIColor blackColor];
+            
+            //TO-DO
         } else {
-            self.galleryScrollView.backgroundColor = [UIColor clearColor];
+            self.scrollViewBackGround.alpha = 0;
+           // self.galleryScrollView.backgroundColor = [UIColor clearColor];
         }
     } completion: ^(BOOL finished ){
         if (!self.tableViewModeOn) {
             [self enableViews];
             self.galleryScrollView.hidden = YES;
+            self.scrollViewBackGround.hidden = YES;
             self.galleryScrollView = nil;
             self.currentTableViewCell.vehiclePicture.hidden = NO;
             [self.tableView reloadData];
@@ -361,5 +374,16 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     }];
     
 }
-
+#pragma mark - accessor
+- (UIView *)scrollViewBackGround {
+    if(!_scrollViewBackGround) {
+        _scrollViewBackGround = [[UIView alloc] init];
+       
+        _scrollViewBackGround.hidden = YES;
+        _scrollViewBackGround.alpha = 0;
+        _scrollViewBackGround.backgroundColor = [UIColor blackColor];
+        [self.view addSubview:_scrollViewBackGround];
+    }
+    return _scrollViewBackGround;
+}
 @end

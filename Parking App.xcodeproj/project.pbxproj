@@ -27,7 +27,6 @@
 		836BD4701C99699E00D2F4A7 /* AnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836BD46F1C99699E00D2F4A7 /* AnimationController.m */; };
 		836DF0E61C69F91400A9E862 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */; };
 		837444D71C903B5300C6AC03 /* CustomGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837444D61C903B5300C6AC03 /* CustomGalleryCell.m */; };
-		837588061C8472DA001E1AA6 /* VehicleGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837588051C8472DA001E1AA6 /* VehicleGalleryViewController.m */; };
 		837588091C8473F6001E1AA6 /* VehicleGalleryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 837588081C8473F6001E1AA6 /* VehicleGalleryScrollView.m */; };
 		8375880C1C847585001E1AA6 /* GalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8375880B1C847585001E1AA6 /* GalleryCell.m */; };
 		83825A401C85CD1C00797E96 /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83825A3F1C85CD1C00797E96 /* GalleryCell.xib */; };
@@ -93,8 +92,6 @@
 		836DF0E51C69F91400A9E862 /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		837444D51C903B5300C6AC03 /* CustomGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGalleryCell.h; sourceTree = "<group>"; };
 		837444D61C903B5300C6AC03 /* CustomGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGalleryCell.m; sourceTree = "<group>"; };
-		837588041C8472DA001E1AA6 /* VehicleGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleGalleryViewController.h; sourceTree = "<group>"; };
-		837588051C8472DA001E1AA6 /* VehicleGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VehicleGalleryViewController.m; sourceTree = "<group>"; };
 		837588071C8473F6001E1AA6 /* VehicleGalleryScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleGalleryScrollView.h; sourceTree = "<group>"; };
 		837588081C8473F6001E1AA6 /* VehicleGalleryScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VehicleGalleryScrollView.m; sourceTree = "<group>"; };
 		8375880A1C847585001E1AA6 /* GalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryCell.h; sourceTree = "<group>"; };
@@ -230,8 +227,6 @@
 				5F802A901C57C7B900CE362C /* ParkingViewController.m */,
 				5F672AC11C5A6E0000FF9D9F /* VehicleListViewController.h */,
 				5F672AC21C5A6E0000FF9D9F /* VehicleListViewController.m */,
-				837588041C8472DA001E1AA6 /* VehicleGalleryViewController.h */,
-				837588051C8472DA001E1AA6 /* VehicleGalleryViewController.m */,
 				8389D7381CA033590037843D /* CustomNavigationController.h */,
 				8389D7391CA033590037843D /* CustomNavigationController.m */,
 			);
@@ -494,7 +489,6 @@
 				835750401C6C96A600ADF5CB /* DataErrorView.m in Sources */,
 				5F1CB2021C56552C00650671 /* AppDelegate.m in Sources */,
 				837588091C8473F6001E1AA6 /* VehicleGalleryScrollView.m in Sources */,
-				837588061C8472DA001E1AA6 /* VehicleGalleryViewController.m in Sources */,
 				5F1CB1FF1C56552C00650671 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

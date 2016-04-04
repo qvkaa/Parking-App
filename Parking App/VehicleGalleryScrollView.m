@@ -20,7 +20,8 @@
 @property (nonatomic) CGPoint scrollViewCenter;
 @property (nonatomic) CGFloat currentLocationInSuperView;
 @property (nonatomic) BOOL animationBegan;
-@property (nonatomic) CGPoint startingLocationInSuperView;
+@property (nonatomic) CGFloat startingLocationInSuperView;
+@property (nonatomic) CGFloat panDistanceThreshold;
 @end
 
 @implementation VehicleGalleryScrollView
@@ -35,6 +36,7 @@
         _scrollViewCenterDetermined = NO;
         _hiddenOffset = 0.0f;
         _currentLocationInSuperView = 999.0f;
+        _panDistanceThreshold = 99999.0f;
         _animationBegan = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.bounces = NO;
@@ -57,6 +59,7 @@
         _scrollViewCenterDetermined = NO;
         _hiddenOffset = 0.0f;
         _currentLocationInSuperView = 999.0f;
+        _panDistanceThreshold = 99999.0f;
         _animationBegan = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.backgroundColor = [UIColor clearColor];
@@ -379,11 +382,38 @@
     }
 }
 
+- (void)setSuperViewBackgroundAlphaTo:(CGFloat)alpha {
+    
+}
+#pragma mark - pan gesture
 - (void)respondToPanGesture:(UIPanGestureRecognizer *)recognizer {
+    
     if (self.animationBegan) {
         return;
     }
-    if (self.currentLocationInSuperView <  (self.startingLocationInSuperView.y - 300.0f)) {
+    
+    CGFloat distanceFromCenter = self.startingLocationInSuperView - self.currentLocationInSuperView;
+    NSLog(@"%f",distanceFromCenter);
+    if (distanceFromCenter >= 0.0f) {
+        CGFloat currentAlpha = distanceFromCenter / self.panDistanceThreshold;
+        currentAlpha = 1.0f - currentAlpha;
+        currentAlpha *= 2.0;
+        if (currentAlpha > 1.0f) {
+            currentAlpha = 1.0f;
+        } else if (currentAlpha < 0.0f) {
+            currentAlpha = 0.0f;
+        }
+        self.galleryContainerView.alpha = currentAlpha;
+        if ([self.galleryDelegate respondsToSelector:@selector(setBackgroundAlphaTo:)]) {
+            [self.galleryDelegate setBackgroundAlphaTo:currentAlpha];
+        }
+
+       
+    }
+    
+   // NSLog(@"\ndis %f\nstar %f\ncurr %f",distanceFromCenter, self.startingLocationInSuperView.y, self.currentLocationInSuperView);
+    //if (self.currentLocationInSuperView <  (self.startingLocationInSuperView - self.panDistanceThreshold)) {
+    if (distanceFromCenter > self.panDistanceThreshold) {
         self.animationBegan = YES;
         [self dismissScrollView];
     } else {
@@ -392,7 +422,8 @@
             if (!self.scrollViewCenterDetermined) {
                 self.scrollViewCenter = recognizer.view.center;
                 self.scrollViewCenterDetermined = YES;
-                self.startingLocationInSuperView = [recognizer locationInView:recognizer.view.superview];
+                self.startingLocationInSuperView = [recognizer locationInView:recognizer.view.superview].y;
+                self.panDistanceThreshold = recognizer.view.frame.size.height / 4.0f;
             }
             CGFloat currentOffsetY = [recognizer translationInView:recognizer.view].y;
             CGFloat currentOffsetX = [recognizer translationInView:recognizer.view].x;
@@ -406,16 +437,59 @@
             CGPoint translation = [recognizer translationInView:recognizer.view];
             recognizer.view.center=CGPointMake(recognizer.view.center.x, recognizer.view.center.y+ translation.y);
             [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
+            
         }
 
         } else if (recognizer.state == UIGestureRecognizerStateEnded){
             self.scrollEnabled = YES;
+            self.scrollViewCenterDetermined = NO;
+            self.currentLocationInSuperView = 999.0f;
+            self.startingLocationInSuperView = 999.0f;
             [UIView animateWithDuration:0.3 animations:^{
                 recognizer.view.center = self.scrollViewCenter;
             }];
         }
     }
 }
+//- (void)respondToPanGesture:(UIPanGestureRecognizer *)recognizer {
+//    if (self.animationBegan) {
+//        return;
+//    }
+//    if (self.currentLocationInSuperView <  (self.startingLocationInSuperView.y - 300.0f)) {
+//        self.animationBegan = YES;
+//        self.galleryContainerView.center = self.containerInitialCenter;
+//        [self dismissScrollView];
+//    } else {
+//        
+//        if (recognizer.state == UIGestureRecognizerStateChanged || recognizer.state == UIGestureRecognizerStateBegan) {
+//            if (!self.scrollViewCenterDetermined) {
+//                self.containerInitialCenter = self.galleryContainerView.center;
+//               // CGPoint containerCenter = self.galleryContainerView.center;
+//                self.scrollViewCenterDetermined = YES;
+//                self.startingLocationInSuperView = [recognizer locationInView:recognizer.view.superview];
+//            }
+//            CGFloat currentOffsetY = [recognizer translationInView:recognizer.view].y;
+//            CGFloat currentOffsetX = [recognizer translationInView:recognizer.view].x;
+//            // NSLog(@"%f",currentOffsetY);
+//            if (currentOffsetY < -10.0f && (fabs(currentOffsetX) < 10.0f)) {
+//                self.scrollEnabled = NO;
+//            }
+//            
+//            if (!self.scrollEnabled && currentOffsetY < 0) {
+//                self.currentLocationInSuperView = [recognizer locationInView:recognizer.view.superview].y;
+//                CGPoint translation = [recognizer translationInView:recognizer.view];
+//                self.galleryContainerView.center=CGPointMake(self.galleryContainerView.center.x, self.galleryContainerView.center.y+ translation.y);
+//                [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
+//            }
+//            
+//        } else if (recognizer.state == UIGestureRecognizerStateEnded){
+//            self.scrollEnabled = YES;
+//            [UIView animateWithDuration:0.3 animations:^{
+//            self.galleryContainerView.center = self.containerInitialCenter;
+//            }];
+//        }
+//    }
+//}
 #pragma mark - gesture delegate methods
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer

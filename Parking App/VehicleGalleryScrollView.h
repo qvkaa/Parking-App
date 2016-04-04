@@ -23,6 +23,8 @@
 - (void)galleryScrollView:(VehicleGalleryScrollView *)scrollView currentCellIndex:(NSInteger)index;
 - (void)userDidTap;
 - (void)swapProfileImageWithIndex:(NSUInteger)index;
+- (void)setBackgroundAlphaTo:(CGFloat)alpha;
+
 @end
 
 @interface VehicleGalleryScrollView : UIScrollView <UIGestureRecognizerDelegate>
