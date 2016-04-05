@@ -34,7 +34,7 @@
     [super viewWillAppear:animated];
     ParkingLot *parking = [ParkingLot defaultParking];
     self.navigationItem.title = @"Total Vehicles";
-    self.mainTextLabel.text = [NSString stringWithFormat: @"Parked Vehicles : %ld", [parking totalVehicles]];
+    self.mainTextLabel.text = [NSString stringWithFormat: @"Parked Vehicles : %ld", (unsigned long)[parking totalVehicles]];
     self.mainTextLabel.hidden = YES;
 }
 

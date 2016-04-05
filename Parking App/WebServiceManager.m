@@ -39,7 +39,6 @@ static const NSString *SECRET = @"0d150382efad5764";
                                                     KEY, tags];
     
     NSURL *URL = [NSURL URLWithString:urlString];
-    NSLog(@"%@",urlString);
    
      [[AFHTTPSessionManager manager] GET:URL.absoluteString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
 

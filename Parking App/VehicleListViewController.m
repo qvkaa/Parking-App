@@ -146,6 +146,7 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!self.tableView.editing) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
         [self disableViews];
         self.tableViewRow = indexPath.row;
         self.currentTableViewCell = [self.tableView cellForRowAtIndexPath:indexPath];

@@ -237,7 +237,7 @@
                             <constraint firstItem="Ens-q9-7LV" firstAttribute="top" secondItem="3jx-OJ-6M2" secondAttribute="bottom" constant="30" id="wjK-iV-eVw"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Add Vehicle" id="fYx-bz-31S"/>
+                    <tabBarItem key="tabBarItem" title="Park Vehicle" id="fYx-bz-31S"/>
                     <navigationItem key="navigationItem" id="NuD-I5-joo"/>
                     <connections>
                         <outlet property="colorTextField" destination="Arl-6n-ksJ" id="ghD-oD-5xt"/>
