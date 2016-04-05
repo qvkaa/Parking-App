@@ -15,8 +15,6 @@ static NSInteger totalParkedVehicles = 0;
 @property (strong,nonatomic,readwrite) NSString *manufacturer;
 @property (strong,nonatomic,readwrite) NSString *model;
 @property (strong,nonatomic,readwrite) NSNumber *yearOfManufacture;
-//@property (strong,nonatomic,readwrite)NSString *imageURL;
-//@property (strong,nonatomic,readwrite)FlickrImage *flickrImage;
 @property (strong,nonatomic,readwrite) NSMutableArray *flickrImages; //of FlickrImage
 
 @end

@@ -10,10 +10,7 @@
 
 @interface CustomTableViewCell()
 
-
-
 @end
 @implementation CustomTableViewCell
-
 
 @end

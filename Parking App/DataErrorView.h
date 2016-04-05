@@ -15,16 +15,7 @@
 @end
 
 @interface DataErrorView : UIView
-#pragma mark - delegate
 @property (weak, nonatomic) id<DataErrorViewDelegate> delegate;
-#pragma mark - UILabel
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
-
-
-#pragma mark - Lifecycle
-//- (instancetype)init;
-//- (instancetype)initWithFrame:(CGRect)frame;
-//+ (id)errorView;
-
 
 @end

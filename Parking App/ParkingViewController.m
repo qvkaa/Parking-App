@@ -11,7 +11,6 @@
 #import "AppDelegate.h"
 #import "Vehicle.h"
 #import "ParkingLot.h"
-
 #import "WebServiceManager.h"
 
 @interface ParkingViewController()
@@ -40,7 +39,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *manufacturerTextField;
 @property (weak, nonatomic) IBOutlet UITextField *colorTextField;
 @property (weak, nonatomic) IBOutlet UITextField *licenseTextField;
-//@property (nonatomic) BOOL shouldShiftLabels;
 @end
 
 @implementation ParkingViewController
@@ -72,13 +70,7 @@
     [self shiftLabes];
     [self animateLabels];
 }
-//- (void)viewDidLayoutSubviews {
-//    [super viewDidLayoutSubviews];
-//    if (self.shouldShiftLabels) {
-//        self.shouldShiftLabels = NO;
-//        [self shiftLabes];
-//    }
-//}
+
 #pragma mark - animation
 
 - (void)shiftLabes {
@@ -288,12 +280,10 @@
     for (UIView *view in self.interactableViews) {
         [view setUserInteractionEnabled:NO];
     }
-   // [self.interactableViews makeObjectsPerformSelector:@selector(setUserInteractionEnabled:) withObject:@NO];
 }
 - (void)enableViews {
     for (UIView *view in self.interactableViews) {
         [view setUserInteractionEnabled:YES];
     }
-    //[self.interactableViews makeObjectsPerformSelector:@selector(setUserInteractionEnabled:) withObject:@YES];
 }
 @end

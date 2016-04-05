@@ -12,8 +12,6 @@
 #import "CustomTableViewCell.h" 
 #import "UIImageView+AFNetworking.h"
 #import "VehicleGalleryViewController.h"
-#import "AnimationController.h"
-#import "NavigationControllerCoordinator.h"
 #import "CustomGalleryCell.h"
 static  NSString *EDIT_TOGGLED_OFF_TITLE = @"Edit";
 static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
@@ -31,6 +29,7 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
 @property (nonatomic) NSInteger tableViewRow;
 @property (nonatomic) CGRect originFrame;
 @property (strong,nonatomic) CustomTableViewCell *currentTableViewCell;
+
 @end
 
 @implementation VehicleListViewController
@@ -46,26 +45,7 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
     [self.tableView setEditing:NO];
     self.deleteSelectedButton.hidden = YES;
 }
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if ([sender isKindOfClass:[NSIndexPath class]]) {
-//        NSIndexPath *path = sender;
-//        NSInteger row = path.row;
-//        CustomTableViewCell *cell = [self.tableView cellForRowAtIndexPath:sender];
-//        //CGRect frame = cell.vehiclePicture.frame;
-//        CGRect frame = [cell convertRect:cell.vehiclePicture.frame toView:self.view];
-//        if ([[segue identifier] isEqualToString:@"openGallery"])
-//        {
-//            VehicleGalleryViewController *vc = [segue destinationViewController];
-//            vc.tableViewRow = row;
-//            vc.originFrame = frame;
-//            self.imageToBeAnimated = cell.vehiclePicture;
-//            vc.transitioningDelegate = self;
-//
-//        }
-//    }
-//    
 
-    
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -155,7 +135,6 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
         cell.vehiclePicture.userInteractionEnabled = YES;
     }
     failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-        NSLog(@"%@",[error description]);
         cell.vehiclePicture.image = [UIImage imageNamed:@"defaultCar"];
         [cell.pictureLoadingIndicator stopAnimating];
         [cell.pictureLoadingIndicator setHidden:YES];
@@ -353,13 +332,11 @@ static  NSString *EDIT_TOGGLED_ON_TITLE = @"Back";
         fromView.transform  = self.tableViewModeOn ? CGAffineTransformIdentity : scaleTransform;
         fromView.center = CGPointMake(CGRectGetMidX(finalFrame),CGRectGetMidY(finalFrame));
         if (self.tableViewModeOn) {
-            self.scrollViewBackGround.alpha = 1;
-            //self.galleryScrollView.backgroundColor = [UIColor blackColor];
-            
-            //TO-DO
+            self.scrollViewBackGround.alpha = 1.0f;
+            [self.galleryScrollView setContainerViewAlphaTo:1.0f];
         } else {
-            self.scrollViewBackGround.alpha = 0;
-           // self.galleryScrollView.backgroundColor = [UIColor clearColor];
+            self.scrollViewBackGround.alpha = 0.0f;
+            [self.galleryScrollView setContainerViewAlphaTo:1.0f];
         }
     } completion: ^(BOOL finished ){
         if (!self.tableViewModeOn) {

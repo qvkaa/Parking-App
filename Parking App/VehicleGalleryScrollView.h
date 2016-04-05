@@ -38,6 +38,7 @@
 - (GalleryCell *)dequeueReusableCell;
 - (void)centerToPreviousCell;
 - (void)centerToNextCell;
+- (void)setContainerViewAlphaTo:(CGFloat)alpha;
 @end
 
 

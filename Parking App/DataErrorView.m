@@ -17,8 +17,6 @@
 
 @implementation DataErrorView
 
-
-
 #pragma mark - Method for delegate
 - (IBAction)closeErrorButton:(id)sender {
     
@@ -27,6 +25,5 @@
          //self.hidden = YES;
     }
 }
-
 
 @end

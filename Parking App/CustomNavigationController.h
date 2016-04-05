@@ -1,13 +1,13 @@
+////
+////  CustomNavigationController.h
+////  Parking App
+////
+////  Created by yavoraleksiev on 3/21/16.
+////  Copyright © 2016 Yavor Aleksiev. All rights reserved.
+////
 //
-//  CustomNavigationController.h
-//  Parking App
+//#import <UIKit/UIKit.h>
 //
-//  Created by yavoraleksiev on 3/21/16.
-//  Copyright © 2016 Yavor Aleksiev. All rights reserved.
+//@interface CustomNavigationController : UINavigationController
 //
-
-#import <UIKit/UIKit.h>
-
-@interface CustomNavigationController : UINavigationController
-
-@end
+//@end

@@ -9,6 +9,7 @@
 #import "VehicleGalleryScrollView.h"
 
 @interface VehicleGalleryScrollView()
+
 @property (strong,nonatomic,readonly) NSMutableSet *reusableGalleryCells; //of GalleryCell
 @property (strong,nonatomic) NSMutableArray *visibleCells; //of GalleryCell
 @property (strong,nonatomic) UIView *galleryContainerView;
@@ -22,6 +23,8 @@
 @property (nonatomic) BOOL animationBegan;
 @property (nonatomic) CGFloat startingLocationInSuperView;
 @property (nonatomic) CGFloat panDistanceThreshold;
+@property (nonatomic) BOOL lockScrollingDirection;
+@property (nonatomic) BOOL horisontalScrollingLocked;
 @end
 
 @implementation VehicleGalleryScrollView
@@ -38,6 +41,7 @@
         _currentLocationInSuperView = 999.0f;
         _panDistanceThreshold = 99999.0f;
         _animationBegan = NO;
+        _lockScrollingDirection = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.bounces = NO;
         self.backgroundColor = [UIColor clearColor];
@@ -61,6 +65,7 @@
         _currentLocationInSuperView = 999.0f;
         _panDistanceThreshold = 99999.0f;
         _animationBegan = NO;
+        _lockScrollingDirection = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.backgroundColor = [UIColor clearColor];
         self.bounces = NO;
@@ -104,7 +109,9 @@
 }
 
 #pragma mark - public
-
+- (void)setContainerViewAlphaTo:(CGFloat)alpha {
+    self.galleryContainerView.alpha = alpha;
+}
 - (void)resetScrollView {
     self.collumIndex = -1;
     CGRect rect = self.bounds;
@@ -121,9 +128,6 @@
 - (GalleryCell *)currentVisibleView {
     CGFloat cellWidth = self.frame.size.width;
     NSUInteger index = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
-//    if ([self.visibleCells count] == 3) {
-//        return [self.visibleCells objectAtIndex:1];
-//    } else
     if (index == 0) {
         return [self.visibleCells objectAtIndex:0];
     } else {
@@ -212,7 +216,6 @@
   
     if (cell <= 0 &&  rect.origin.x < minimumLimit) {
         rect.origin.x = cellWidth;
-        //[self scrollRectToVisible:rect animated:YES];
         [UIView animateWithDuration:0.5
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
@@ -222,15 +225,11 @@
 
     if (cell >= self.totalCells-1 && rect.origin.x > maximumLimit) {
         rect.origin.x = cellWidth;
-        
-       // [self scrollRectToVisible:rect animated:YES ];
-        
         [UIView animateWithDuration:0.5
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{ [self scrollRectToVisible:rect animated:NO]; }
                          completion:NULL];
-        
     }
 }
 
@@ -255,7 +254,6 @@
     [self tileCellsFromMinX:minVisibleX toMaxX:maxVisibleX];
     CGFloat cellWidth = self.frame.size.width;
     self.collumIndex = (NSInteger)floor(((self.contentOffset.x - self.hiddenOffset) * 2.0f + cellWidth) / (cellWidth * 2.0f));
-//    [self checkIfVisibleRectIsInLimits:visibleBounds];
 }
 - (void)setTitle {
     if ([self.galleryDelegate respondsToSelector:@selector(galleryScrollView:currentCellIndex:)]) {
@@ -349,7 +347,6 @@
     CGRect rect = self.bounds;
     if (cell > 0 ) {
         rect.origin.x -= cellWidth;
-        //[self scrollRectToVisible:rect animated:YES];
         [UIView animateWithDuration:0.5
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
@@ -364,7 +361,6 @@
     CGRect rect = self.bounds;
     if (cell < self.totalCells-1 ) {
         rect.origin.x += cellWidth;
-        //[self scrollRectToVisible:rect animated:YES];
         [UIView animateWithDuration:0.5
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
@@ -386,18 +382,19 @@
     
 }
 #pragma mark - pan gesture
+
 - (void)respondToPanGesture:(UIPanGestureRecognizer *)recognizer {
-    
+    //dont handle more pan gestures if animation has began
     if (self.animationBegan) {
         return;
     }
-    
     CGFloat distanceFromCenter = self.startingLocationInSuperView - self.currentLocationInSuperView;
-    NSLog(@"%f",distanceFromCenter);
+    
+    //determine the opacity of the view based on the amount scrolled
     if (distanceFromCenter >= 0.0f) {
         CGFloat currentAlpha = distanceFromCenter / self.panDistanceThreshold;
-        currentAlpha = 1.0f - currentAlpha;
-        currentAlpha *= 2.0;
+        currentAlpha = 1.3f - currentAlpha;
+        
         if (currentAlpha > 1.0f) {
             currentAlpha = 1.0f;
         } else if (currentAlpha < 0.0f) {
@@ -407,85 +404,135 @@
         if ([self.galleryDelegate respondsToSelector:@selector(setBackgroundAlphaTo:)]) {
             [self.galleryDelegate setBackgroundAlphaTo:currentAlpha];
         }
-
-       
     }
     
-   // NSLog(@"\ndis %f\nstar %f\ncurr %f",distanceFromCenter, self.startingLocationInSuperView.y, self.currentLocationInSuperView);
-    //if (self.currentLocationInSuperView <  (self.startingLocationInSuperView - self.panDistanceThreshold)) {
+    // perform animation if the theshold is passed
     if (distanceFromCenter > self.panDistanceThreshold) {
         self.animationBegan = YES;
         [self dismissScrollView];
     } else {
-
+        
         if (recognizer.state == UIGestureRecognizerStateChanged || recognizer.state == UIGestureRecognizerStateBegan) {
+            
+            //determine the start point of the pan gesture
             if (!self.scrollViewCenterDetermined) {
                 self.scrollViewCenter = recognizer.view.center;
                 self.scrollViewCenterDetermined = YES;
                 self.startingLocationInSuperView = [recognizer locationInView:recognizer.view.superview].y;
                 self.panDistanceThreshold = recognizer.view.frame.size.height / 4.0f;
             }
+            
             CGFloat currentOffsetY = [recognizer translationInView:recognizer.view].y;
             CGFloat currentOffsetX = [recognizer translationInView:recognizer.view].x;
-           // NSLog(@"%f",currentOffsetY);
-            if (currentOffsetY < -10.0f && (fabs(currentOffsetX) < 10.0f)) {
-                self.scrollEnabled = NO;
-            }
-        
-        if (!self.scrollEnabled && currentOffsetY < 0) {
-            self.currentLocationInSuperView = [recognizer locationInView:recognizer.view.superview].y;
-            CGPoint translation = [recognizer translationInView:recognizer.view];
-            recognizer.view.center=CGPointMake(recognizer.view.center.x, recognizer.view.center.y+ translation.y);
-            [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
             
-        }
-
+            // determine direction
+            if (!self.lockScrollingDirection) {
+                //determine if vertical scrolling
+                if (currentOffsetY < -10.0f && (fabs(currentOffsetX) < 10.0f)) {
+                    self.lockScrollingDirection = YES;
+                    self.horisontalScrollingLocked = NO;
+                    self.scrollEnabled = NO;
+            
+                    //horizontal scrolling takes priority
+                } else if ( fabs(currentOffsetX) > 10.0f) {
+                    self.lockScrollingDirection = YES;
+                    self.horisontalScrollingLocked = YES;
+                }
+            }
+            if (self.lockScrollingDirection && !self.horisontalScrollingLocked) {
+                self.currentLocationInSuperView = [recognizer locationInView:recognizer.view.superview].y;
+                CGPoint translation = [recognizer translationInView:recognizer.view];
+                recognizer.view.center=CGPointMake(recognizer.view.center.x, recognizer.view.center.y+ translation.y);
+                [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
+                
+            }
+            
         } else if (recognizer.state == UIGestureRecognizerStateEnded){
+            self.lockScrollingDirection = NO;
             self.scrollEnabled = YES;
             self.scrollViewCenterDetermined = NO;
             self.currentLocationInSuperView = 999.0f;
             self.startingLocationInSuperView = 999.0f;
             [UIView animateWithDuration:0.3 animations:^{
                 recognizer.view.center = self.scrollViewCenter;
+                
+                
+                self.galleryContainerView.alpha = 1.0f;
+                if ([self.galleryDelegate respondsToSelector:@selector(setBackgroundAlphaTo:)]) {
+                    [self.galleryDelegate setBackgroundAlphaTo:1.0f];
+                }
+                
             }];
         }
     }
+
 }
+
 //- (void)respondToPanGesture:(UIPanGestureRecognizer *)recognizer {
+//    
 //    if (self.animationBegan) {
 //        return;
 //    }
-//    if (self.currentLocationInSuperView <  (self.startingLocationInSuperView.y - 300.0f)) {
+//    
+//    CGFloat distanceFromCenter = self.startingLocationInSuperView - self.currentLocationInSuperView;
+//
+//    if (distanceFromCenter >= 0.0f) {
+//        CGFloat currentAlpha = distanceFromCenter / self.panDistanceThreshold;
+//        currentAlpha = 1.3f - currentAlpha;
+//    
+//        if (currentAlpha > 1.0f) {
+//            currentAlpha = 1.0f;
+//        } else if (currentAlpha < 0.0f) {
+//            currentAlpha = 0.0f;
+//        }
+//        self.galleryContainerView.alpha = currentAlpha;
+//        if ([self.galleryDelegate respondsToSelector:@selector(setBackgroundAlphaTo:)]) {
+//            [self.galleryDelegate setBackgroundAlphaTo:currentAlpha];
+//        }
+//
+//       
+//    }
+//    
+//    if (distanceFromCenter > self.panDistanceThreshold) {
 //        self.animationBegan = YES;
-//        self.galleryContainerView.center = self.containerInitialCenter;
 //        [self dismissScrollView];
 //    } else {
-//        
+//
 //        if (recognizer.state == UIGestureRecognizerStateChanged || recognizer.state == UIGestureRecognizerStateBegan) {
 //            if (!self.scrollViewCenterDetermined) {
-//                self.containerInitialCenter = self.galleryContainerView.center;
-//               // CGPoint containerCenter = self.galleryContainerView.center;
+//                self.scrollViewCenter = recognizer.view.center;
 //                self.scrollViewCenterDetermined = YES;
-//                self.startingLocationInSuperView = [recognizer locationInView:recognizer.view.superview];
+//                self.startingLocationInSuperView = [recognizer locationInView:recognizer.view.superview].y;
+//                self.panDistanceThreshold = recognizer.view.frame.size.height / 4.0f;
 //            }
 //            CGFloat currentOffsetY = [recognizer translationInView:recognizer.view].y;
 //            CGFloat currentOffsetX = [recognizer translationInView:recognizer.view].x;
-//            // NSLog(@"%f",currentOffsetY);
 //            if (currentOffsetY < -10.0f && (fabs(currentOffsetX) < 10.0f)) {
 //                self.scrollEnabled = NO;
 //            }
+//        
+//        if (!self.scrollEnabled && currentOffsetY < 0) {
+//            self.currentLocationInSuperView = [recognizer locationInView:recognizer.view.superview].y;
+//            CGPoint translation = [recognizer translationInView:recognizer.view];
+//            recognizer.view.center=CGPointMake(recognizer.view.center.x, recognizer.view.center.y+ translation.y);
+//            [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
 //            
-//            if (!self.scrollEnabled && currentOffsetY < 0) {
-//                self.currentLocationInSuperView = [recognizer locationInView:recognizer.view.superview].y;
-//                CGPoint translation = [recognizer translationInView:recognizer.view];
-//                self.galleryContainerView.center=CGPointMake(self.galleryContainerView.center.x, self.galleryContainerView.center.y+ translation.y);
-//                [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
-//            }
-//            
+//        }
+//
 //        } else if (recognizer.state == UIGestureRecognizerStateEnded){
 //            self.scrollEnabled = YES;
+//            self.scrollViewCenterDetermined = NO;
+//            self.currentLocationInSuperView = 999.0f;
+//            self.startingLocationInSuperView = 999.0f;
 //            [UIView animateWithDuration:0.3 animations:^{
-//            self.galleryContainerView.center = self.containerInitialCenter;
+//                recognizer.view.center = self.scrollViewCenter;
+//                
+//               
+//                self.galleryContainerView.alpha = 1.0f;
+//                if ([self.galleryDelegate respondsToSelector:@selector(setBackgroundAlphaTo:)]) {
+//                    [self.galleryDelegate setBackgroundAlphaTo:1.0f];
+//                }
+//                
 //            }];
 //        }
 //    }

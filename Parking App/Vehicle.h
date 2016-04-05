@@ -16,8 +16,6 @@
 @property (strong,nonatomic,readonly) NSString *manufacturer;
 @property (strong,nonatomic,readonly) NSString *model;
 @property (strong,nonatomic,readonly) NSNumber *yearOfManufacture;
-//@property (strong,nonatomic,readonly)NSString *imageURL;
-//@property (strong,nonatomic,readonly)FlickrImage *flickrImage;
 @property (strong,nonatomic,readonly) NSMutableArray *flickrImages; //of FlickrImage
 - (instancetype)initWithPlateLicense:(NSString *)plate
                                color:(NSString *)color
