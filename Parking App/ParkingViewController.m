@@ -16,10 +16,12 @@
 @interface ParkingViewController()
 
 #pragma mark - Property
+@property (weak, nonatomic) IBOutlet UIScrollView *containerScrollView;
 @property (nonatomic) NSUInteger data;
 @property (strong, nonatomic) DataErrorView *errorView;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *interactableViews;
-
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak,nonatomic) UITextField *activeField;
 #pragma mark - IBActions
 
 - (IBAction)clickParkingButton:(id)sender;
@@ -51,10 +53,13 @@
 }
 
 #pragma mark - Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.navigationItem.title = @"Parking";
-//    self.shouldShiftLabels = YES;
+    [self registerForKeyboardNotifications];
+    self.navigationItem.title = @"Parking";
+//    self.containerScrollView.contentInset = UIEdgeInsetsMake(0, 0, 90, 0);
+    
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -65,6 +70,7 @@
     self.colorTextField.hidden = YES;
 }
 - (void)viewDidAppear:(BOOL)animated {
+    [self.containerScrollView setContentSize:self.containerScrollView.bounds.size];
     self.data = 0;
     [self closeErrorView:YES];
     [self shiftLabes];
@@ -144,12 +150,12 @@
     }completion:nil];
 }
 - (DataErrorView *)errorView {
-    if( !_errorView) {
+       if( !_errorView) {
         _errorView = [[[NSBundle mainBundle] loadNibNamed:@"DataErrorView" owner:nil options:nil] lastObject];
         if ([_errorView isKindOfClass:[DataErrorView class]]) {
-            [self.view addSubview:self.errorView];
-            [self.errorView setFrame:self.view.frame];
-            self.errorView.delegate = self;
+            [self.view addSubview:_errorView];
+            [_errorView setFrame:self.view.frame];
+            _errorView.delegate = self;
         } else {
             return nil;
         }
@@ -259,6 +265,10 @@
     return UIInterfaceOrientationPortrait;
 }
 
+#pragma mark - gestures
+- (IBAction)userDidTapBackground:(id)sender {
+    [self.containerView endEditing:YES];
+}
 
 #pragma mark - IBActions
 
@@ -286,4 +296,95 @@
         [view setUserInteractionEnabled:YES];
     }
 }
+
+#pragma mark - keyboard
+- (void)registerForKeyboardNotifications
+
+{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+     
+                                             selector:@selector(keyboardWasShown:)
+     
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+     
+                                             selector:@selector(keyboardWillBeHidden:)
+     
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+    
+    
+}
+// Called when the UIKeyboardDidShowNotification is sent.
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+
+{
+    
+    NSDictionary* info = [aNotification userInfo];
+    
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    
+    self.containerScrollView.contentInset = contentInsets;
+    
+    self.containerScrollView.scrollIndicatorInsets = contentInsets;
+    
+    
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    
+    // Your app might not need or want this behavior.
+    
+    CGRect aRect = self.view.frame;
+    
+    aRect.size.height -= kbSize.height;
+    
+    if (!CGRectContainsPoint(aRect, self.activeField.frame.origin) ) {
+        
+        [self.containerScrollView scrollRectToVisible:self.activeField.frame animated:YES];
+        
+    }
+    
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+
+{
+    
+    self.activeField = textField;
+    
+}
+
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+
+{
+    
+    self.activeField = nil;
+    
+}
+
+
+// Called when the UIKeyboardWillHideNotification is sent
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+
+{
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    
+    self.containerScrollView.contentInset = contentInsets;
+    
+    self.containerScrollView.scrollIndicatorInsets = contentInsets;
+    
+}
+
 @end
