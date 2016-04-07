@@ -20,7 +20,9 @@ static const NSString *SECRET = @"0d150382efad5764";
 @implementation WebServiceManager
 
 - (void)fetchImageInfoForManufacturer:(NSString *)manufacturer model:(NSString *)model color:(NSString *)color  withCompletionBlock:(void (^)(NSArray *array))completionBlock {
-
+//    NSMutableString *tempManufacture = [manufacturer stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//    NSMutableString *tempModel = [model stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//    NSMutableString *tempColor = [color stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     // 1
     NSMutableString *tags = [[NSMutableString alloc] init];
     [tags appendString:@"car"];
@@ -37,10 +39,9 @@ static const NSString *SECRET = @"0d150382efad5764";
     NSString *urlString =[NSString stringWithFormat:
                                                     @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&tag_mode=all&per_page=10&format=json&nojsoncallback=1",
                                                     KEY, tags];
-    NSLog(@"%@",urlString);
     
     urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@","];
-    NSLog(@"%@",urlString);
+
     NSURL *URL = [NSURL URLWithString:urlString];
    
      [[AFHTTPSessionManager manager] GET:URL.absoluteString parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
