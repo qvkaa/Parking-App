@@ -49,6 +49,9 @@
 #pragma mark - Delegate Methods
 - (void)closeErrorView:(BOOL)complete {
     if (complete) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.errorView.errorToolbar.alpha = 0.0f;
+        }];
         [self enableViews];
         self.errorView.hidden = YES;
     }
@@ -58,19 +61,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self addTextFieldsToArray];
     self.navigationItem.title = @"Parking";
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+
 //    self.containerScrollView.contentInset = UIEdgeInsetsMake(0, 0, 90, 0);
     
 }
-- (IBAction)testButton:(id)sender {
-    NSLog(@"unregister");
-    [self unregisterForKeyboardNotifications];
-}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self registerForKeyboardNotifications];
-    [self addTextFieldsToArray];
+      [self registerForKeyboardNotifications];
     self.manufacturerTextField.hidden = YES;
     self.yearTextField.hidden = YES;
     self.modelTextField.hidden = YES;
@@ -78,8 +79,10 @@
     self.colorTextField.hidden = YES;
 }
 - (void)viewWillDisappear:(BOOL)animated {
+    
     [super viewWillDisappear:animated];
     [self unregisterForKeyboardNotifications];
+//    [[AFNetworkReachabilityManager sharedManager] stopMonitoring];
 }
 - (void)viewDidAppear:(BOOL)animated {
     [self.containerScrollView setContentSize:self.containerScrollView.bounds.size];
@@ -175,6 +178,9 @@
     return _errorView;
 }
 #pragma mark - URLrequests
+- (BOOL)connected {
+    return [AFNetworkReachabilityManager sharedManager].reachable;
+}
 - (void)getInfoFromTextFields {
     
     NSString *tempLicense = self.licenseTextField.text;
@@ -247,8 +253,7 @@
     NSString *errorMessage = @"";
     if (! (self.data & ValidLicense)) { // check if bit is set
         
-        errorMessage = [errorMessage stringByAppendingString:@"*License plate lenght must be between"
-                        " 7 and 8 characters long!\n"];
+        errorMessage = [errorMessage stringByAppendingString:@"*!Invalid license"];
     }
     if (!(self.data & ValidColor)) { // check if bit is set
         
@@ -286,21 +291,32 @@
 }
 
 #pragma mark - IBActions
+- (void)showErrorViewWithMessage:(NSString *)message {
+    [self disableViews];
+    self.errorView.errorToolbar.alpha = 0;
+    self.errorView.hidden = NO;
+    self.errorView.errorLabel.numberOfLines = 0;
+    self.errorView.errorLabel.text = message;
+    [UIView animateWithDuration:0.2f animations:^{
+        self.errorView.errorToolbar.alpha = 0.94;
+    }];
 
+}
 - (IBAction)clickParkingButton:(id)sender {
-
-    if ([self isDataValid]) {
+    if (![self connected]) {
+        [self showErrorViewWithMessage:@"No internet connection!"];
+        
+    } else if ([self isDataValid]) {
         
         [self getInfoFromTextFields];
         [self userDidTapBackground:nil];
         [self resetTextFields];
         
+        [self showErrorViewWithMessage:@"SUCCESS!"];
+        
     } else {
         
-        [self disableViews];
-        self.errorView.hidden = NO;
-        self.errorView.errorLabel.numberOfLines = 0;
-        self.errorView.errorLabel.text = [self errorMessage];
+        [self showErrorViewWithMessage:[self errorMessage]];
         
     }
 }
@@ -336,7 +352,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
-   // [[NSNotificationCenter defaultCenter] removeObserver:UIKeyboardWillHideNotification];
+   
     
 }
 // Called when the UIKeyboardDidShowNotification is sent.

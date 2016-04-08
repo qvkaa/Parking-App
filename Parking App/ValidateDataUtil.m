@@ -11,16 +11,26 @@
 @implementation ValidateDataUtil
 
 + (ValidData)isValidColor:(NSString *)color {
-    return ValidColor;
+    NSMutableCharacterSet *validChars = [NSMutableCharacterSet alphanumericCharacterSet];
+    NSMutableCharacterSet *charsInColor = [NSMutableCharacterSet characterSetWithCharactersInString:color];
+    if (![validChars isSupersetOfSet:charsInColor]) {
+        return 0;
+    } else {
+        return ValidColor;
+    }
 }
 
 
-+ (ValidData)isValidManufacturer:(NSString *)manufacturer {
-    return ValidManufacturer;
-}
 
 + (ValidData)isValidModel:(NSString *)model {
-    return ValidModel;
+    NSMutableCharacterSet *validChars = [NSMutableCharacterSet alphanumericCharacterSet];
+    [validChars formUnionWithCharacterSet:[NSMutableCharacterSet whitespaceCharacterSet]];
+    NSMutableCharacterSet *charsInModel = [NSMutableCharacterSet characterSetWithCharactersInString:model];
+    if (![validChars isSupersetOfSet:charsInModel]) {
+        return 0;
+    } else {
+        return ValidModel;
+    }
 }
 + (ValidData)isValidYear:(NSString*) year{
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
@@ -33,14 +43,7 @@
     if( ![numbers isSupersetOfSet:yearChars]){
         isNumber = 0;
     }
-   /* for(int i = 0 ; i < year.length; ++i){
-        char temp = [year characterAtIndex:i];
-        if(temp < zero || temp > nine){ //   ascii
-            isNumber = NO;
-            break;
-        }
-    }*/
-    //Check if year is in valid range  0 - current year
+
     NSInteger number = [year integerValue];
     if( !(number > 1950 && number <= currentYear) ){
         isNumber = 0;
@@ -50,11 +53,23 @@
 }
 + (ValidData)isValidLicense:(NSString*)license requiredLength:(NSUInteger)requiredLength{
     NSUInteger currentLen =[license length];
-    
-    if( currentLen != requiredLength) {
+    NSMutableCharacterSet *validChars = [NSMutableCharacterSet alphanumericCharacterSet];
+    NSMutableCharacterSet *charsInLicense = [NSMutableCharacterSet characterSetWithCharactersInString:license];
+//    [validChars formUnionWithCharacterSet:[NSMutableCharacterSet whitespaceCharacterSet]];
+    if( currentLen != requiredLength || ![validChars isSupersetOfSet:charsInLicense]) {
         return 0;
     }else{
         return ValidLicense;
+    }
+}
++ (ValidData)isValidManufacturer:(NSString *)manufacturer {
+    NSMutableCharacterSet *validChars = [NSMutableCharacterSet alphanumericCharacterSet];
+    [validChars formUnionWithCharacterSet:[NSMutableCharacterSet whitespaceCharacterSet]];
+    NSMutableCharacterSet *charsInManufacturer = [NSMutableCharacterSet characterSetWithCharactersInString:manufacturer];
+    if (![validChars isSupersetOfSet:charsInManufacturer]) {
+        return 0;
+    } else {
+        return ValidManufacturer;
     }
 }
 

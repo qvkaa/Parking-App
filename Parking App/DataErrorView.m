@@ -10,9 +10,6 @@
 
 @interface DataErrorView ()
 
-
-
-
 @end
 
 @implementation DataErrorView
@@ -22,8 +19,9 @@
     
     if ([self.delegate respondsToSelector:@selector(closeErrorView:)]) {
         [self.delegate closeErrorView:YES];
-         //self.hidden = YES;
+
     }
 }
+
 
 @end

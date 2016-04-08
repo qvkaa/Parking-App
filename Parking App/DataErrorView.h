@@ -15,6 +15,8 @@
 @end
 
 @interface DataErrorView : UIView
+
+@property (weak, nonatomic) IBOutlet UIToolbar *errorToolbar;
 @property (weak, nonatomic) id<DataErrorViewDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 
