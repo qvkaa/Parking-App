@@ -85,6 +85,7 @@
 //    [[AFNetworkReachabilityManager sharedManager] stopMonitoring];
 }
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.containerScrollView setContentSize:self.containerScrollView.bounds.size];
     self.data = 0;
     [self closeErrorView:YES];

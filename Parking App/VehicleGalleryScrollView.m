@@ -271,7 +271,10 @@
        cell = [self.galleryDelegate galleryScrollView:self cellForCollumAtIndex:self.collumIndex];
        
     }
-    [self.visibleCells addObject:cell];
+    if (cell) {
+        [self.visibleCells addObject:cell];
+    }
+    
     CGRect frame = [cell frame];
     frame.origin.x = rightEdge;
     frame.origin.y = 0;

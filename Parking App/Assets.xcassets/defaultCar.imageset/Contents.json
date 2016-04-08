@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "defaultCar.jpg",
+      "filename" : "No_Image_Available.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "No_Image_Available-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "No_Image_Available-2.png",
       "scale" : "3x"
     }
   ],

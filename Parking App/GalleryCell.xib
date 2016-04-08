@@ -34,6 +34,6 @@
         </view>
     </objects>
     <resources>
-        <image name="defaultCar" width="176" height="132"/>
+        <image name="defaultCar" width="600" height="600"/>
     </resources>
 </document>
